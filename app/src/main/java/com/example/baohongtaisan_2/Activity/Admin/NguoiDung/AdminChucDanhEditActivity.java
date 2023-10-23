@@ -1,7 +1,5 @@
 package com.example.baohongtaisan_2.Activity.Admin.NguoiDung;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -58,6 +58,7 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initializeViews() {
         macd = findViewById(R.id.macd);
         tencd = findViewById(R.id.txtTenCD_edit);
@@ -77,14 +78,14 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
     }
 
     private void editChucDanh() {
-        ApiServices.apiServices.edit_chucdanh(Integer.parseInt(macd.getText().toString()),tencd.getText().toString(),motacd.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.edit_chucdanh(Integer.parseInt(macd.getText().toString()), tencd.getText().toString(), motacd.getText().toString()).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
-                if (objectEdit.getCode() == 1){
+                if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminChucDanhEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminChucDanhEditActivity.this, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

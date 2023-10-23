@@ -12,8 +12,7 @@
         android:layout_height="60dp"
         android:background="#3F51B5"
         app:title="Sửa khu vực phòng"
-        app:titleTextColor="#EDE7E7"
-        />
+        app:titleTextColor="#EDE7E7" />
 
 
     <LinearLayout
@@ -22,25 +21,28 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:paddingBottom="150dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_input"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
-                android:text="Id: "/>
+                android:text="Id: " />
+
             <TextView
                 android:id="@+id/maKV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
-                android:textSize="14dp"
-                android:text="1" />
+                android:gravity="center"
+                android:text="1"
+                android:textSize="14dp" />
         </LinearLayout>
 
         <EditText
@@ -49,32 +51,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
+            android:drawableStart="@drawable/baseline_format_color_text_24"
+            android:drawablePadding="3dp"
             android:hint="Tên khu vực"
             android:padding="10dp"
-            android:textColorHint="#BDC3C7"
-            android:drawableStart="@drawable/baseline_format_color_text_24"
-            android:drawablePadding="3dp" />
+            android:textColorHint="#BDC3C7" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnSuakv"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Sửa" />
+
             <Button
                 android:id="@+id/btnQuaylaikv"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Quay lại" />
         </LinearLayout>
 

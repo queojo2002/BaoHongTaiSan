@@ -85,8 +85,7 @@ public class AdminPhanQuyenAdapter extends RecyclerView.Adapter<AdminPhanQuyenAd
         return 0;
     }
 
-    public void searchDataList(ArrayList<PhanQuyen> searchlist)
-    {
+    public void searchDataList(ArrayList<PhanQuyen> searchlist) {
         listPhanquyen = searchlist;
         notifyDataSetChanged();
     }

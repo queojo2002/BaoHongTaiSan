@@ -18,7 +18,6 @@ import com.example.baohongtaisan_2.Activity.LoginActivity;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminNguoiDungFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminPhongFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminTaiSanFragment;
-import com.example.baohongtaisan_2.Fragment.Admin.AdminTrangChuFragment;
 import com.example.baohongtaisan_2.Fragment.User.TrangChuFragment;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

@@ -41,18 +41,17 @@ public interface ApiServices {
     Call<List<DonVi>> get_list_donvi();
 
     @GET("api/edit_data_donvi.php")
-    Call<ObjectReponse> edit_donvi(@Query("MaDV")int madv,
-                                @Query("TenDV")String tendv,
-                                @Query("MoTaDV")String motadv);
+    Call<ObjectReponse> edit_donvi(@Query("MaDV") int madv,
+                                   @Query("TenDV") String tendv,
+                                   @Query("MoTaDV") String motadv);
 
     @GET("api/add_data_donvi.php")
-    Call<ObjectReponse> add_donvi(@Query("TenDV")String tendv,
-                               @Query("MoTaDV")String motadv);
+    Call<ObjectReponse> add_donvi(@Query("TenDV") String tendv,
+                                  @Query("MoTaDV") String motadv);
 
     @GET("api/delete_data_donvi.php")
-    Call<ObjectReponse> delete_donvi(@Query("MaDV")int madv);
+    Call<ObjectReponse> delete_donvi(@Query("MaDV") int madv);
     // end api dv
-
 
 
     // Chức danh
@@ -60,16 +59,16 @@ public interface ApiServices {
     Call<List<ChucDanh>> get_list_chucdanh();
 
     @GET("api/edit_data_chucdanh.php")
-    Call<ObjectReponse> edit_chucdanh(@Query("MaCD")int macd,
-                                   @Query("TenCD")String tencd,
-                                   @Query("MoTaCD")String motacd);
+    Call<ObjectReponse> edit_chucdanh(@Query("MaCD") int macd,
+                                      @Query("TenCD") String tencd,
+                                      @Query("MoTaCD") String motacd);
 
     @GET("api/add_data_chucdanh.php")
-    Call<ObjectReponse> add_chucdanh(@Query("TenCD")String tencd,
-                                  @Query("MoTaCD")String motacd);
+    Call<ObjectReponse> add_chucdanh(@Query("TenCD") String tencd,
+                                     @Query("MoTaCD") String motacd);
 
     @GET("api/delete_data_chucdanh.php")
-    Call<ObjectReponse> delete_chucdanh(@Query("MaCD")int macd);
+    Call<ObjectReponse> delete_chucdanh(@Query("MaCD") int macd);
 
     // end api chức danh
 
@@ -148,7 +147,6 @@ public interface ApiServices {
 
     @GET("api/load_data_nguoidung.php")
     Call<List<NguoiDung>> get_list_nguoidung();
-
 
 
     @GET("api/edit_token_uid_nguoidung.php")

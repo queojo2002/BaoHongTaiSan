@@ -12,9 +12,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.baohongtaisan_2.Activity.User.HomeActivity;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.BuildConfig;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -24,11 +22,9 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
-        if (FirebaseAuth.getInstance().getCurrentUser() != null)
-        {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             Map<String, String> stringMap = message.getData();
-            if (stringMap == null)
-            {
+            if (stringMap == null) {
                 return;
             }
             showNotification(stringMap.get("title"), stringMap.get("body"));
@@ -49,7 +45,7 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
         builder = builder.setContent(customNotification(title, body));
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(channelID, "test", NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(notificationChannel);
         }
@@ -58,8 +54,7 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
     }
 
 
-    public RemoteViews customNotification(String title, String body)
-    {
+    public RemoteViews customNotification(String title, String body) {
         RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification);
         remoteViews.setTextViewText(R.id.txtTitle_noti, title);
         remoteViews.setTextViewText(R.id.txtBody_noti, body);

@@ -52,7 +52,7 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         if (dv == null) {
             return;
         }
-        holder.madv.setText(dv.getMaDV()+ "");
+        holder.madv.setText(dv.getMaDV() + "");
         holder.tendv.setText(dv.getTenDV());
         holder.editdv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,11 +81,11 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
                             @Override
                             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                                 ObjectReponse objectadd = response.body();
-                                if (objectadd.getCode() == 1){
+                                if (objectadd.getCode() == 1) {
                                     Toast.makeText(context, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                                     listDonvi.remove(vitri);
                                     notifyItemRemoved(vitri);
-                                }else {
+                                } else {
                                     Toast.makeText(context, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -117,8 +117,7 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         return 0;
     }
 
-    public void searchDataList(ArrayList<DonVi> searchlist)
-    {
+    public void searchDataList(ArrayList<DonVi> searchlist) {
         listDonvi = searchlist;
         notifyDataSetChanged();
     }

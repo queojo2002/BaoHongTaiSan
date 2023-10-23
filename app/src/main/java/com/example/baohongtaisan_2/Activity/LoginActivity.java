@@ -11,10 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.baohongtaisan_2.Activity.Admin.AdminHomeActivity;
 import com.example.baohongtaisan_2.Activity.User.HomeActivity;
 import com.example.baohongtaisan_2.Api.ApiServices;
-import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -90,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                                         _Them_NguoiDung(account.getDisplayName(), account.getEmail(), 2, 5, 7, FirebaseAuth.getInstance().getCurrentUser().getUid().toString(), task.getResult().toString());
                                     }
                                 });
-
 
 
                             } else {

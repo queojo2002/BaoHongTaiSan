@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Admin.NguoiDung.AdminQLDonViFragment">
 
     <LinearLayout
@@ -22,18 +22,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:queryHint="Tìm kiếm" />
+
             <Button
                 android:id="@+id/btndv_add"
                 android:layout_width="140dp"
                 android:layout_height="35dp"
-                android:layout_marginEnd="10dp"
-                android:layout_centerInParent="true"
-                android:text="Thêm mới"
                 android:layout_alignParentEnd="true"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:drawableRight="@drawable/baseline_add_to_photos_24"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/custom_button_add"
+                android:drawableRight="@drawable/baseline_add_to_photos_24"
+                android:text="Thêm mới"
+                android:textColor="#000000"
+                android:textSize="12sp"
                 app:backgroundTint="@null" />
 
         </RelativeLayout>
@@ -47,30 +48,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:text="Mã ĐV"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:text="Mã ĐV" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Tên đơn vị"
                 android:textSize="16dp"
-                android:text="Tên đơn vị" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="16dp"
                 android:layout_marginLeft="30dp"
-                android:text="Hành động" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Hành động"
+                android:textSize="16dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

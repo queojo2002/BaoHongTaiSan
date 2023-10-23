@@ -11,7 +11,7 @@ public class ChucDanh {
     public ChucDanh() {
     }
 
-    public ChucDanh(int maCD, String tenCD,String moTaCD, String ngayCapNhat, String ngayTao) {
+    public ChucDanh(int maCD, String tenCD, String moTaCD, String ngayCapNhat, String ngayTao) {
         MaCD = maCD;
         TenCD = tenCD;
         MoTaCD = moTaCD;

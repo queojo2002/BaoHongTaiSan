@@ -12,8 +12,7 @@
         android:layout_height="60dp"
         android:background="#3F51B5"
         app:title="Thêm mới phòng"
-        app:titleTextColor="#EDE7E7"
-        />
+        app:titleTextColor="#EDE7E7" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,40 +22,41 @@
         android:paddingBottom="150dp">
 
 
-
         <EditText
             android:id="@+id/txtTenPhong"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
+            android:drawableStart="@drawable/baseline_format_color_text_24"
+            android:drawablePadding="3dp"
             android:hint="Tên phòng"
             android:padding="10dp"
-            android:textColorHint="#BDC3C7"
-            android:drawableStart="@drawable/baseline_format_color_text_24"
-            android:drawablePadding="3dp" />
+            android:textColorHint="#BDC3C7" />
 
         <Spinner
             android:id="@+id/spnKVP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/background_input" />
+            android:background="@drawable/background_input"
+            android:padding="10dp" />
+
         <Spinner
             android:id="@+id/spnLP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/background_input"/>
+            android:background="@drawable/background_input"
+            android:padding="10dp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnThemphong"
                 android:layout_width="160dp"
@@ -64,12 +64,13 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Thêm phòng" />
+
             <Button
                 android:id="@+id/btnQuaylaiphong"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Quay lại" />
         </LinearLayout>
 

@@ -1,7 +1,5 @@
 package com.example.baohongtaisan_2.Activity.Admin.Phong;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -64,26 +64,26 @@ public class AdminLoaiPhongEditActivity extends AppCompatActivity {
         Bundle myBundle = intent.getBundleExtra("datalp");
         int IDLP = myBundle.getInt("malp");
         String TenLP = myBundle.getString("tenlp");
-        malp.setText(IDLP+"");
+        malp.setText(IDLP + "");
         tenlp.setText(TenLP);
     }
 
     private void editLoaiPhong() {
-        ApiServices.apiServices.edit_loaiphong(Integer.parseInt(malp.getText().toString()),tenlp.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.edit_loaiphong(Integer.parseInt(malp.getText().toString()), tenlp.getText().toString()).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
-                if (objectEdit.getCode() == 1){
+                if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminLoaiPhongEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminLoaiPhongEditActivity.this, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ObjectReponse> call, Throwable t) {
-                Toast.makeText(AdminLoaiPhongEditActivity.this,"Cập nhật thất bại !" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminLoaiPhongEditActivity.this, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

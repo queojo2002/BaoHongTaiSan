@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toEndOf="@+id/imgaccount"
             android:layout_marginLeft="50dp"
+            android:layout_toEndOf="@+id/imgaccount"
             android:text="Đặng Văn AAAAA"
             android:textColor="#F6F3F3"
             android:textSize="14sp" />
@@ -52,8 +52,6 @@
             app:tint="#F40505" />
 
     </RelativeLayout>
-
-
 
 
 </androidx.cardview.widget.CardView>

@@ -27,11 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
+            android:drawableStart="@drawable/baseline_format_color_text_24"
+            android:drawablePadding="3dp"
             android:hint="Tên chức danh"
             android:padding="10dp"
-            android:textColorHint="#BDC3C7"
-            android:drawableStart="@drawable/baseline_format_color_text_24"
-            android:drawablePadding="3dp" />
+            android:textColorHint="#BDC3C7" />
 
         <EditText
             android:id="@+id/txtMotaCD"
@@ -39,16 +39,17 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
+            android:gravity="top"
             android:hint="Mô tả chức danh"
             android:padding="10dp"
-            android:gravity="top"
             android:textColorHint="#BDC3C7" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnThemcd"
                 android:layout_width="160dp"
@@ -56,12 +57,13 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Thêm chức danh" />
+
             <Button
                 android:id="@+id/btnQuaylaicd"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Quay lại" />
         </LinearLayout>
 

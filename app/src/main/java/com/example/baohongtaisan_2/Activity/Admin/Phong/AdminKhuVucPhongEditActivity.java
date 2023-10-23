@@ -1,7 +1,5 @@
 package com.example.baohongtaisan_2.Activity.Admin.Phong;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,26 +66,26 @@ public class AdminKhuVucPhongEditActivity extends AppCompatActivity {
         Bundle myBundle = intent.getBundleExtra("datakhuvucphong");
         int IDKVP = myBundle.getInt("makhuvuc");
         String TenKVP = myBundle.getString("tenkhuvuc");
-        makv.setText(IDKVP+"");
+        makv.setText(IDKVP + "");
         tenkv.setText(TenKVP);
     }
 
     private void editKhuVucPhong() {
-        ApiServices.apiServices.edit_khuvucphong(Integer.parseInt(makv.getText().toString()),tenkv.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.edit_khuvucphong(Integer.parseInt(makv.getText().toString()), tenkv.getText().toString()).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
-                if (objectEdit.getCode() == 1){
+                if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminKhuVucPhongEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminKhuVucPhongEditActivity.this, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ObjectReponse> call, Throwable t) {
-                Toast.makeText(AdminKhuVucPhongEditActivity.this,"Cập nhật thất bại !" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminKhuVucPhongEditActivity.this, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

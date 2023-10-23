@@ -18,6 +18,7 @@ public class AdminNguoiDungFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_nguoi_dung, container, false);

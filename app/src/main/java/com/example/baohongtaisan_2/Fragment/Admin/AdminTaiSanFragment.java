@@ -19,6 +19,7 @@ public class AdminTaiSanFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_tai_san, container, false);

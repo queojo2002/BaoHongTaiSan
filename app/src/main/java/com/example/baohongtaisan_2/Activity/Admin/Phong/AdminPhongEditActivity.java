@@ -41,6 +41,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
     private List<LoaiPhong> listLP;
 
     private int MaLP = -1, MaKVP = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initializeViews() {
         maP = findViewById(R.id.maP);
         txtTen = findViewById(R.id.txtEdit_TenPhong);
@@ -97,21 +99,21 @@ public class AdminPhongEditActivity extends AppCompatActivity {
         int IdP = myBundle.getInt("maphong");
         String TenP = myBundle.getString("tenphong");
         MaKVP = myBundle.getInt("makvp");
-        MaLP= myBundle.getInt("malp");
+        MaLP = myBundle.getInt("malp");
         maP.setText(IdP + "");
         txtTen.setText(TenP);
     }
 
 
     private void editPhong() {
-        ApiServices.apiServices.edit_phong(Integer.parseInt(maP.getText().toString()),txtTen.getText().toString(),MaKVP,MaLP).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.edit_phong(Integer.parseInt(maP.getText().toString()), txtTen.getText().toString(), MaKVP, MaLP).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
-                if (objectEdit.getCode() == 1){
+                if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminPhongEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminPhongEditActivity.this, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -148,6 +150,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
         });
     }
+
     private void handleLoaiPhongItemSelected(int position) {
         ArrayAdapter<LoaiPhong> adapter = (ArrayAdapter<LoaiPhong>) spinnerLP.getAdapter();
         LoaiPhong selected = adapter.getItem(position);
@@ -155,6 +158,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             MaLP = selected.getMaLP();
         }
     }
+
     private void handleKhuVucPhongItemSelected(int position) {
         ArrayAdapter<KhuVucPhong> adapter = (ArrayAdapter<KhuVucPhong>) spinnerKVP.getAdapter();
         KhuVucPhong selected = adapter.getItem(position);
@@ -162,6 +166,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             MaKVP = selected.getMaKVP();
         }
     }
+
     private void loadDataForSpinner() {
         loadKVPData(MaKVP);
         loadLPData(MaLP);
@@ -208,7 +213,6 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     private void loadLPData(int malp) {

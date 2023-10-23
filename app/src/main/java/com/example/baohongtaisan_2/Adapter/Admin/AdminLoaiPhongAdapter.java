@@ -52,7 +52,7 @@ public class AdminLoaiPhongAdapter extends RecyclerView.Adapter<AdminLoaiPhongAd
         if (lp == null) {
             return;
         }
-        holder.maloaiphong.setText(lp.getMaLP()+"");
+        holder.maloaiphong.setText(lp.getMaLP() + "");
         holder.tenloaiphong.setText(lp.getTenLP());
         holder.editloaiphong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,11 +80,11 @@ public class AdminLoaiPhongAdapter extends RecyclerView.Adapter<AdminLoaiPhongAd
                             @Override
                             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                                 ObjectReponse objectadd = response.body();
-                                if (objectadd.getCode() == 1){
+                                if (objectadd.getCode() == 1) {
                                     Toast.makeText(context, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                                     listLoaiphong.remove(vitri);
                                     notifyItemRemoved(vitri);
-                                }else {
+                                } else {
                                     Toast.makeText(context, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

@@ -1,13 +1,13 @@
 package com.example.baohongtaisan_2.Activity.Admin.NguoiDung;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -70,14 +70,14 @@ public class AdminChucDanhAddActivity extends AppCompatActivity {
         pd.setTitle("Đang thêm dữ liệu...");
         pd.show();
 
-        ApiServices.apiServices.add_chucdanh(tencd,motacd).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.add_chucdanh(tencd, motacd).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectadd = response.body();
-                if (objectadd.getCode() == 1){
+                if (objectadd.getCode() == 1) {
                     Toast.makeText(AdminChucDanhAddActivity.this, "Thêm mới thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminChucDanhAddActivity.this, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

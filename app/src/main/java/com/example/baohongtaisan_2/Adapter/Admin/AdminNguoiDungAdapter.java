@@ -82,8 +82,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
         return 0;
     }
 
-    public void searchDataList(ArrayList<NguoiDung> searchlist)
-    {
+    public void searchDataList(ArrayList<NguoiDung> searchlist) {
         listNguoidung = searchlist;
         notifyDataSetChanged();
     }

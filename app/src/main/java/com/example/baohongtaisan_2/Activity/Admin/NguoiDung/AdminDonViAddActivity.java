@@ -1,7 +1,5 @@
 package com.example.baohongtaisan_2.Activity.Admin.NguoiDung;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +33,6 @@ public class AdminDonViAddActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnQuaylaidv);
 
         pd = new ProgressDialog(AdminDonViAddActivity.this);
-
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +58,18 @@ public class AdminDonViAddActivity extends AppCompatActivity {
             }
         });
     }
+
     private void uploadDataDV(String tendv, String motadv) {
         pd.setTitle("Đang thêm dữ liệu...");
         pd.show();
-        ApiServices.apiServices.add_donvi(tendv,motadv).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.add_donvi(tendv, motadv).enqueue(new Callback<ObjectReponse>() {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectadd = response.body();
-                if (objectadd.getCode() == 1){
+                if (objectadd.getCode() == 1) {
                     Toast.makeText(AdminDonViAddActivity.this, "Thêm mới thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminDonViAddActivity.this, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

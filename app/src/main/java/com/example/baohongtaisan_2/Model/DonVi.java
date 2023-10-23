@@ -2,7 +2,7 @@ package com.example.baohongtaisan_2.Model;
 
 public class DonVi {
     private int MaDV;
-    private String TenDV,MoTaDV, NgayCapNhat, NgayTao;
+    private String TenDV, MoTaDV, NgayCapNhat, NgayTao;
 
     public DonVi() {
     }

@@ -1,24 +1,18 @@
 package com.example.baohongtaisan_2.Activity.Admin.Phong;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.baohongtaisan_2.Api.ApiServices;
-import com.example.baohongtaisan_2.Model.KhuVucPhong;
-import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +23,7 @@ public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
     private EditText txtTen;
     private FirebaseDatabase db;
     private ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,10 +64,10 @@ public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                 ObjectReponse objectadd = response.body();
-                if (objectadd.getCode() == 1){
+                if (objectadd.getCode() == 1) {
                     Toast.makeText(AdminKhuVucPhongAddActivity.this, "Thêm mới thành công !", Toast.LENGTH_SHORT).show();
                     finish();
-                }else {
+                } else {
                     Toast.makeText(AdminKhuVucPhongAddActivity.this, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

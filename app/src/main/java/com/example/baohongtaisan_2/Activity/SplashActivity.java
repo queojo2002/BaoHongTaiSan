@@ -97,6 +97,7 @@ public class SplashActivity extends AppCompatActivity {
                                                     finishAffinity();
                                                 }
                                             }
+
                                             @Override
                                             public void onFailure(Call<ObjectReponse> call, Throwable t) {
                                             }

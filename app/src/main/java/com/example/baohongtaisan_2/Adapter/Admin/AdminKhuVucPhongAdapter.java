@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.baohongtaisan_2.Activity.Admin.Phong.AdminKhuVucPhongEditActivity;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
@@ -53,7 +52,7 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
         if (kv == null) {
             return;
         }
-        holder.makhuvuc.setText(kv.getMaKVP()+"");
+        holder.makhuvuc.setText(kv.getMaKVP() + "");
         holder.tenkhuvuc.setText(kv.getTenKVP());
         holder.editkhuvuc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,11 +79,11 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
                             @Override
                             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                                 ObjectReponse objectadd = response.body();
-                                if (objectadd.getCode() == 1){
+                                if (objectadd.getCode() == 1) {
                                     Toast.makeText(context, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                                     listKhuvucphong.remove(vitri);
                                     notifyItemRemoved(vitri);
-                                }else {
+                                } else {
                                     Toast.makeText(context, objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

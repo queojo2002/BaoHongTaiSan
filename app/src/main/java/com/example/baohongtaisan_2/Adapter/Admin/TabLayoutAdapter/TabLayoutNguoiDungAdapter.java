@@ -20,12 +20,17 @@ public class TabLayoutNguoiDungAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0: return new AdminDanhSachNguoiDungFragment();
-            case 1: return new AdminQLDonViFragment();
-            case 2: return new AdminQLChucDanhFragment();
-            case 3: return new AdminQLPhanQuyenFragment();
-            default: return new AdminDanhSachNguoiDungFragment();
+        switch (position) {
+            case 0:
+                return new AdminDanhSachNguoiDungFragment();
+            case 1:
+                return new AdminQLDonViFragment();
+            case 2:
+                return new AdminQLChucDanhFragment();
+            case 3:
+                return new AdminQLPhanQuyenFragment();
+            default:
+                return new AdminDanhSachNguoiDungFragment();
         }
     }
 
@@ -37,15 +42,19 @@ public class TabLayoutNguoiDungAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String title ="";
-        switch (position){
-            case 0: title = "Danh sách";
+        String title = "";
+        switch (position) {
+            case 0:
+                title = "Danh sách";
                 break;
-            case 1: title = "Đơn vị";
+            case 1:
+                title = "Đơn vị";
                 break;
-            case 2: title = "Chức danh";
+            case 2:
+                title = "Chức danh";
                 break;
-            case 3: title = "Phân quyền";
+            case 3:
+                title = "Phân quyền";
                 break;
         }
         return title;

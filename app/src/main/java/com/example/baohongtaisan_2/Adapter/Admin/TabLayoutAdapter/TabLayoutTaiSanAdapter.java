@@ -18,11 +18,15 @@ public class TabLayoutTaiSanAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0: return new AdminDanhSachTaiSanFragment();
-            case 1: return new AdminQLNhomTaiSanFragment();
-            case 2: return new AdminQLLoaiTaiSanFragment();
-            default: return new AdminDanhSachTaiSanFragment();
+        switch (position) {
+            case 0:
+                return new AdminDanhSachTaiSanFragment();
+            case 1:
+                return new AdminQLNhomTaiSanFragment();
+            case 2:
+                return new AdminQLLoaiTaiSanFragment();
+            default:
+                return new AdminDanhSachTaiSanFragment();
         }
     }
 
@@ -34,13 +38,16 @@ public class TabLayoutTaiSanAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String title ="";
-        switch (position){
-            case 0: title = "Danh sách";
+        String title = "";
+        switch (position) {
+            case 0:
+                title = "Danh sách";
                 break;
-            case 1: title = "Nhóm tài sản";
+            case 1:
+                title = "Nhóm tài sản";
                 break;
-            case 2: title = "Loại tài sản";
+            case 2:
+                title = "Loại tài sản";
                 break;
         }
         return title;

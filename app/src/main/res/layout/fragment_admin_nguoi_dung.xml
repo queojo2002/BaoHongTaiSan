@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Admin.AdminNguoiDungFragment">
 
     <RelativeLayout
@@ -11,23 +11,23 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-            android:importantForAccessibility="no"
             android:id="@+id/tab_layoutND"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
+            android:importantForAccessibility="no"
+            app:tabBackground="@drawable/background_tab"
             app:tabGravity="fill"
-            app:tabSelectedTextColor="#2196F3"
-            app:tabTextColor="@color/black"
             app:tabIndicatorColor="#2196F3"
-            app:tabBackground="@drawable/background_tab"/>
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#2196F3"
+            app:tabTextColor="@color/black" />
 
         <androidx.viewpager.widget.ViewPager
-            android:importantForAccessibility="no"
             android:id="@+id/view_pagerND"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tab_layoutND"/>
+            android:layout_below="@+id/tab_layoutND"
+            android:importantForAccessibility="no" />
 
     </RelativeLayout>
 
