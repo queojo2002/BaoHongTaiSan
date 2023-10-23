@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient client;
     private GoogleSignInAccount account;
     private ProgressDialog progressDialog;
-    private FirebaseDatabase database;
 
 
     @Override
@@ -47,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        database = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(this);
         btnLogin = findViewById(R.id.btnLogin);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -56,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 .requestProfile()
                 .build();
 
+        // test
         client = GoogleSignIn.getClient(LoginActivity.this, googleSignInOptions);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
