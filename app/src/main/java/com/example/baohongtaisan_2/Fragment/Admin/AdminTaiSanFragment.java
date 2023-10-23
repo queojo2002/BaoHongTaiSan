@@ -16,7 +16,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class AdminTaiSanFragment extends Fragment {
 
-
     private TabLayout tabLayout;
     private ViewPager viewPager;
 

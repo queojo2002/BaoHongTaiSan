@@ -5,7 +5,9 @@ import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.LoaiPhong;
+import com.example.baohongtaisan_2.Model.LoaiTaiSan;
 import com.example.baohongtaisan_2.Model.NguoiDung;
+import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.PhanBo;
@@ -127,6 +129,21 @@ public interface ApiServices {
 
     // End api khu vực phòng
 
+    //Nhóm tài sản
+
+    @GET("api/load_data_nhomtaisan.php")
+    Call<List<NhomTaiSan>> get_list_nhomtaisan();
+
+
+    // End api nhóm tài sản
+
+    //Loại tài sản
+
+    @GET("api/load_data_loaitaisan.php")
+    Call<List<LoaiTaiSan>> get_list_loaitaisan();
+
+
+    // End api loại tài sản
 
     @GET("api/load_data_phanbo_byMaP.php")
     Call<List<PhanBo>> get_list_phanbo_byMaP(@Query("MaP") int MaP);
