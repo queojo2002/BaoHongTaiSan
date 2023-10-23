@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.User.QuanLyBaoHongFragment">
+
+
+    <TextView
+        android:id="@+id/txtTVQLBH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Lịch sử báo hỏng thiết bị, tài sản của bạn"
+        android:textColor="#454444"
+        android:textSize="18sp"
+        android:textStyle="bold"></TextView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtTVQLBH">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQLBH"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

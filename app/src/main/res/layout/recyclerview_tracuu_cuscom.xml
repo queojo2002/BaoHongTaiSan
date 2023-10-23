@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgTaiSan_1"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="60dp">
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_inventory_24"></ImageView>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtTenTS_1"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/imgTaiSan_1"
+            android:text="Toshiba Inverter 1 HP RAS-H10C4KCVG-V"
+            android:textColor="#000000"
+            android:textSize="13sp"></TextView>
+
+        <TextView
+            android:id="@+id/txtTenNTS_1"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTenTS_1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/imgTaiSan_1"
+            android:text="Máy lạnh"
+            android:textSize="12sp">
+
+        </TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/txtTenTS_1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnBaoHong"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:backgroundTint="#FF0000"
+                android:text="Báo hỏng"
+                android:textColor="#fff"
+                android:textSize="10sp"></Button>
+
+            <Button
+                android:id="@+id/btnXemChiTiet"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:gravity="top|center"
+                android:text="Xem chi tiết"
+                android:textSize="10sp"></Button>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txtSoLuong_1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/imgTaiSan_1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-15dp"
+            android:layout_toRightOf="@id/imgTaiSan_1"
+            android:text="Số lượng: 1"
+            android:textColor="#CDC7C7"
+            android:textSize="13sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtTrangThai_1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/imgTaiSan_1"
+            android:layout_marginTop="10dp"
+            android:background="#00FF0A"
+            android:gravity="center"
+            android:text="Hoạt động tốt"
+            android:textSize="13sp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

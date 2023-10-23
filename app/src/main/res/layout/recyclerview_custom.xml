@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgHome1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="60dp">
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_home_24"></ImageView>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtTenPhong"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/imgHome1"
+            android:text="Phòng E3-302"
+            android:textColor="#000000"
+            android:textSize="18sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtTenKhuVucPhong"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/txtTenPhong"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/imgHome1"
+            android:text="Dãy H"
+            android:textSize="15sp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btnTraCuu"
+            android:layout_width="150dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/txtTenPhong"
+            android:backgroundTint="#00BCD4"
+            android:text="Tra cứu"
+            android:textSize="12sp"></Button>
+
+        <TextView
+            android:id="@+id/txtTenLoaiPhong"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/imgHome1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-5dp"
+            android:layout_toRightOf="@id/imgHome1"
+            android:text="Lý thuyết"
+            android:textColor="#CDC7C7">
+
+        </TextView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

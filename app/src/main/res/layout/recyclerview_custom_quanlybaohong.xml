@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:id="@+id/rlQLBH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgQLBH"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left|center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/logo_tdmu_2">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/txtQLBH_Time"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgQLBH"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="23dp"
+                android:gravity="center"
+                android:text="10-18-2023 12:31:32"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txtQLBG_TenTS"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@id/imgQLBH"
+                android:gravity="center"
+                android:text="Toshiba Inverter 1 HP RAS-H10C4KCVG-V"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtQLBG_TenTS"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@id/imgQLBH"
+                android:orientation="vertical">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="left|center"
+                        android:text="Tên phòng: "
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtQLBG_TenP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:ems="2"
+                        android:gravity="top|left|center"
+                        android:text="Phòng C2-P2-E3-123"
+                        android:textColor="#CB00ED"
+                        android:textSize="11sp" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="left|center"
+                        android:text="Trạng thái: "
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtQLBG_TrangThai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:ems="2"
+                        android:gravity="top|left|center"
+                        android:text="Đã gửi báo hỏng"
+                        android:textColor="#266E29"
+                        android:textSize="11sp" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="left|center"
+                        android:text="Tình trạng: "
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtQLBG_TinhTrang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:ems="2"
+                        android:gravity="top|left|center"
+                        android:text="Hư hỏng trung bình (Moderate)"
+                        android:textColor="#F64E4E"
+                        android:textSize="11sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="left|center"
+                        android:text="Mô tả hư hỏng: "
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtQLBG_MoTa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="65dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_input"
+                        android:ems="2"
+                        android:gravity="top|left"
+                        android:padding="5dp"
+                        android:text="Mô tả ở đây"
+                        android:textColor="#535252"
+                        android:textSize="11sp" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

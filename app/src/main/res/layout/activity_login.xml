@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/logo_tdmu_1" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rs_button_home_1"
+        android:drawableLeft="@drawable/rs_button_home_2"
+        android:text="Đăng nhập bằng email"
+        android:textColor="#000000"
+        app:backgroundTint="@null" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivFB"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/iconfb" />
+
+        <ImageView
+            android:id="@+id/iYTB"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/iconytb" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/lb_tdmu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="TDMU IS @ 2023" />
+
+
+</RelativeLayout>

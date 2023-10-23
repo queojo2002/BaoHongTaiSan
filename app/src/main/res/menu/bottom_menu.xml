@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_trangchu"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Trang chủ" />
+
+    <item
+        android:id="@+id/bottom_manager_baohong"
+        android:icon="@drawable/baseline_settings_brightness_24"
+        android:title="Quản lý" />
+
+
+    <!--<item
+        android:title=""/>-->
+
+    <item
+        android:id="@+id/bottom_baohong_tracuu"
+        android:icon="@drawable/baseline_screen_search_desktop_24"
+        android:title="Tra cứu &amp; báo hỏng" />
+
+    <item
+        android:id="@+id/bottom_nhantin"
+        android:icon="@drawable/baseline_chat_24"
+        android:title="Nhắn tin" />
+
+    <item
+        android:id="@+id/bottom_manager_info"
+        android:icon="@drawable/baseline_manage_accounts_24"
+        android:title="Tài khoản" />
+
+</menu>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Báo Hỏng Tài Sản TDMU</string>
+    <string name="open_nav">Mở Menu</string>
+    <string name="close_nav">Đóng Menu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">390576091039-ubdr4sg6lo3uh9i42ofl4npue6m2gctf.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.Admin.Phong.AdminLoaiPhongFragment">
+
+    <LinearLayout
+        android:id="@+id/tab3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SearchView
+                android:id="@+id/txtSearchLoaiphong"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:queryHint="Tìm kiếm" />
+            <Button
+                android:id="@+id/btnloaiphong_add"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerInParent="true"
+                android:text="Thêm mới"
+                android:layout_alignParentEnd="true"
+                android:textSize="12sp"
+                android:textColor="#000000"
+                android:drawableRight="@drawable/baseline_add_to_photos_24"
+                android:background="@drawable/custom_button_add"
+                app:backgroundTint="@null" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="Mã LP" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="Tên loại phòng" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:layout_marginLeft="30dp"
+                android:textStyle="bold"
+                android:text="Hành động" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLoaiphong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</FrameLayout>
