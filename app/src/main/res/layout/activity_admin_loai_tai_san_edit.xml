@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Admin.TaiSan.AdminNhomTaiSanAddActivity">
+    tools:context=".Activity.Admin.TaiSan.AdminLoaiTaiSanEditActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#3F51B5"
-        app:title="Thêm mới nhóm tài sản"
+        app:title="Sửa loại tài sản"
         app:titleTextColor="#EDE7E7" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,16 +22,38 @@
         android:orientation="vertical"
         android:paddingBottom="150dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_input"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Id: " />
+
+            <TextView
+                android:id="@+id/maLTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="14dp" />
+        </LinearLayout>
 
         <EditText
-            android:id="@+id/txtTenNTS_add"
+            android:id="@+id/txtTenLTS_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_input"
             android:drawableStart="@drawable/baseline_format_color_text_24"
             android:drawablePadding="3dp"
-            android:hint="Tên nhóm tài sản"
+            android:hint="Tên loại tài sản"
             android:padding="10dp"
             android:textColorHint="#BDC3C7" />
 
@@ -42,15 +65,15 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnThemNTS"
+                android:id="@+id/btnSuaLTS_edit"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Thêm mới" />
+                android:gravity="center"
+                android:text="Sửa" />
 
             <Button
-                android:id="@+id/btnQuaylaiNTS_add"
+                android:id="@+id/btnQuaylaiLTS_edit"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -59,6 +82,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>

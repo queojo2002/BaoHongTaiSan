@@ -169,14 +169,14 @@ public interface ApiServices {
     Call<List<LoaiTaiSan>> get_list_loaitaisan();
 
     @GET("api/edit_data_loaitaisan.php")
-    Call<List<LoaiTaiSan>> edit_data_loaitaisan_byMaLTS(@Query("MaLTS") int MaLTS,
+    Call<ObjectReponse> edit_data_loaitaisan_byMaLTS(@Query("MaLTS") int MaLTS,
                                                         @Query("TenLTS") String TenLTS);
 
     @GET("api/add_data_loaitaisan.php")
-    Call<List<LoaiTaiSan>> add_data_loaitaisan(@Query("TenLTS") String TenLTS);
+    Call<ObjectReponse> add_data_loaitaisan(@Query("TenLTS") String TenLTS);
 
     @GET("api/delete_data_loaitaisan.php")
-    Call<List<LoaiTaiSan>> delete_data_loaitaisan(@Query("MaLTS") int MaLTS);
+    Call<ObjectReponse> delete_data_loaitaisan(@Query("MaLTS") int MaLTS);
 
 
     // End api loại tài sản

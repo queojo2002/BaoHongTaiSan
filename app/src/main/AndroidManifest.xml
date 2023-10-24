@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Admin.TaiSan.AdminLoaiTaiSanEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Admin.TaiSan.AdminLoaiTaiSanAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Admin.TaiSan.AdminNhomTaiSanEditActivity"
             android:exported="false" />
         <activity
