@@ -1,13 +1,19 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +63,8 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         holder.editdv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
+                Open_Dialog_Edit();
+                /*Context context = view.getContext();
 
                 Intent intent = new Intent(context, AdminDonViEditActivity.class);
                 Bundle bdDonvi = new Bundle();
@@ -65,10 +72,11 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
                 bdDonvi.putString("tendv", dv.getTenDV());
                 bdDonvi.putString("motadv", dv.getMoTaDV());
                 intent.putExtra("datadonvi", bdDonvi);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
             }
         });
         holder.deletedv.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.tendv.getContext());
@@ -122,9 +130,32 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         notifyDataSetChanged();
     }
 
+
     public DonVi getItem(int position) {
         return listDonvi.get(position);
     }
+
+
+    public void Open_Dialog_Edit()
+    {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_edit);
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+
 
     public class DonviViewHolder extends RecyclerView.ViewHolder {
         private TextView madv, tendv;

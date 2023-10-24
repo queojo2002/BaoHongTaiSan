@@ -21,8 +21,6 @@ public class TabLayoutNguoiDungAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new AdminDanhSachNguoiDungFragment();
             case 1:
                 return new AdminQLDonViFragment();
             case 2:

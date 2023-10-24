@@ -258,7 +258,7 @@ public interface ApiServices {
             @Query("MoTa") String MoTa,
             @Query("HinhAnh") String HinhAnh);
 
-    @GET("api/add_data_baoloi.php")
+    @GET("api/edit_data_baoloi_byMaBL.php")
     Call<ObjectReponse> edit_data_trangthai_baoloi_byMaBL(
             @Query("MaBL") int MaBL,
             @Query("TrangThai") int TrangThai);

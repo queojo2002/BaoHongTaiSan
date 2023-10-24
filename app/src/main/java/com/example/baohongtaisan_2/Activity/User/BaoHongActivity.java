@@ -28,6 +28,7 @@ import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
 import com.example.baohongtaisan_2.Model.NotificationReponse;
 import com.example.baohongtaisan_2.Model.NotificationSendData;
+import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.UploadIMG;
 import com.example.baohongtaisan_2.R;
@@ -217,10 +218,10 @@ public class BaoHongActivity extends AppCompatActivity {
             public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                 NguoiDung nguoiDung = response.body();
                 if (nguoiDung != null) {
-                    ApiServices.apiServices.add_new_baoloi(MaPB, nguoiDung.getMaND(), TrangThaiHH, txtMoTaHH.getText().toString(), HinhAnh).enqueue(new Callback<Object_Add>() {
+                    ApiServices.apiServices.add_new_baoloi(MaPB, nguoiDung.getMaND(), TrangThaiHH, txtMoTaHH.getText().toString(), HinhAnh).enqueue(new Callback<ObjectReponse>() {
                         @Override
-                        public void onResponse(Call<Object_Add> call, Response<Object_Add> response) {
-                            Object_Add object_add = response.body();
+                        public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                            ObjectReponse object_add = response.body();
                             if (object_add != null) {
                                 sendNotiToAdmin(nguoiDung.getMaND(), TenTS, TenP, 0, TrangThaiHH, txtMoTaHH.getText().toString());
                                 Toast.makeText(BaoHongActivity.this, object_add.getMessage(), Toast.LENGTH_SHORT).show();
@@ -230,7 +231,7 @@ public class BaoHongActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Object_Add> call, Throwable t) {
+                        public void onFailure(Call<ObjectReponse> call, Throwable t) {
                             Toast.makeText(BaoHongActivity.this, "Gửi báo hỏng thất bại !!!", Toast.LENGTH_SHORT).show();
                             finish();
                         }
