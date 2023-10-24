@@ -27,7 +27,7 @@
             <Button
                 android:id="@+id/btnphong_add"
                 android:layout_width="140dp"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="10dp"
