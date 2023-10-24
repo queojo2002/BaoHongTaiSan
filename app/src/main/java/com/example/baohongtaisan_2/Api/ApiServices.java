@@ -135,12 +135,28 @@ public interface ApiServices {
     Call<List<NhomTaiSan>> get_list_nhomtaisan();
 
 
+    @GET("api/edit_data_nhomtaisan.php")
+    Call<ObjectReponse> edit_nhomtaisan_byMaNTS(@Query("MaNTS") int MaNTS,
+                                                @Query("TenNTS") String TenNTS);
+
+    @GET("api/add_data_nhomtaisan.php")
+    Call<ObjectReponse> add_nhomtaisan(@Query("TenNTS") String TenNTS);
+
+
+    @GET("api/delete_data_nhomtaisan.php")
+    Call<ObjectReponse> delete_nhomtaisan(@Query("MaNTS") int MaNTS);
+
     // End api nhóm tài sản
+
+
+
 
     //Loại tài sản
 
     @GET("api/load_data_loaitaisan.php")
     Call<List<LoaiTaiSan>> get_list_loaitaisan();
+
+
 
 
     // End api loại tài sản
