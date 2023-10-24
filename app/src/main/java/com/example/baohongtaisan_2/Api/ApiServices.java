@@ -17,6 +17,7 @@ import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.PhanBo;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.Model.Phong;
+import com.example.baohongtaisan_2.Model.TaiSan;
 import com.example.baohongtaisan_2.Model.ThongKe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -142,6 +143,14 @@ public interface ApiServices {
 
     // End api khu vực phòng
 
+
+
+    //tai san
+    @GET("api/load_data_taisan.php")
+    Call<List<TaiSan>> get_list_taisan();
+
+
+    // end api tai san
 
 
     //Nhóm tài sản

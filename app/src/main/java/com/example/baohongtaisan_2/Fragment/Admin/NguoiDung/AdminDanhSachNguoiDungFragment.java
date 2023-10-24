@@ -127,6 +127,5 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
     public void onResume() {
         super.onResume();
         GetListNguoiDung();
-
     }
 }

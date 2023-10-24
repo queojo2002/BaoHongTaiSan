@@ -1,30 +1,16 @@
 package com.example.baohongtaisan_2.Model;
 
 public class TaiSan {
-    private String MaTS, TenTS, HinhAnh, GhiChu, HangSanXuat, NgayCapNhat, NgayTao;
+    private int MaTS;
+    private String TenTS, HinhAnh, GhiChu, HangSanXuat, NgayCapNhat, NgayTao;
     private int GiaTri, SLNhapVao, SLHienCon, PhamChat, NamSanXuat;
-    private LoaiTaiSan loaiTaiSan;
-    private NhomTaiSan nhomTaiSan;
+    private String TenLTS, TenNTS;
 
     public TaiSan() {
     }
 
 
-    public TaiSan(String maTS, String tenTS, String hinhAnh, String ghiChu, String hangSanXuat, int giaTri, int phamChat, int namSanXuat, LoaiTaiSan loaiTaiSan, NhomTaiSan nhomTaiSan) {
-        MaTS = maTS;
-        TenTS = tenTS;
-        HinhAnh = hinhAnh;
-        GhiChu = ghiChu;
-        HangSanXuat = hangSanXuat;
-        GiaTri = giaTri;
-        PhamChat = phamChat;
-        NamSanXuat = namSanXuat;
-        this.loaiTaiSan = loaiTaiSan;
-        this.nhomTaiSan = nhomTaiSan;
-    }
-
-
-    public TaiSan(String maTS, String tenTS, String hinhAnh, String ghiChu, String hangSanXuat, String ngayCapNhat, String ngayTao, int giaTri, int slNhapVao, int slHienCon, int phamChat, int namSanXuat, LoaiTaiSan loaiTaiSan, NhomTaiSan nhomTaiSan) {
+    public TaiSan(int maTS, String tenTS, String hinhAnh, String ghiChu, String hangSanXuat, String ngayCapNhat, String ngayTao, int giaTri, int SLNhapVao, int SLHienCon, int phamChat, int namSanXuat, String tenLTS, String tenNTS) {
         MaTS = maTS;
         TenTS = tenTS;
         HinhAnh = hinhAnh;
@@ -33,20 +19,19 @@ public class TaiSan {
         NgayCapNhat = ngayCapNhat;
         NgayTao = ngayTao;
         GiaTri = giaTri;
-        SLNhapVao = slNhapVao;
-        SLHienCon = slHienCon;
+        this.SLNhapVao = SLNhapVao;
+        this.SLHienCon = SLHienCon;
         PhamChat = phamChat;
         NamSanXuat = namSanXuat;
-        this.loaiTaiSan = loaiTaiSan;
-        this.nhomTaiSan = nhomTaiSan;
+        TenLTS = tenLTS;
+        TenNTS = tenNTS;
     }
 
-
-    public String getMaTS() {
+    public int getMaTS() {
         return MaTS;
     }
 
-    public void setMaTS(String maTS) {
+    public void setMaTS(int maTS) {
         MaTS = maTS;
     }
 
@@ -138,19 +123,19 @@ public class TaiSan {
         NamSanXuat = namSanXuat;
     }
 
-    public LoaiTaiSan getLoaiTaiSan() {
-        return loaiTaiSan;
+    public String getTenLTS() {
+        return TenLTS;
     }
 
-    public void setLoaiTaiSan(LoaiTaiSan loaiTaiSan) {
-        this.loaiTaiSan = loaiTaiSan;
+    public void setTenLTS(String tenLTS) {
+        TenLTS = tenLTS;
     }
 
-    public NhomTaiSan getNhomTaiSan() {
-        return nhomTaiSan;
+    public String getTenNTS() {
+        return TenNTS;
     }
 
-    public void setNhomTaiSan(NhomTaiSan nhomTaiSan) {
-        this.nhomTaiSan = nhomTaiSan;
+    public void setTenNTS(String tenNTS) {
+        TenNTS = tenNTS;
     }
 }

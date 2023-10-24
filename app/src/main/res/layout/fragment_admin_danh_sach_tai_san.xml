@@ -3,12 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Admin.TaiSan.AdminDanhSachTaiSanFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/tab1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <SearchView
+                android:id="@+id/txtSearchTS"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:queryHint="Tìm kiếm" />
+
+            <Button
+                android:id="@+id/btnts_add"
+                android:layout_width="140dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_button_add"
+                android:drawableRight="@drawable/baseline_add_to_photos_24"
+                android:text="Thêm mới"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:backgroundTint="@null" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTaiSan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </FrameLayout>

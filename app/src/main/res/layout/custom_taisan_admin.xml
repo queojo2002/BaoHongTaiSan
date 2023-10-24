@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgQLTS"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_inventory_24">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/txtAdminQLTS_TenTS"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imgQLTS"
+                android:ems="5"
+                android:gravity="left|center"
+                android:text="Máy in Laser Trắng Đen HP 107w WiFi (4ZB78A)"
+                android:textColor="#4CAF50"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtAdminQLTS_TenNTS"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAdminQLTS_TenTS"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:paddingBottom="2dp"
+                android:textColor="#F60404"
+                android:layout_toEndOf="@id/imgQLTS"
+                android:text="Bộ máy vi tính"
+                android:textSize="12sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtAdminQLTS_TenLTS"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAdminQLTS_TenNTS"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imgQLTS"
+                android:paddingBottom="5dp"
+                android:textColor="#120808"
+                android:text="Công cụ dụng cụ"
+                android:textSize="12sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtAdminQLTS_SLNV"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:paddingTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:paddingRight="5dp"
+                android:layout_toEndOf="@id/txtAdminQLTS_TenTS"
+                android:backgroundTint="#FF0000"
+                android:text="Số lượng nhập vào: 10000"
+                android:textAlignment="center"
+                android:textColor="#515151"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txtAdminQLTS_SLHC"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/txtAdminQLTS_SLNV"
+                android:layout_toEndOf="@id/txtAdminQLTS_TenNTS"
+                android:backgroundTint="#FF0000"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:text="Số lượng hiện còn: 10000"
+                android:textAlignment="center"
+                android:textColor="#515151"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
