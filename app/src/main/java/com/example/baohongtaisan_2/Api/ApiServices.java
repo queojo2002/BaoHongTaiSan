@@ -1,5 +1,7 @@
 package com.example.baohongtaisan_2.Api;
 
+import android.database.Observable;
+
 import com.example.baohongtaisan_2.Model.BaoHong;
 import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.DonVi;
@@ -8,6 +10,8 @@ import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.LoaiTaiSan;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.NhomTaiSan;
+import com.example.baohongtaisan_2.Model.NotificationReponse;
+import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.PhanBo;
@@ -21,7 +25,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiServices {
@@ -37,6 +44,11 @@ public interface ApiServices {
             .build()
             .create(ApiServices.class);
 
+    ApiServices apiServices_Noti = new Retrofit.Builder()
+            .baseUrl("https://fcm.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(ApiServices.class);
 
     // đơn vị
     @GET("api/load_data_donvi.php")
@@ -156,7 +168,15 @@ public interface ApiServices {
     @GET("api/load_data_loaitaisan.php")
     Call<List<LoaiTaiSan>> get_list_loaitaisan();
 
+    @GET("api/edit_data_loaitaisan.php")
+    Call<List<LoaiTaiSan>> edit_data_loaitaisan_byMaLTS(@Query("MaLTS") int MaLTS,
+                                                        @Query("TenLTS") String TenLTS);
 
+    @GET("api/add_data_loaitaisan.php")
+    Call<List<LoaiTaiSan>> add_data_loaitaisan(@Query("TenLTS") String TenLTS);
+
+    @GET("api/delete_data_loaitaisan.php")
+    Call<List<LoaiTaiSan>> delete_data_loaitaisan(@Query("MaLTS") int MaLTS);
 
 
     // End api loại tài sản
@@ -206,5 +226,16 @@ public interface ApiServices {
             @Query("TinhTrang") int TinhTrang,
             @Query("MoTa") String MoTa,
             @Query("HinhAnh") String HinhAnh);
+
+
+
+    @POST("fcm/send")
+    @Headers(
+            {
+                    "Content-Type: application/json",
+                    "Authorization: key=AAAAWvAmL58:APA91bFFZKlE1DWmALVBzCE5h6Oj_8NAMjG4BdewwLxRsvV4Q1Cwkb1QciPin8I6ZUCrN2cT1-FmVMYNag0snE880ledRZE523FfjOSh8u3fUVFsu7g9W4s2-4nKPHIqS5OnQkJVGKgo"
+            }
+    )
+    Call<NotificationReponse> sendNoti(@Body NotificationSendData notificationSendData);
 
 }
