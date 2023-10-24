@@ -31,12 +31,6 @@
             android:name=".Activity.Admin.NguoiDung.AdminPhanQuyenAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Admin.NguoiDung.AdminDonViEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Admin.NguoiDung.AdminDonViAddActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Admin.NguoiDung.AdminChucDanhEditActivity"
             android:exported="false" />
         <activity

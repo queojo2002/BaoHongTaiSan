@@ -4,16 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Activity.Admin.NguoiDung.AdminDonViEditActivity;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -38,6 +37,8 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
 
     private List<DonVi> listDonvi;
     private Context context;
+    private Button btnhuybo, btnchinhsua;
+    private EditText txtinput;
 
     public AdminDonViAdapter(List<DonVi> listDonvi) {
         this.listDonvi = listDonvi;
@@ -63,16 +64,7 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         holder.editdv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Open_Dialog_Edit();
-                /*Context context = view.getContext();
-
-                Intent intent = new Intent(context, AdminDonViEditActivity.class);
-                Bundle bdDonvi = new Bundle();
-                bdDonvi.putInt("madv", dv.getMaDV());
-                bdDonvi.putString("tendv", dv.getTenDV());
-                bdDonvi.putString("motadv", dv.getMoTaDV());
-                intent.putExtra("datadonvi", bdDonvi);
-                context.startActivity(intent);*/
+                Open_Dialog_Edit(dv,vitri);
             }
         });
         holder.deletedv.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +128,12 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
     }
 
 
-    public void Open_Dialog_Edit()
+    public void Open_Dialog_Edit(DonVi dv, int vitri)
     {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_edit);
+
         Window window = dialog.getWindow();
         if (window == null)
         {
@@ -148,11 +141,53 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         WindowManager.LayoutParams windowAtt = window.getAttributes();
         windowAtt.gravity = Gravity.CENTER;
         window.setAttributes(windowAtt);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
+
+        txtinput = dialog.findViewById(R.id.txtInput);
+        btnhuybo = dialog.findViewById(R.id.btnHuyBo);
+        btnchinhsua = dialog.findViewById(R.id.btnEdit);
+
+        txtinput.setText(dv.getTenDV());
+        btnchinhsua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiServices.apiServices.edit_donvi(dv.getMaDV(), txtinput.getText().toString(), dv.getMoTaDV()).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
+                        ObjectReponse objectEdit = response.body();
+                        if (objectEdit == null) return;
+                        if (objectEdit.getCode() == 1) {
+                            Toast.makeText(context, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            listDonvi.get(vitri).setTenDV(txtinput.getText().toString());
+                            notifyItemChanged(vitri);
+                        } else {
+                            Toast.makeText(context, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
+                        Toast.makeText(context, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
+
     }
 
 
