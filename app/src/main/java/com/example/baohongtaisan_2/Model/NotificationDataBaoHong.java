@@ -2,13 +2,15 @@ package com.example.baohongtaisan_2.Model;
 
 public class NotificationDataBaoHong {
     private int MaND;
-    private String TenTS, TenP, TrangThai, TinhTrang, MoTa;
+    private String TenTS, TenP;
+    private int TrangThai, TinhTrang;
+    private String MoTa;
 
 
     public NotificationDataBaoHong() {
     }
 
-    public NotificationDataBaoHong(int maND, String tenTS, String tenP, String trangThai, String tinhTrang, String moTa) {
+    public NotificationDataBaoHong(int maND, String tenTS, String tenP, int trangThai, int tinhTrang, String moTa) {
         MaND = maND;
         TenTS = tenTS;
         TenP = tenP;
@@ -41,19 +43,19 @@ public class NotificationDataBaoHong {
         TenP = tenP;
     }
 
-    public String getTrangThai() {
+    public int getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(int trangThai) {
         TrangThai = trangThai;
     }
 
-    public String getTinhTrang() {
+    public int getTinhTrang() {
         return TinhTrang;
     }
 
-    public void setTinhTrang(String tinhTrang) {
+    public void setTinhTrang(int tinhTrang) {
         TinhTrang = tinhTrang;
     }
 
@@ -64,5 +66,4 @@ public class NotificationDataBaoHong {
     public void setMoTa(String moTa) {
         MoTa = moTa;
     }
-
 }

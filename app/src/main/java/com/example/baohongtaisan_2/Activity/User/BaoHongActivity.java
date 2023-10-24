@@ -22,8 +22,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.baohongtaisan_2.Adapter.Admin.AdminNguoiDungAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.NguoiDung;
+import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
+import com.example.baohongtaisan_2.Model.NotificationReponse;
+import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.UploadIMG;
 import com.example.baohongtaisan_2.R;
@@ -36,6 +40,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +65,7 @@ public class BaoHongActivity extends AppCompatActivity {
 
     private StorageTask mUploadTask;
     private ProgressBar mProgressBar;
-
+    private List<NguoiDung> nguoiDungList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,7 @@ public class BaoHongActivity extends AppCompatActivity {
         TenTS = intent.getStringExtra("TenTS");
         TenP = intent.getStringExtra("TenP");
         tv_TenTS.setText(TenTS);
+        nguoiDungList = new ArrayList<>();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
@@ -161,7 +169,6 @@ public class BaoHongActivity extends AppCompatActivity {
         if (mImageUri != null) {
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
-
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -215,6 +222,7 @@ public class BaoHongActivity extends AppCompatActivity {
                         public void onResponse(Call<Object_Add> call, Response<Object_Add> response) {
                             Object_Add object_add = response.body();
                             if (object_add != null) {
+                                sendNotiToAdmin(nguoiDung.getMaND(), TenTS, TenP, 0, TrangThaiHH, txtMoTaHH.getText().toString());
                                 Toast.makeText(BaoHongActivity.this, object_add.getMessage(), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -273,5 +281,50 @@ public class BaoHongActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+
+    private void sendNotiToAdmin(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa)
+    {
+        ApiServices.apiServices.get_list_nguoidung().enqueue(new Callback<List<NguoiDung>>() {
+            @Override
+            public void onResponse(Call<List<NguoiDung>> call, Response<List<NguoiDung>> response) {
+                nguoiDungList.clear();
+                nguoiDungList = response.body();
+                if (nguoiDungList != null) {
+                    for (int i = 0 ; i < nguoiDungList.size(); i++)
+                    {
+                        NguoiDung nguoiDung = nguoiDungList.get(i);
+                        if (nguoiDung.getTenPQ().equals("Admin") && nguoiDung.getToken() != null)
+                        {
+                            System.out.println(nguoiDung.getHoVaTen()+"");
+                            sendNoti(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa, nguoiDung.getToken());
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<NguoiDung>> call, Throwable t) {
+                Toast.makeText(BaoHongActivity.this, "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void sendNoti(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa, String Token)
+    {
+        NotificationDataBaoHong notificationDataBaoHong = new NotificationDataBaoHong(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa);
+        NotificationSendData notificationSendData = new NotificationSendData(notificationDataBaoHong, Token);
+        ApiServices.apiServices_Noti.sendNoti(notificationSendData).enqueue(new Callback<NotificationReponse>() {
+            @Override
+            public void onResponse(Call<NotificationReponse> call, Response<NotificationReponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<NotificationReponse> call, Throwable t) {
+
+            }
+        });
+    }
 
 }

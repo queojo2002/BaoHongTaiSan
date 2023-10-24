@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.example.baohongtaisan_2.Activity.User.HomeActivity;
+import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -27,7 +28,23 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
             if (stringMap == null) {
                 return;
             }
-            showNotification(stringMap.get("MaND").toString(),stringMap.get("TenTS"), stringMap.get("TenP"));
+
+            if (IsLogin.getInstance().getTenPQ() == "Admin")
+            {
+                String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
+                String body = "";
+                if (Integer.parseInt(stringMap.get("TinhTrang")) == 1) {
+                    body = "Hư hỏng nhẹ (Minor)";
+                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 2) {
+                    body = "Hư hỏng trung bình (Moderate)";
+                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 3) {
+                    body = "Hư hỏng nghiêm trọng (Severe)";
+                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 4) {
+                    body = "Hư hỏng hoàn toàn (Critical)";
+                }
+                showNotification(stringMap.get("MaND").toString(),title, body);
+            }
+
 
         }
     }

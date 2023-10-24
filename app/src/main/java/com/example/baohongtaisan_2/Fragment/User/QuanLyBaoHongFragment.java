@@ -86,19 +86,7 @@ public class QuanLyBaoHongFragment extends Fragment {
         });
 
 
-        NotificationDataBaoHong notificationDataBaoHong = new NotificationDataBaoHong(1, "duc 1","duc 2","duc 3","duc 4","duc 5");
-        NotificationSendData notificationSendData = new NotificationSendData(notificationDataBaoHong, "d7Tw-dzRTR6hlM1UEn1xwY:APA91bFCo_bnfA0EuEaZB41fZC98f25H0HFDI1KMoRGuU1qdLKLMdtcdpUcZG816BZwFPP9d7kolhbfLuY6lbeJrtKiNTQsMLJVJzyQ-Uhq2xI-XwHQGbdp8QV6wyaV23UuUs3_A6gm8");
-        ApiServices.apiServices_Noti.sendNoti(notificationSendData).enqueue(new Callback<NotificationReponse>() {
-            @Override
-            public void onResponse(Call<NotificationReponse> call, Response<NotificationReponse> response) {
 
-            }
-
-            @Override
-            public void onFailure(Call<NotificationReponse> call, Throwable t) {
-
-            }
-        });
 
 
 
