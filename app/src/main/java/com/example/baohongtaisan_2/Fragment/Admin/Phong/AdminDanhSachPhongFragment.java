@@ -170,7 +170,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
         txtinput.setHint("Nhập tên Phòng");
 
 
-
         spnLP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -189,13 +188,12 @@ public class AdminDanhSachPhongFragment extends Fragment {
                 ArrayAdapter<KhuVucPhong> adapter = (ArrayAdapter<KhuVucPhong>) spnKVP.getAdapter();
                 KhuVucPhong selected = adapter.getItem(i);
                 if (selected != null) {
-                    MaLP_Add = selected.getMaKVP();
+                    MaKVP_Add = selected.getMaKVP();
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-
 
 
         btnthem.setOnClickListener(new View.OnClickListener() {
@@ -248,10 +246,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     loaiPhongList = response.body();
                     SpinnerLoaiPhong_Adapter spinnerLoaiPhongAdapter = new SpinnerLoaiPhong_Adapter(getContext(), R.layout.custom_spinner_selected, loaiPhongList);
                     spinner.setAdapter(spinnerLoaiPhongAdapter);
-                    if (loaiPhongList.size() >= 1) {
-                        spinner.setSelection(0);
-                        MaLP_Add = loaiPhongList.get(0).getMaLP();
-                    }
                 }
             }
             @Override
@@ -270,10 +264,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     khuVucPhongList = response.body();
                     SpinnerKhuVucPhong_Adapter spinner_2 = new SpinnerKhuVucPhong_Adapter(getContext(), R.layout.custom_spinner_selected, khuVucPhongList);
                     spinner.setAdapter(spinner_2);
-                    if (khuVucPhongList.size() >= 1) {
-                        MaKVP_Add = khuVucPhongList.get(0).getMaKVP();
-                        spinner.setSelection(0);
-                    }
                 }
             }
             @Override
