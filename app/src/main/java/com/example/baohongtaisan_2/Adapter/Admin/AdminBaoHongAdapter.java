@@ -194,4 +194,3 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
     }
 
 }
-
