@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgQL_BaoHong"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_inventory_24">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/txtQLBH_TenTS"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/imgQL_BaoHong"
+                android:ems="5"
+                android:gravity="left|center"
+                android:text="Bộ máy vi tính - Samsung"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtQLBH_TenP"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtQLBH_TenTS"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/imgQL_BaoHong"
+                android:text="Phòng C2-P3-302"
+                android:textSize="12sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtQLBH_Time"
+                android:layout_width="200dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/txtQLBH_TenTS"
+                android:backgroundTint="#FF0000"
+                android:text="18-10-2023 08:23:34"
+                android:textAlignment="center"
+                android:textColor="#878585"
+                android:textSize="13sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:id="@+id/txtQLBH_TinhTrang"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/txtQLBH_Time"
+                android:layout_toRightOf="@id/txtQLBH_TenP"
+                android:backgroundTint="#FF0000"
+                android:gravity="center"
+                android:text="Hư hỏng nhẹ (Minor)"
+                android:textAlignment="center"
+                android:textColor="#F36969"
+                android:textSize="12sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:id="@+id/txtQLBH_TrangThai"
+                android:layout_width="200dp"
+                android:layout_height="15dp"
+                android:layout_below="@id/txtQLBH_TinhTrang"
+                android:layout_toRightOf="@id/txtQLBH_TenP"
+                android:gravity="center"
+                android:text="Đã gửi báo hỏng"
+                android:textAlignment="center"
+                android:textColor="#FF9800"
+                android:textSize="12sp"
+                android:textStyle="italic"></TextView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/imgQL_BaoHong">
+                <Button
+                    android:id="@+id/btnTiepnhan"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:textSize="6sp"
+                    android:backgroundTint="#55C5C5"
+                    android:text="Đã tiếp nhận"></Button>
+                <Button
+                    android:id="@+id/btnDangsua"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_toRightOf="@id/btnTiepnhan"
+                    android:textSize="6sp"
+                    android:backgroundTint="#55C5C5"
+                    android:text="Đang sửa chữa"></Button>
+                <Button
+                    android:id="@+id/btnThanhcong"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/btnDangsua"
+                    android:textSize="6sp"
+                    android:backgroundTint="#55C5C5"
+                    android:text="Sửa thành công"></Button>
+                <Button
+                    android:id="@+id/btnKhongthanhcong"
+                    android:layout_width="80dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/btnThanhcong"
+                    android:textSize="6sp"
+                    android:backgroundTint="#55C5C5"
+                    android:text="Không thành công"></Button>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
