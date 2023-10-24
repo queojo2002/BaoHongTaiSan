@@ -27,15 +27,15 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
             if (stringMap == null) {
                 return;
             }
-            showNotification(stringMap.get("MaND").toString(),stringMap.get("TenTS"), stringMap.get("TenP"));
+            showNotification(stringMap.get("title"), stringMap.get("body"));
 
         }
     }
 
-    private void showNotification(String MaND, String title, String body) {
+    private void showNotification(String title, String body) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        String channelID = MaND;
+        String channelID = "testid";
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setSmallIcon(R.drawable.logo_tdmu_2)
