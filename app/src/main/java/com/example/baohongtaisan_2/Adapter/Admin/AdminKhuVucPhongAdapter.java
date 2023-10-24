@@ -1,13 +1,19 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Activity.Admin.Phong.AdminKhuVucPhongEditActivity;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -45,6 +50,7 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
         return new KhuvucphongViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull KhuvucphongViewHolder holder, int position) {
         int vitri = position;
@@ -57,13 +63,7 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
         holder.editkhuvuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, AdminKhuVucPhongEditActivity.class);
-                Bundle bdKhuvucphong = new Bundle();
-                bdKhuvucphong.putInt("makhuvuc", kv.getMaKVP());
-                bdKhuvucphong.putString("tenkhuvuc", kv.getTenKVP());
-                intent.putExtra("datakhuvucphong", bdKhuvucphong);
-                context.startActivity(intent);
+                Open_Dialog_Edit(kv, vitri);
             }
         });
         holder.deletekhuvuc.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +107,7 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
         });
     }
 
+
     @Override
     public int getItemCount() {
         if (listKhuvucphong != null) {
@@ -115,14 +116,91 @@ public class AdminKhuVucPhongAdapter extends RecyclerView.Adapter<AdminKhuVucPho
         return 0;
     }
 
+
+
     public void searchDataList(ArrayList<KhuVucPhong> searchlist) {
         listKhuvucphong = searchlist;
         notifyDataSetChanged();
     }
 
+
+
     public KhuVucPhong getItem(int position) {
         return listKhuvucphong.get(position);
     }
+
+
+
+    public void Open_Dialog_Edit(KhuVucPhong khuVucPhong, int vitri) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_edit);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        EditText txtinput = dialog.findViewById(R.id.txtInput);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
+        Button btnchinhsua = dialog.findViewById(R.id.btnEdit);
+        txtinput.setText(khuVucPhong.getTenKVP());
+        btnchinhsua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiServices.apiServices.edit_khuvucphong(khuVucPhong.getMaKVP(), txtinput.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
+                        ObjectReponse objectEdit = response.body();
+                        if (objectEdit == null) return;
+                        if (objectEdit.getCode() == 1) {
+                            Toast.makeText(context, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            listKhuvucphong.get(vitri).setTenKVP(txtinput.getText().toString());
+                            notifyItemChanged(vitri);
+                        } else {
+                            Toast.makeText(context, objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
+                        Toast.makeText(context, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public class KhuvucphongViewHolder extends RecyclerView.ViewHolder {
         private TextView makhuvuc, tenkhuvuc;

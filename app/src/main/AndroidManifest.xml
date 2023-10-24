@@ -28,18 +28,6 @@
             android:name=".Activity.Admin.NguoiDung.AdminNguoiDungAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Admin.Phong.AdminLoaiPhongEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Admin.Phong.AdminLoaiPhongAddActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Admin.Phong.AdminKhuVucPhongEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Admin.Phong.AdminKhuVucPhongAddActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Admin.Phong.AdminPhongAddActivity"
             android:exported="false" />
         <activity

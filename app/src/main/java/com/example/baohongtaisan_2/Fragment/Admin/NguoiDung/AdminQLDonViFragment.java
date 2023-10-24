@@ -130,8 +130,7 @@ public class AdminQLDonViFragment extends Fragment {
         adminDonVi_adapter.searchDataList(searchlist);
     }
 
-    public void Open_Dialog_Add()
-    {
+    public void Open_Dialog_Add() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_edit);

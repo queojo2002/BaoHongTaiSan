@@ -128,8 +128,7 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
     }
 
 
-    public void Open_Dialog_Edit(DonVi dv, int vitri)
-    {
+    public void Open_Dialog_Edit(DonVi dv, int vitri) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_edit);
