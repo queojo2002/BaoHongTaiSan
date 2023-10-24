@@ -1,5 +1,6 @@
 package com.example.baohongtaisan_2.Services;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,46 +19,43 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
+import java.util.Objects;
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 public class FirebaseMessagerReceiver extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             Map<String, String> stringMap = message.getData();
-            if (stringMap == null) {
-                return;
-            }
-            System.out.println("noti: " + stringMap.get("LoaiNoti").toString());
-
             if (IsLogin.getInstance().getTenPQ().equals("Admin") && stringMap.get("LoaiNoti").equals("UserToAdmin"))
             {
                 String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
                 String body = "";
-                if (Integer.parseInt(stringMap.get("TinhTrang")) == 1) {
+                if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TinhTrang"))) == 1) {
                     body = "Hư hỏng nhẹ (Minor)";
-                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 2) {
+                } else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TinhTrang")))  == 2) {
                     body = "Hư hỏng trung bình (Moderate)";
-                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 3) {
+                } else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TinhTrang")))  == 3) {
                     body = "Hư hỏng nghiêm trọng (Severe)";
-                } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 4) {
+                } else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TinhTrang")))  == 4) {
                     body = "Hư hỏng hoàn toàn (Critical)";
                 }
-                showNotification(stringMap.get("MaND").toString(),title, body);
+                showNotification(stringMap.get("MaND"),title, body);
             }else if (IsLogin.getInstance().getTenPQ().equals("User") && stringMap.get("LoaiNoti").equals("AdminToUser"))
             {
                 String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
                 String body = "";
-                 if (Integer.parseInt(stringMap.get("TrangThai"))  == 2) {
+                 if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TrangThai")))  == 2) {
                     body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Đã tiếp nhận báo hỏng";
-                } else if (Integer.parseInt(stringMap.get("TrangThai"))  == 3) {
+                } else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TrangThai")))  == 3) {
                     body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Đang sửa chữa";
-                } else if (Integer.parseInt(stringMap.get("TrangThai"))  == 4) {
+                } else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TrangThai")))  == 4) {
                     body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Sửa thành công";
-                }else if (Integer.parseInt(stringMap.get("TrangThai"))  == 5) {
+                }else if (Integer.parseInt(Objects.requireNonNull(stringMap.get("TrangThai")))  == 5) {
                     body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Sửa không thành công";
                 }
-                showNotification(stringMap.get("MaND").toString(),title, body);
+                showNotification(stringMap.get("MaND"),title, body);
             }
 
 
