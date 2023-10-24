@@ -3,6 +3,8 @@ package com.example.baohongtaisan_2.Adapter.Admin;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,31 +15,39 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baohongtaisan_2.Activity.Admin.TaiSan.AdminNhomTaiSanEditActivity;
+import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.NhomTaiSan;
+import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NhomTaiSanAdapter extends RecyclerView.Adapter<NhomTaiSanAdapter.NhomtaisanViewHolder> {
+import javax.security.auth.callback.Callback;
+
+import retrofit2.Call;
+import retrofit2.Response;
+
+public class AdminNhomTaiSanAdapter extends RecyclerView.Adapter<AdminNhomTaiSanAdapter.NhomtaisanViewHolder> {
 
     private List<NhomTaiSan> listnhomts;
     private Context context;
 
-    public NhomTaiSanAdapter(List<NhomTaiSan> listnhomts) {
+    public AdminNhomTaiSanAdapter(List<NhomTaiSan> listnhomts) {
         this.listnhomts = listnhomts;
     }
 
     @NonNull
     @Override
-    public NhomTaiSanAdapter.NhomtaisanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdminNhomTaiSanAdapter.NhomtaisanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_nhomtaisan_admin, parent, false);
         context = parent.getContext();
-        return new NhomTaiSanAdapter.NhomtaisanViewHolder(view);
+        return new AdminNhomTaiSanAdapter.NhomtaisanViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NhomTaiSanAdapter.NhomtaisanViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdminNhomTaiSanAdapter.NhomtaisanViewHolder holder, int position) {
         int vitri = position;
         NhomTaiSan nhomTaiSan = listnhomts.get(position);
         if (nhomTaiSan == null) {
@@ -48,14 +58,14 @@ public class NhomTaiSanAdapter extends RecyclerView.Adapter<NhomTaiSanAdapter.Nh
         holder.editnhomts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Context context = view.getContext();
+                Context context = view.getContext();
 
-                Intent intent = new Intent(context, EditNhomtaisanActivity.class);
+                Intent intent = new Intent(context, AdminNhomTaiSanEditActivity.class);
                 Bundle bdNTS = new Bundle();
                 bdNTS.putInt("mants", nhomTaiSan.getMaNTS());
                 bdNTS.putString("tennts", nhomTaiSan.getTenNTS());
                 intent.putExtra("datants", bdNTS);
-                context.startActivity(intent);*/
+                context.startActivity(intent);
             }
         });
         holder.deletenhomts.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +77,10 @@ public class NhomTaiSanAdapter extends RecyclerView.Adapter<NhomTaiSanAdapter.Nh
                 builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        /*APIService.apiServices.delete_nhomtaisan(nhomTaiSan.getMaNTS()).enqueue(new Callback<ObjectEdit>() {
+                        ApiServices.apiServices.delete_nhomtaisan(nhomTaiSan.getMaNTS()).enqueue(new retrofit2.Callback<ObjectReponse>() {
                             @Override
-                            public void onResponse(Call<ObjectEdit> call, Response<ObjectEdit> response) {
-                                ObjectEdit objectadd = response.body();
+                            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                                ObjectReponse objectadd = response.body();
                                 if (objectadd.getCode() == 1){
                                     Toast.makeText(context, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                                     listnhomts.remove(vitri);
@@ -81,11 +91,11 @@ public class NhomTaiSanAdapter extends RecyclerView.Adapter<NhomTaiSanAdapter.Nh
                             }
 
                             @Override
-                            public void onFailure(Call<ObjectEdit> call, Throwable t) {
+                            public void onFailure(Call<ObjectReponse> call, Throwable t) {
                                 Toast.makeText(context, "Xóa thất bại !", Toast.LENGTH_SHORT).show();
 
                             }
-                        });*/
+                        });
                     }
                 });
                 builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {

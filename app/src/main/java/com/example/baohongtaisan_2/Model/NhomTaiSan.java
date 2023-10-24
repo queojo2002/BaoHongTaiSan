@@ -1,29 +1,30 @@
 package com.example.baohongtaisan_2.Model;
 
 public class NhomTaiSan {
-    private String MaNTS, TenNTS, NgayCapNhat, NgayTao;
+    private int MaNTS;
+    private String TenNTS, NgayCapNhat, NgayTao;
 
 
     public NhomTaiSan() {
     }
 
-    public NhomTaiSan(String maNTS, String tenNTS) {
+    public NhomTaiSan(int maNTS, String tenNTS) {
         MaNTS = maNTS;
         TenNTS = tenNTS;
     }
 
-    public NhomTaiSan(String maNTS, String tenNTS, String ngayCapNhat, String ngayTao) {
+    public NhomTaiSan(int maNTS, String tenNTS, String ngayCapNhat, String ngayTao) {
         MaNTS = maNTS;
         TenNTS = tenNTS;
         NgayCapNhat = ngayCapNhat;
         NgayTao = ngayTao;
     }
 
-    public String getMaNTS() {
+    public int getMaNTS() {
         return MaNTS;
     }
 
-    public void setMaNTS(String maNTS) {
+    public void setMaNTS(int maNTS) {
         MaNTS = maNTS;
     }
 
