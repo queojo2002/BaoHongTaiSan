@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.baohongtaisan_2.Activity.LoginActivity;
+import com.example.baohongtaisan_2.Fragment.Admin.AdminBaoHongFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminNguoiDungFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminPhongFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.AdminTaiSanFragment;
@@ -109,7 +110,9 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
             Open_NAV_QuanLy_TaiSan(0);
         } else if (item.getItemId() == R.id.nav_admin_phanbo) { // click quản lý phân bổ
             Open_NAV_PhanBo(0);
-        } else if (item.getItemId() == R.id.nav_admin_dangxuat) {
+        }else if (item.getItemId() == R.id.nav_admin_qlbaohong) { // click quản lý báo hỏng
+            Open_NAV_Quanly_BaoHong(0);
+        }else if (item.getItemId() == R.id.nav_admin_dangxuat) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -184,6 +187,19 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
 
 
     private void Open_NAV_PhanBo(int OptionNAV) {
+
+    }
+    private void Open_NAV_Quanly_BaoHong(int OptionNAV){
+        if (currentFrament_NAV != "nav_admin_qlbaohong") {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminBaoHongFragment()).commit();
+            getSupportActionBar().setTitle("Quản lí báo hỏng");
+            currentFrament_NAV = "nav_admin_qlbaohong";
+            if (OptionNAV == 0) {
+                bottomNavigationView.getMenu().findItem(R.id.bottom_admin_trangchu).setChecked(true);
+            } else {
+                navigationView.setCheckedItem(R.id.nav_admin_qlbaohong);
+            }
+        }
     }
 
 

@@ -26,6 +26,11 @@
             android:id="@+id/nav_admin_phanbo"
             android:icon="@drawable/baseline_inventory_24"
             android:title="Phân bổ tài sản" />
+
+        <item
+            android:id="@+id/nav_admin_qlbaohong"
+            android:icon="@drawable/baseline_construction_24"
+            android:title="Quản lí báo hỏng" />
     </group>
     <item android:title="">
         <menu>
