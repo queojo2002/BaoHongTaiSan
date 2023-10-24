@@ -4,19 +4,20 @@ public class NotificationDataBaoHong {
     private int MaND;
     private String TenTS, TenP;
     private int TrangThai, TinhTrang;
-    private String MoTa;
+    private String MoTa, LoaiNoti;
 
 
     public NotificationDataBaoHong() {
     }
 
-    public NotificationDataBaoHong(int maND, String tenTS, String tenP, int trangThai, int tinhTrang, String moTa) {
+    public NotificationDataBaoHong(int maND, String tenTS, String tenP, int trangThai, int tinhTrang, String moTa, String loaiNoti) {
         MaND = maND;
         TenTS = tenTS;
         TenP = tenP;
         TrangThai = trangThai;
         TinhTrang = tinhTrang;
         MoTa = moTa;
+        this.LoaiNoti = loaiNoti;
     }
 
     public int getMaND() {
@@ -65,5 +66,13 @@ public class NotificationDataBaoHong {
 
     public void setMoTa(String moTa) {
         MoTa = moTa;
+    }
+
+    public String getLoaiNoti() {
+        return LoaiNoti;
+    }
+
+    public void setLoaiNoti(String loaiNoti) {
+        LoaiNoti = loaiNoti;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.baohongtaisan_2.Activity.Admin.Phong;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
@@ -54,32 +56,24 @@ public class AdminPhongEditActivity extends AppCompatActivity {
 
         setSpinnerListeners();
 
-        btnedit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String tenphong = txtTen.getText().toString().trim();
-                if (tenphong.isEmpty()) {
-                    txtTen.setError("Bạn chưa nhập tên phòng.");
-                    return;
-                }
-                if (MaKVP == -1) {
-                    Toast.makeText(AdminPhongEditActivity.this, "Vui lòng chọn khu vực phòng.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (MaLP == -1) {
-                    Toast.makeText(AdminPhongEditActivity.this, "Vui lòng chọn loại phòng.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                editPhong();
+        btnedit.setOnClickListener(view -> {
+            String tenphong = txtTen.getText().toString().trim();
+            if (tenphong.isEmpty()) {
+                txtTen.setError("Bạn chưa nhập tên phòng.");
+                return;
             }
+            if (MaKVP == -1) {
+                Toast.makeText(AdminPhongEditActivity.this, "Vui lòng chọn khu vực phòng.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (MaLP == -1) {
+                Toast.makeText(AdminPhongEditActivity.this, "Vui lòng chọn loại phòng.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            editPhong();
         });
 
-        btnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnback.setOnClickListener(view -> finish());
     }
 
     private void initializeViews() {
@@ -94,6 +88,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
         listLP = new ArrayList<>();
     }
 
+    @SuppressLint("SetTextI18n")
     private void dataBindingChucDanh() {
         Bundle myBundle = intent.getBundleExtra("dataphong");
         int IdP = myBundle.getInt("maphong");
@@ -108,8 +103,9 @@ public class AdminPhongEditActivity extends AppCompatActivity {
     private void editPhong() {
         ApiServices.apiServices.edit_phong(Integer.parseInt(maP.getText().toString()), txtTen.getText().toString(), MaKVP, MaLP).enqueue(new Callback<ObjectReponse>() {
             @Override
-            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+            public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
+                if (objectEdit == null) return;
                 if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminPhongEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
@@ -119,7 +115,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ObjectReponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongEditActivity.this, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
             }
         });
@@ -175,16 +171,11 @@ public class AdminPhongEditActivity extends AppCompatActivity {
     private void loadKVPData(int makvp) {
         ApiServices.apiServices.get_list_khuvucphong().enqueue(new Callback<List<KhuVucPhong>>() {
             @Override
-            public void onResponse(Call<List<KhuVucPhong>> call, Response<List<KhuVucPhong>> response) {
+            public void onResponse(@NonNull Call<List<KhuVucPhong>> call, @NonNull Response<List<KhuVucPhong>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     listKVP = response.body();
 
-                    Collections.sort(listKVP, new Comparator<KhuVucPhong>() {
-                        @Override
-                        public int compare(KhuVucPhong kvp1, KhuVucPhong kvp2) {
-                            return Integer.compare(kvp1.getMaKVP(), kvp2.getMaKVP());
-                        }
-                    });
+                    listKVP.sort(Comparator.comparingInt(KhuVucPhong::getMaKVP));
 
                     KhuVucPhong selectedKVP = null;
                     for (KhuVucPhong kvp : listKVP) {
@@ -208,7 +199,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<KhuVucPhong>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<KhuVucPhong>> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongEditActivity.this, "ERROR...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -218,16 +209,11 @@ public class AdminPhongEditActivity extends AppCompatActivity {
     private void loadLPData(int malp) {
         ApiServices.apiServices.get_list_loaiphong().enqueue(new Callback<List<LoaiPhong>>() {
             @Override
-            public void onResponse(Call<List<LoaiPhong>> call, Response<List<LoaiPhong>> response) {
+            public void onResponse(@NonNull Call<List<LoaiPhong>> call, @NonNull Response<List<LoaiPhong>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     listLP = response.body();
 
-                    Collections.sort(listLP, new Comparator<LoaiPhong>() {
-                        @Override
-                        public int compare(LoaiPhong lp1, LoaiPhong lp2) {
-                            return Integer.compare(lp1.getMaLP(), lp2.getMaLP());
-                        }
-                    });
+                    listLP.sort(Comparator.comparingInt(LoaiPhong::getMaLP));
 
                     LoaiPhong selectedLP = null;
                     for (LoaiPhong lp : listLP) {
@@ -250,7 +236,7 @@ public class AdminPhongEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<LoaiPhong>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<LoaiPhong>> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongEditActivity.this, "ERROR...", Toast.LENGTH_SHORT).show();
             }
         });

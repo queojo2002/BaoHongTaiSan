@@ -11,30 +11,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.baohongtaisan_2.Activity.Admin.Phong.AdminPhongAddActivity;
-import com.example.baohongtaisan_2.Activity.Admin.Phong.AdminPhongEditActivity;
-import com.example.baohongtaisan_2.Activity.User.BaoHongActivity;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerChucDanhAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerDonViAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerPhanQuyenAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.DonVi;
-import com.example.baohongtaisan_2.Model.KhuVucPhong;
-import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
-import com.example.baohongtaisan_2.Model.PhanBo;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
-import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
-import com.google.protobuf.Api;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,7 +45,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
     private SpinnerPhanQuyenAdapter spinnerPhanQuyenAdapter;
     private Intent intent;
     private int MaND = -1, MaDV = -1, MaCD = -1, MaPQ = -1;
-    private String HoVaTen = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,12 +113,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
-        btnSuaND.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Edit_NguoiDung();
-            }
-        });
+        btnSuaND.setOnClickListener(view -> Edit_NguoiDung());
     }
 
 
@@ -138,13 +123,13 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
         if (MaND == -1 || MaCD == -1 || MaDV == -1 || MaPQ == -1 || TextUtils.isEmpty(txtHoVaTen.getText().toString()))
         {
             Toast.makeText(AdminNguoiDungEditActivity.this, "Dữ liệu sửa người dùng của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
-            return;
         }else
         {
             ApiServices.apiServices.edit_data_nguoidung(MaND, txtHoVaTen.getText().toString(), MaDV, MaCD, MaPQ).enqueue(new Callback<ObjectReponse>() {
                 @Override
-                public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                     ObjectReponse objectEdit = response.body();
+                    if (objectEdit == null) return;
                     if (objectEdit.getCode() == 1) {
                         Toast.makeText(AdminNguoiDungEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                         finish();
@@ -154,7 +139,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ObjectReponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                     Toast.makeText(AdminNguoiDungEditActivity.this, "Có lỗi khi cập nhật người dùng!!!!!", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -169,14 +154,14 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
         MaDV = nd_data.getInt("MaDV");
         MaCD = nd_data.getInt("MaCD");
         MaPQ = nd_data.getInt("MaPQ");
-        HoVaTen = nd_data.getString("HoVaTen");
-        txtHoVaTen.setText(HoVaTen);
+        String hoVaTen = nd_data.getString("HoVaTen");
+        txtHoVaTen.setText(hoVaTen);
     }
 
     private void Load_Data_DonVi() {
         ApiServices.apiServices.get_list_donvi().enqueue(new Callback<List<DonVi>>() {
             @Override
-            public void onResponse(Call<List<DonVi>> call, Response<List<DonVi>> response) {
+            public void onResponse(@NonNull Call<List<DonVi>> call, @NonNull Response<List<DonVi>> response) {
                 if (response.isSuccessful())
                 {
                     donViList = response.body();
@@ -193,7 +178,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<DonVi>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<DonVi>> call, @NonNull Throwable t) {
 
             }
         });
@@ -202,7 +187,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
     private void Load_Data_ChucDanh() {
         ApiServices.apiServices.get_list_chucdanh().enqueue(new Callback<List<ChucDanh>>() {
             @Override
-            public void onResponse(Call<List<ChucDanh>> call, Response<List<ChucDanh>> response) {
+            public void onResponse(@NonNull Call<List<ChucDanh>> call, @NonNull Response<List<ChucDanh>> response) {
                 if (response.isSuccessful())
                 {
                     chucDanhList = response.body();
@@ -219,7 +204,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<List<ChucDanh>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<ChucDanh>> call, @NonNull Throwable t) {
 
             }
         });
@@ -229,7 +214,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
     private void Load_Data_PhanQuyen() {
         ApiServices.apiServices.get_list_phanquyen().enqueue(new Callback<List<PhanQuyen>>() {
             @Override
-            public void onResponse(Call<List<PhanQuyen>> call, Response<List<PhanQuyen>> response) {
+            public void onResponse(@NonNull Call<List<PhanQuyen>> call, @NonNull Response<List<PhanQuyen>> response) {
                 if (response.isSuccessful())
                 {
                     phanQuyenList = response.body();
@@ -246,7 +231,7 @@ public class AdminNguoiDungEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<PhanQuyen>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<PhanQuyen>> call, @NonNull Throwable t) {
 
             }
         });

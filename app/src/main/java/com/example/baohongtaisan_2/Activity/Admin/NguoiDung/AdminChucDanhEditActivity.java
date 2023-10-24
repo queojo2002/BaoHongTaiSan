@@ -1,13 +1,14 @@
 package com.example.baohongtaisan_2.Activity.Admin.NguoiDung;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
@@ -34,29 +35,21 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
         intent = getIntent();
         dataBindingChucDanh();
 
-        btnedit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String Tencd = tencd.getText().toString().trim();
-                String Motacd = motacd.getText().toString().trim();
-                if (Tencd.isEmpty()) {
-                    tencd.setError("Bạn chưa nhập tên đơn vị.");
-                    return;
-                }
-                if (Motacd.isEmpty()) {
-                    motacd.setError("Bạn chưa nhập mô tả đơn vị.");
-                    return;
-                }
-                editChucDanh();
+        btnedit.setOnClickListener(view -> {
+            String Tencd = tencd.getText().toString().trim();
+            String Motacd = motacd.getText().toString().trim();
+            if (Tencd.isEmpty()) {
+                tencd.setError("Bạn chưa nhập tên đơn vị.");
+                return;
             }
+            if (Motacd.isEmpty()) {
+                motacd.setError("Bạn chưa nhập mô tả đơn vị.");
+                return;
+            }
+            editChucDanh();
         });
 
-        btnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnback.setOnClickListener(view -> finish());
     }
 
     private void initializeViews() {
@@ -67,6 +60,7 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
         btnback = findViewById(R.id.btnQuaylaicd);
     }
 
+    @SuppressLint("SetTextI18n")
     private void dataBindingChucDanh() {
         Bundle myBundle = intent.getBundleExtra("datachucdanh");
         int IDCD = myBundle.getInt("macd");
@@ -80,8 +74,9 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
     private void editChucDanh() {
         ApiServices.apiServices.edit_chucdanh(Integer.parseInt(macd.getText().toString()), tencd.getText().toString(), motacd.getText().toString()).enqueue(new Callback<ObjectReponse>() {
             @Override
-            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+            public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
+                if (objectEdit == null) return;
                 if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminChucDanhEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
@@ -91,7 +86,7 @@ public class AdminChucDanhEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ObjectReponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                 Toast.makeText(AdminChucDanhEditActivity.this, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
             }
         });

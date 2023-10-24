@@ -28,8 +28,9 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
             if (stringMap == null) {
                 return;
             }
+            System.out.println("noti: " + stringMap.get("LoaiNoti").toString());
 
-            if (IsLogin.getInstance().getTenPQ().equals("Admin"))
+            if (IsLogin.getInstance().getTenPQ().equals("Admin") && stringMap.get("LoaiNoti").equals("UserToAdmin"))
             {
                 String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
                 String body = "";
@@ -41,6 +42,20 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
                     body = "Hư hỏng nghiêm trọng (Severe)";
                 } else if (Integer.parseInt(stringMap.get("TinhTrang"))  == 4) {
                     body = "Hư hỏng hoàn toàn (Critical)";
+                }
+                showNotification(stringMap.get("MaND").toString(),title, body);
+            }else if (IsLogin.getInstance().getTenPQ().equals("User") && stringMap.get("LoaiNoti").equals("AdminToUser"))
+            {
+                String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
+                String body = "";
+                 if (Integer.parseInt(stringMap.get("TrangThai"))  == 2) {
+                    body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Đã tiếp nhận báo hỏng";
+                } else if (Integer.parseInt(stringMap.get("TrangThai"))  == 3) {
+                    body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Đang sửa chữa";
+                } else if (Integer.parseInt(stringMap.get("TrangThai"))  == 4) {
+                    body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Sửa thành công";
+                }else if (Integer.parseInt(stringMap.get("TrangThai"))  == 5) {
+                    body = "Thiết bị mà bạn báo hỏng đã đổi trạng thái sang: Sửa không thành công";
                 }
                 showNotification(stringMap.get("MaND").toString(),title, body);
             }

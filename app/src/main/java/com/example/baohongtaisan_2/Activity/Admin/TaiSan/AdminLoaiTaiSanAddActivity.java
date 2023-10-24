@@ -19,7 +19,6 @@ import retrofit2.Response;
 
 public class AdminLoaiTaiSanAddActivity extends AppCompatActivity {
 
-    private Button btnAdd, btnBack;
     private EditText txtTen;
     private ProgressDialog pd;
 
@@ -28,30 +27,23 @@ public class AdminLoaiTaiSanAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_loai_tai_san_add);
 
-        btnAdd = findViewById(R.id.btnThemLTS);
+        Button btnAdd = findViewById(R.id.btnThemLTS);
         txtTen = findViewById(R.id.txtTenLTS_add);
-        btnBack = findViewById(R.id.btnQuaylaiLTS_add);
+        Button btnBack = findViewById(R.id.btnQuaylaiLTS_add);
 
         pd = new ProgressDialog(AdminLoaiTaiSanAddActivity.this);
 
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tenlts = txtTen.getText().toString().trim();
-                if (tenlts.isEmpty()) {
-                    txtTen.setError("Bạn chưa nhập tên loại tài sản.");
-                    return;
-                }
-                uploadDataLTS(tenlts);
+        btnAdd.setOnClickListener(v -> {
+            String tenlts = txtTen.getText().toString().trim();
+            if (tenlts.isEmpty()) {
+                txtTen.setError("Bạn chưa nhập tên loại tài sản.");
+                return;
             }
+            uploadDataLTS(tenlts);
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
+        btnBack.setOnClickListener(view -> finish());
 
     }
 

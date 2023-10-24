@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
@@ -88,19 +89,10 @@ public class AdminPhongAddActivity extends AppCompatActivity {
     }
 
     private void setButtonClickListeners() {
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleAddButtonClick();
-            }
-        });
+        btnAdd.setOnClickListener(v -> handleAddButtonClick());
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnBack.setOnClickListener(view -> finish());
+
     }
 
     private void handleLoaiPhongItemSelected(int position) {
@@ -142,8 +134,9 @@ public class AdminPhongAddActivity extends AppCompatActivity {
         pd.show();
         ApiServices.apiServices.add_phong(tenPhong, MaKVP, MaLP).enqueue(new Callback<ObjectReponse>() {
             @Override
-            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+            public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectadd = response.body();
+                if (objectadd == null) return;
                 if (objectadd.getCode() == 1) {
                     Toast.makeText(AdminPhongAddActivity.this, "Thêm mới thành công !", Toast.LENGTH_SHORT).show();
                     finish();
@@ -153,7 +146,7 @@ public class AdminPhongAddActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ObjectReponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongAddActivity.this, "Thêm mới thất bại !", Toast.LENGTH_SHORT).show();
             }
         });
@@ -168,7 +161,7 @@ public class AdminPhongAddActivity extends AppCompatActivity {
     private void loadKVPData() {
         ApiServices.apiServices.get_list_khuvucphong().enqueue(new Callback<List<KhuVucPhong>>() {
             @Override
-            public void onResponse(Call<List<KhuVucPhong>> call, Response<List<KhuVucPhong>> response) {
+            public void onResponse(@NonNull Call<List<KhuVucPhong>> call, @NonNull Response<List<KhuVucPhong>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     listKVP.clear();
                     listKVP = response.body();
@@ -180,7 +173,7 @@ public class AdminPhongAddActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<KhuVucPhong>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<KhuVucPhong>> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongAddActivity.this, "ERROR...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -189,7 +182,7 @@ public class AdminPhongAddActivity extends AppCompatActivity {
     private void loadLPData() {
         ApiServices.apiServices.get_list_loaiphong().enqueue(new Callback<List<LoaiPhong>>() {
             @Override
-            public void onResponse(Call<List<LoaiPhong>> call, Response<List<LoaiPhong>> response) {
+            public void onResponse(@NonNull Call<List<LoaiPhong>> call, @NonNull Response<List<LoaiPhong>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     listLP.clear();
                     listLP = response.body();
@@ -201,7 +194,7 @@ public class AdminPhongAddActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<LoaiPhong>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<LoaiPhong>> call, @NonNull Throwable t) {
                 Toast.makeText(AdminPhongAddActivity.this, "ERROR...", Toast.LENGTH_SHORT).show();
             }
         });

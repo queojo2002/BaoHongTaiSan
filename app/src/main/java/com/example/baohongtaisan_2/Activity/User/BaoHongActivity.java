@@ -313,7 +313,7 @@ public class BaoHongActivity extends AppCompatActivity {
 
     private void sendNoti(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa, String Token)
     {
-        NotificationDataBaoHong notificationDataBaoHong = new NotificationDataBaoHong(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa);
+        NotificationDataBaoHong notificationDataBaoHong = new NotificationDataBaoHong(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa, "UserToAdmin");
         NotificationSendData notificationSendData = new NotificationSendData(notificationDataBaoHong, Token);
         ApiServices.apiServices_Noti.sendNoti(notificationSendData).enqueue(new Callback<NotificationReponse>() {
             @Override

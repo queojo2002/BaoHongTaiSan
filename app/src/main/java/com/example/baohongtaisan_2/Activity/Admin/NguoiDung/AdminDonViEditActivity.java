@@ -1,13 +1,14 @@
 package com.example.baohongtaisan_2.Activity.Admin.NguoiDung;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
@@ -24,8 +25,6 @@ public class AdminDonViEditActivity extends AppCompatActivity {
     private EditText tendv, motadv;
     private Intent intent;
     private Button btnedit, btnback;
-    private int IDDV;
-    private String TenDV, MotaDV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,29 +35,21 @@ public class AdminDonViEditActivity extends AppCompatActivity {
         dataBindingDonVi();
 
 
-        btnedit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String Tendv = tendv.getText().toString().trim();
-                String Motadv = motadv.getText().toString().trim();
-                if (Tendv.isEmpty()) {
-                    tendv.setError("Bạn chưa nhập tên đơn vị.");
-                    return;
-                }
-                if (Motadv.isEmpty()) {
-                    motadv.setError("Bạn chưa nhập mô tả đơn vị.");
-                    return;
-                }
-                editDonVi();
+        btnedit.setOnClickListener(view -> {
+            String Tendv = tendv.getText().toString().trim();
+            String Motadv = motadv.getText().toString().trim();
+            if (Tendv.isEmpty()) {
+                tendv.setError("Bạn chưa nhập tên đơn vị.");
+                return;
             }
+            if (Motadv.isEmpty()) {
+                motadv.setError("Bạn chưa nhập mô tả đơn vị.");
+                return;
+            }
+            editDonVi();
         });
 
-        btnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnback.setOnClickListener(view -> finish());
     }
 
     private void initializeViews() {
@@ -69,21 +60,23 @@ public class AdminDonViEditActivity extends AppCompatActivity {
         btnback = findViewById(R.id.btnQuaylaidv);
     }
 
+    @SuppressLint("SetTextI18n")
     private void dataBindingDonVi() {
         Bundle myBundle = intent.getBundleExtra("datadonvi");
-        IDDV = myBundle.getInt("madv");
-        TenDV = myBundle.getString("tendv");
-        MotaDV = myBundle.getString("motadv");
+        int IDDV = myBundle.getInt("madv");
+        String tenDV = myBundle.getString("tendv");
+        String motaDV = myBundle.getString("motadv");
         madv.setText(IDDV + "");
-        tendv.setText(TenDV);
-        motadv.setText(MotaDV);
+        tendv.setText(tenDV);
+        motadv.setText(motaDV);
     }
 
     private void editDonVi() {
         ApiServices.apiServices.edit_donvi(Integer.parseInt(madv.getText().toString()), tendv.getText().toString(), motadv.getText().toString()).enqueue(new Callback<ObjectReponse>() {
             @Override
-            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+            public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectEdit = response.body();
+                if (objectEdit == null) return;
                 if (objectEdit.getCode() == 1) {
                     Toast.makeText(AdminDonViEditActivity.this, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     finish();
@@ -93,7 +86,7 @@ public class AdminDonViEditActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ObjectReponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                 Toast.makeText(AdminDonViEditActivity.this, "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
                 finish();
             }

@@ -2,7 +2,7 @@ package com.example.baohongtaisan_2.Model;
 
 public class BaoHong {
     private int MaBL, MaPB, MaND, TrangThai, TinhTrang;
-    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS;
+    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token;
 
 
     // TrangThai: 1 - Da Gui
@@ -17,6 +17,21 @@ public class BaoHong {
     // TinhTrang: 4 -
 
     public BaoHong() {
+    }
+
+    public BaoHong(int maBL, int maPB, int maND, int trangThai, int tinhTrang, String mota, String hinhAnh, String ngayCapNhat, String ngayTao, String tenP, String tenTS, String token) {
+        MaBL = maBL;
+        MaPB = maPB;
+        MaND = maND;
+        TrangThai = trangThai;
+        TinhTrang = tinhTrang;
+        Mota = mota;
+        HinhAnh = hinhAnh;
+        NgayCapNhat = ngayCapNhat;
+        NgayTao = ngayTao;
+        TenP = tenP;
+        TenTS = tenTS;
+        this.token = token;
     }
 
     public BaoHong(int maBL, int maPB, int maND, int trangThai, int tinhTrang, String mota, String hinhAnh, String ngayCapNhat, String ngayTao, String tenP, String tenTS) {
@@ -131,5 +146,13 @@ public class BaoHong {
 
     public void setTenTS(String tenTS) {
         TenTS = tenTS;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

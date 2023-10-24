@@ -2,26 +2,23 @@ package com.example.baohongtaisan_2.Activity.Admin.Phong;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
-    private Button btnAdd, btnBack;
     private EditText txtTen;
-    private FirebaseDatabase db;
     private ProgressDialog pd;
 
     @Override
@@ -29,31 +26,22 @@ public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_khu_vuc_phong_add);
 
-        btnAdd = findViewById(R.id.btnThemkv);
+        Button btnAdd = findViewById(R.id.btnThemkv);
         txtTen = findViewById(R.id.txtTenkv);
-        btnBack = findViewById(R.id.btnQuaylaikv);
+        Button btnBack = findViewById(R.id.btnQuaylaikv);
 
         pd = new ProgressDialog(AdminKhuVucPhongAddActivity.this);
 
-        db = FirebaseDatabase.getInstance();
+        btnAdd.setOnClickListener(v -> {
+            String tenkv = txtTen.getText().toString().trim();
+            if (tenkv.isEmpty()) {
+                txtTen.setError("Bạn chưa nhập tên khu vực phòng.");
+                return;
+            }
+            uploadDataKVP(tenkv);
+        });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tenkv = txtTen.getText().toString().trim();
-                if (tenkv.isEmpty()) {
-                    txtTen.setError("Bạn chưa nhập tên khu vực phòng.");
-                    return;
-                }
-                uploadDataKVP(tenkv);
-            }
-        });
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnBack.setOnClickListener(view -> finish());
     }
 
     private void uploadDataKVP(String name) {
@@ -62,8 +50,9 @@ public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
 
         ApiServices.apiServices.add_khuvucphong(name).enqueue(new Callback<ObjectReponse>() {
             @Override
-            public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+            public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectadd = response.body();
+                if (objectadd == null) return;
                 if (objectadd.getCode() == 1) {
                     Toast.makeText(AdminKhuVucPhongAddActivity.this, "Thêm mới thành công !", Toast.LENGTH_SHORT).show();
                     finish();
@@ -73,7 +62,7 @@ public class AdminKhuVucPhongAddActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ObjectReponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
                 Toast.makeText(AdminKhuVucPhongAddActivity.this, "Thêm mới thất bại !", Toast.LENGTH_SHORT).show();
 
             }
