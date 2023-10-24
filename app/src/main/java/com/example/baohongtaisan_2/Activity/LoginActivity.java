@@ -11,8 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.baohongtaisan_2.Activity.Admin.AdminHomeActivity;
 import com.example.baohongtaisan_2.Activity.User.HomeActivity;
 import com.example.baohongtaisan_2.Api.ApiServices;
+import com.example.baohongtaisan_2.Model.IsLogin;
+import com.example.baohongtaisan_2.Model.NguoiDung;
+import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -112,9 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Object_Add> call, Response<Object_Add> response) {
                 Object_Add _object_add = response.body();
                 if (_object_add.getCode() == 1) {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finishAffinity();
+                    _UpdateNguoiDung(Email);
                 } else {
                     Toast.makeText(LoginActivity.this, "Có lỗi khi đăng nhập !!", Toast.LENGTH_SHORT).show();
                     client.signOut();
@@ -125,6 +127,71 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Object_Add> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Có lỗi khi đăng nhập !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void _UpdateNguoiDung(String Email)
+    {
+        ApiServices.apiServices.get_nguoidung_byEmail(Email).enqueue(new Callback<NguoiDung>() {
+            @Override
+            public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
+                NguoiDung nguoiDung = response.body();
+                if (nguoiDung != null) {
+                    IsLogin loginInstance = IsLogin.getInstance();
+                    loginInstance.setLoggedInUser(
+                            nguoiDung.getMaND(),
+                            nguoiDung.getMaDV(),
+                            nguoiDung.getMaCD(),
+                            nguoiDung.getMaPQ(),
+                            nguoiDung.getTenDangNhap(),
+                            nguoiDung.getMatKhau(),
+                            nguoiDung.getHoVaTen(),
+                            nguoiDung.getEmail(),
+                            nguoiDung.getDiaChi(),
+                            nguoiDung.getSoDienThoai(),
+                            nguoiDung.getTenCD(),
+                            nguoiDung.getTenDV(),
+                            nguoiDung.getTenPQ(),
+                            nguoiDung.getNgayCapNhat(),
+                            nguoiDung.getNgayTao(),
+                            nguoiDung.getUid(),
+                            nguoiDung.getToken());
+                    FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                        @Override
+                        public void onComplete(@NonNull Task<String> task) {
+                            ApiServices.apiServices.edit_token_uid_nguoidung(nguoiDung.getMaND(), FirebaseAuth.getInstance().getCurrentUser().getUid().toString(), task.getResult().toString()).enqueue(new Callback<ObjectReponse>() {
+                                @Override
+                                public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                                    if (nguoiDung.getTenPQ().equals("Admin")) {
+                                        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                                        startActivity(intent);
+                                        finishAffinity();
+                                    } else if (nguoiDung.getTenPQ().equals("User")) {
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finishAffinity();
+                                    } else {
+                                        finishAffinity();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ObjectReponse> call, Throwable t) {
+                                }
+                            });
+
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NguoiDung> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Load dữ liệu người dùng không thành công !!!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baohongtaisan_2.Activity.Admin.NguoiDung.AdminNguoiDungEditActivity;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.R;
 
@@ -39,18 +42,22 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
             return;
         }
         holder.tennd.setText(nd.getHoVaTen());
-       /* holder.editnd.setOnClickListener(new View.OnClickListener() {
+        holder.editnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-
-                Intent intent = new Intent(context, EditPhanquyenActivity.class);
+                Intent intent = new Intent(context, AdminNguoiDungEditActivity.class);
                 Bundle bdNguoidung = new Bundle();
-                bdNguoidung.putString("tenpq", nd.getHoVaTen());
-                intent.putExtra("datanguoidung", bdNguoidung);
+                bdNguoidung.putInt("MaND", nd.getMaND());
+                bdNguoidung.putString("HoVaTen", nd.getHoVaTen());
+                bdNguoidung.putInt("MaDV", nd.getMaDV());
+                bdNguoidung.putInt("MaCD", nd.getMaCD());
+                bdNguoidung.putInt("MaPQ", nd.getMaPQ());
+                intent.putExtra("DataEditNguoiDung", bdNguoidung);
                 context.startActivity(intent);
             }
         });
+       /*
         holder.deletend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

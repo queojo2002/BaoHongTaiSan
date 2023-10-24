@@ -1,24 +1,26 @@
 package com.example.baohongtaisan_2.Model;
 
 public class PhanQuyen {
-    private String MaPQ, TenPQ, NgayCapNhat, NgayTao;
+    private int MaPQ;
+    private String TenPQ, NgayCapNhat, NgayTao;
 
 
     public PhanQuyen() {
     }
 
-
-    public PhanQuyen(String maPQ, String tenPQ, String ngayCapNhat, String ngayTao) {
+    public PhanQuyen(int maPQ, String tenPQ, String ngayCapNhat, String ngayTao) {
         MaPQ = maPQ;
         TenPQ = tenPQ;
         NgayCapNhat = ngayCapNhat;
         NgayTao = ngayTao;
     }
 
+    public int getMaPQ() {
+        return MaPQ;
+    }
 
-    public PhanQuyen(String maPQ, String tenPQ) {
+    public void setMaPQ(int maPQ) {
         MaPQ = maPQ;
-        TenPQ = tenPQ;
     }
 
     public String getTenPQ() {
@@ -43,13 +45,5 @@ public class PhanQuyen {
 
     public void setNgayTao(String ngayTao) {
         NgayTao = ngayTao;
-    }
-
-    public String getMaPQ() {
-        return MaPQ;
-    }
-
-    public void setMaPQ(String maPQ) {
-        MaPQ = maPQ;
     }
 }

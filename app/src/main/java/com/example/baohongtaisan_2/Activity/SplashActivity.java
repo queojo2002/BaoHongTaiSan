@@ -54,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    ApiServices.apiServices.get_nguoidung_byEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail()).enqueue(new Callback<NguoiDung>() {
+                    ApiServices.apiServices.get_nguoidung_byEmail(user.getEmail()).enqueue(new Callback<NguoiDung>() {
                         @Override
                         public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                             NguoiDung nguoiDung = response.body();

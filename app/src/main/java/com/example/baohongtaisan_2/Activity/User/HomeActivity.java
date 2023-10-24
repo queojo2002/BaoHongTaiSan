@@ -60,7 +60,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void _AnhXa() {
-        System.out.println(IsLogin.getInstance().getHoVaTen());
         toolbar = findViewById(R.id.toolbar);
         bottomNavigationView = findViewById(R.id.bottom_nav);
         drawerLayout = findViewById(R.id.drawer_layout);

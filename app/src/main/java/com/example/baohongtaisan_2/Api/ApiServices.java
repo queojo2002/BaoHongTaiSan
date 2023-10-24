@@ -15,6 +15,7 @@ import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.PhanBo;
+import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.Model.ThongKe;
 import com.google.gson.Gson;
@@ -141,6 +142,8 @@ public interface ApiServices {
 
     // End api khu vực phòng
 
+
+
     //Nhóm tài sản
 
     @GET("api/load_data_nhomtaisan.php")
@@ -198,6 +201,8 @@ public interface ApiServices {
     Call<ThongKe> get_thongke();
 
 
+
+    // Người dùng
     @GET("api/load_data_nguoidung.php")
     Call<List<NguoiDung>> get_list_nguoidung();
 
@@ -207,6 +212,15 @@ public interface ApiServices {
             @Query("MaND") int MaND,
             @Query("UID") String UID,
             @Query("TOKEN") String TOKEN);
+
+
+    @GET("api/edit_data_nguoidung.php")
+    Call<ObjectReponse> edit_data_nguoidung(
+            @Query("MaND") int MaND,
+            @Query("HoVaTen") String HoVaTen,
+            @Query("MaDV") int MaDV,
+            @Query("MaCD") int MaCD,
+            @Query("MaPQ") int MaPQ);
 
 
     @GET("api/add_data_nguoidung.php")
@@ -219,13 +233,42 @@ public interface ApiServices {
             @Query("UID") String UID,
             @Query("TOKEN") String TOKEN);
 
+
+
+    // End api người dùng
+
+    @GET("api/load_data_phanquyen.php")
+    Call<List<PhanQuyen>> get_list_phanquyen();
+
+    // phân quyền
+
+
+
+
+    // end api phân quyền
+
+
+
+    // báo lỗi
     @GET("api/add_data_baoloi.php")
-    Call<Object_Add> add_new_baoloi(
+    Call<ObjectReponse> add_new_baoloi(
             @Query("MaPB") int MaPB,
             @Query("MaND") int MaND,
             @Query("TinhTrang") int TinhTrang,
             @Query("MoTa") String MoTa,
             @Query("HinhAnh") String HinhAnh);
+
+    @GET("api/add_data_baoloi.php")
+    Call<ObjectReponse> edit_data_trangthai_baoloi_byMaBL(
+            @Query("MaBL") int MaBL,
+            @Query("TrangThai") int TrangThai);
+
+
+
+    // end api báo lỗi
+
+
+
 
 
 
