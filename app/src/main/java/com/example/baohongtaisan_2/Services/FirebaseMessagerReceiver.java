@@ -29,7 +29,7 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
                 return;
             }
 
-            if (IsLogin.getInstance().getTenPQ() == "Admin")
+            if (IsLogin.getInstance().getTenPQ().equals("Admin"))
             {
                 String title = stringMap.get("TenP") + ": " + stringMap.get("TenTS");
                 String body = "";
