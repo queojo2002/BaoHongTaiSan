@@ -56,6 +56,7 @@ public class AdminBaoHongFragment extends Fragment {
         adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList);
         rvBH.setAdapter(adminBaoHongAdapter);
 
+
         /*svBH.clearFocus();
         svBH.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -105,5 +106,8 @@ public class AdminBaoHongFragment extends Fragment {
         super.onResume();
         GetListBaoHong();
 
+    }
+    public interface ItemClickListener {
+        void onClick(View view, int position,boolean isLongClick);
     }
 }

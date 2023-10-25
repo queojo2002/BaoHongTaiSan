@@ -2,10 +2,8 @@ package com.example.baohongtaisan_2.Adapter.Admin;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,19 +23,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Activity.Admin.NguoiDung.AdminNguoiDungEditActivity;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerChucDanhAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerDonViAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerPhanQuyenAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.DonVi;
-import com.example.baohongtaisan_2.Model.KhuVucPhong;
-import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
-import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;

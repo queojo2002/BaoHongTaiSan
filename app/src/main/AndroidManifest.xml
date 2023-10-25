@@ -22,12 +22,6 @@
             android:name=".Activity.Admin.NguoiDung.AdminPhanQuyenAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Admin.NguoiDung.AdminNguoiDungEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Admin.NguoiDung.AdminNguoiDungAddActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Admin.Phong.AdminPhongAddActivity"
             android:exported="false" />
         <activity

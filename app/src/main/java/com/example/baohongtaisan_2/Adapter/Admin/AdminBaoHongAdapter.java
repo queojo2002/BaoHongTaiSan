@@ -1,10 +1,20 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,11 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baohongtaisan_2.Api.ApiServices;
+import com.example.baohongtaisan_2.Fragment.Admin.AdminBaoHongFragment;
 import com.example.baohongtaisan_2.Model.BaoHong;
+import com.example.baohongtaisan_2.Model.KhuVucPhong;
+import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
 import com.example.baohongtaisan_2.Model.NotificationReponse;
 import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
+import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
@@ -61,6 +75,15 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
         holder.btnTT3.setOnClickListener(view -> Set_TrangThai(baoHong, 3));
         holder.btnTT4.setOnClickListener(view -> Set_TrangThai(baoHong, 4));
         holder.btnTT5.setOnClickListener(view -> Set_TrangThai(baoHong, 5));
+        holder.setItemClickListener(new AdminBaoHongFragment.ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if(isLongClick)
+                    return;
+                else
+                    Open_Dialog_Edit(baoHong);
+            }
+        });
 
 
         if (baoHong.getTinhTrang() == 1) {
@@ -172,10 +195,11 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
         });
     }
 
-    public static class AdminBaoHongViewHolder extends RecyclerView.ViewHolder {
+    public static class AdminBaoHongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
         CircleImageView imgQLBH_BaoHong;
         TextView txtQLBH_TenTS, txtQLBH_TenP, txtQLBH_Time, txtQLBH_TrangThai, txtQLBH_TinhTrang;
         Button btnTT2, btnTT3, btnTT4, btnTT5;
+        private AdminBaoHongFragment.ItemClickListener itemClickListener;
 
         public AdminBaoHongViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -189,8 +213,80 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
             btnTT3 = itemView.findViewById(R.id.btnDangsua);
             btnTT4 = itemView.findViewById(R.id.btnThanhcong);
             btnTT5 = itemView.findViewById(R.id.btnKhongthanhcong);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
         }
+        public void setItemClickListener(AdminBaoHongFragment.ItemClickListener itemClickListener)
+        {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v,getAdapterPosition(),false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClickListener.onClick(v,getAdapterPosition(),true);
+            return true;
+        }
+
+    }
+    public void Open_Dialog_Edit(BaoHong baoHong) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_chitiet_baohong);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        TextView tents = dialog.findViewById(R.id.tvTenTS);
+        TextView tenphong = dialog.findViewById(R.id.tvTenphong);
+        TextView tinhtrang = dialog.findViewById(R.id.tvTinhtrang);
+        TextView ngaycapnhat = dialog.findViewById(R.id.tvNgaycapnhat);
+        TextView hoten = dialog.findViewById(R.id.tvHoten);
+        TextView email = dialog.findViewById(R.id.tvEmail);
+
+        tents.setText(baoHong.getTenTS());
+        tenphong.setText(baoHong.getTenP());
+        int tt = baoHong.getTinhTrang();
+        if (tt == 1) {
+            tinhtrang.setText("Hư hỏng nhẹ (Minor)");
+        } else if (tt == 2) {
+            tinhtrang.setText("Hư hỏng trung bình (Moderate)");
+        } else if (tt == 3) {
+            tinhtrang.setText("Hư hỏng nghiêm trọng (Severe)");
+        } else if (tt == 4) {
+            tinhtrang.setText("Hư hỏng hoàn toàn (Critical)");
+        }
+        ngaycapnhat.setText(baoHong.getNgayCapNhat());
+
+        hoten.setText(baoHong.getHoVaTen());
+        email.setText(baoHong.getEmail());
+
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
     }
 
 }

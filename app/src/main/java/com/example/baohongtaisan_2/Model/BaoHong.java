@@ -2,7 +2,7 @@ package com.example.baohongtaisan_2.Model;
 
 public class BaoHong {
     private int MaBL, MaPB, MaND, TrangThai, TinhTrang;
-    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token;
+    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token , HoVaTen, Email;
 
 
     // TrangThai: 1 - Da Gui
@@ -19,7 +19,25 @@ public class BaoHong {
     public BaoHong() {
     }
 
-    public BaoHong(int maBL, int maPB, int maND, int trangThai, int tinhTrang, String mota, String hinhAnh, String ngayCapNhat, String ngayTao, String tenP, String tenTS, String token) {
+    public BaoHong(int maBL, int maPB, int maND, int trangThai, int tinhTrang, String mota, String hinhAnh, String ngayCapNhat, String ngayTao, String tenP, String tenTS, String token, String hoVaTen, String email) {
+        MaBL = maBL;
+        MaPB = maPB;
+        MaND = maND;
+        TrangThai = trangThai;
+        TinhTrang = tinhTrang;
+        Mota = mota;
+        HinhAnh = hinhAnh;
+        NgayCapNhat = ngayCapNhat;
+        NgayTao = ngayTao;
+        TenP = tenP;
+        TenTS = tenTS;
+        this.token = token;
+        HoVaTen = hoVaTen;
+        Email = email;
+    }
+
+    public BaoHong(int maBL, int maPB, int maND, int trangThai, int tinhTrang, String mota, String hinhAnh, String ngayCapNhat,
+                   String ngayTao, String tenP, String tenTS, String token) {
         MaBL = maBL;
         MaPB = maPB;
         MaND = maND;
@@ -58,6 +76,22 @@ public class BaoHong {
         HinhAnh = hinhAnh;
         NgayCapNhat = ngayCapNhat;
         NgayTao = ngayTao;
+    }
+
+    public String getHoVaTen() {
+        return HoVaTen;
+    }
+
+    public void setHoVaTen(String hoVaTen) {
+        HoVaTen = hoVaTen;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public int getMaBL() {
