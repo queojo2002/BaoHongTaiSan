@@ -11,11 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--<RelativeLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            &lt;!&ndash; SearchView &ndash;&gt;
+            <!-- SearchView -->
             <SearchView
                 android:id="@+id/txtSearchBH"
                 android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_alignParentStart="true"
                 android:queryHint="Tìm kiếm" />
 
-        </RelativeLayout>-->
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBaohong"

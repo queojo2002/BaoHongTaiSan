@@ -47,7 +47,7 @@ public class AdminBaoHongFragment extends Fragment {
 
     public void _AnhXa() {
         rvBH = view.findViewById(R.id.rvBaohong);
-        /*svBH = view.findViewById(R.id.txtSearchBH);*/
+        svBH = view.findViewById(R.id.txtSearchBH);
 
         linearLayoutManager = new LinearLayoutManager(requireContext());
         rvBH.setLayoutManager(linearLayoutManager);
@@ -57,7 +57,7 @@ public class AdminBaoHongFragment extends Fragment {
         rvBH.setAdapter(adminBaoHongAdapter);
 
 
-        /*svBH.clearFocus();
+        svBH.clearFocus();
         svBH.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -67,15 +67,29 @@ public class AdminBaoHongFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String s) {
                 ArrayList<BaoHong> searchlist = new ArrayList<>();
-                for (Phong phong : phongList) {
-                    if (phong.getTenP().toLowerCase().contains(s.toLowerCase())) {
-                        searchlist.add(phong);
+                for (BaoHong baoHong : baoHongList) {
+                    if (baoHongMatchesSearch(baoHong, s)) {
+                        searchlist.add(baoHong);
                     }
                 }
-                adminPhongAdapter.searchDataList(searchlist);
+                adminBaoHongAdapter.searchDataList(searchlist);
                 return false;
             }
-        });*/
+
+            private boolean baoHongMatchesSearch(BaoHong baoHong, String query) {
+                // Thay đổi logic tìm kiếm.
+                String queryLower = query.toLowerCase();
+                String tenP = baoHong.getTenP().toLowerCase();
+                String tenTS = baoHong.getTenTS().toLowerCase();
+                String ngay = baoHong.getNgayCapNhat().toLowerCase();
+
+                // Sử dụng nhiều thuộc tính cho tìm kiếm phù hợp.
+                if (tenP.contains(queryLower) || tenTS.contains(queryLower) || ngay.contains(queryLower)) {
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
