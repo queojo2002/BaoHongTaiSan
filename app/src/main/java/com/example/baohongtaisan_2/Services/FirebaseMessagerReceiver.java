@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.example.baohongtaisan_2.Activity.User.HomeActivity;
+import com.example.baohongtaisan_2.Fragment.User.TrangChuFragment;
 import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,16 +64,16 @@ public class FirebaseMessagerReceiver extends FirebaseMessagingService {
     }
 
     private void showNotification(String MaND, String title, String body) {
-        Intent intent = new Intent(this, HomeActivity.class);
+       /* Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);*/
         String channelID = MaND;
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setSmallIcon(R.drawable.logo_tdmu_2)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000})
-                .setOnlyAlertOnce(true)
-                .setContentIntent(pendingIntent);
+                .setOnlyAlertOnce(true);
+                //.setContentIntent(pendingIntent);
         builder = builder.setContent(customNotification(title, body));
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

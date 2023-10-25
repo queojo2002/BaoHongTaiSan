@@ -28,7 +28,7 @@ public class TraCuuFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterPhong adapterPhong;
     private List<Phong> phongList;
-    private SearchView sv;
+    private androidx.appcompat.widget.SearchView sv;
     public TraCuuFragment() {
     }
 
@@ -65,9 +65,9 @@ public class TraCuuFragment extends Fragment {
     public void _SuKien()
     {
         sv.clearFocus();
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
@@ -84,12 +84,9 @@ public class TraCuuFragment extends Fragment {
             }
         });
 
-
     }
 
     public void Show_AllPhong() {
-
-
         ApiServices.apiServices.get_list_phong().enqueue(new Callback<List<Phong>>() {
             @Override
             public void onResponse(@NonNull Call<List<Phong>> call, @NonNull Response<List<Phong>> response) {
