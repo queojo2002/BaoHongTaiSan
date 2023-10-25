@@ -17,11 +17,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.example.baohongtaisan_2.Activity.LoginActivity;
 import com.example.baohongtaisan_2.Fragment.User.NhanTinFragment;
-import com.example.baohongtaisan_2.Fragment.User.ProfileFragment;
+import com.example.baohongtaisan_2.Fragment.User.QuanLyProfileFragment;
 import com.example.baohongtaisan_2.Fragment.User.QuanLyBaoHongFragment;
 import com.example.baohongtaisan_2.Fragment.User.TraCuuFragment;
 import com.example.baohongtaisan_2.Fragment.User.TrangChuFragment;
-import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -161,7 +160,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void Open_NAV_QuanLy_ThongTinCaNhan(int OptionNAV) {
         if (currentFrament_NAV != "nav_manager_info") {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ProfileFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new QuanLyProfileFragment()).commit();
             getSupportActionBar().setTitle("Quản lý thông tin cá nhân");
             currentFrament_NAV = "nav_manager_info";
             if (OptionNAV == 0) {

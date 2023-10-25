@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baohongtaisan_2.Adapter.User.AdapterBaoLoi_QLBH;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.BaoHong;
+import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
 import com.example.baohongtaisan_2.Model.NotificationReponse;
@@ -54,43 +55,21 @@ public class QuanLyBaoHongFragment extends Fragment {
     }
 
     public void _Get_BaoHong_byMaND() {
-        ApiServices.apiServices.get_nguoidung_byEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail()).enqueue(new Callback<NguoiDung>() {
+        ApiServices.apiServices.get_list_baohong_byMaND(IsLogin.getInstance().getMaND()).enqueue(new Callback<List<BaoHong>>() {
             @Override
-            public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
-                NguoiDung nguoiDung = response.body();
-                if (nguoiDung != null) {
-                    ApiServices.apiServices.get_list_baohong_byMaND(nguoiDung.getMaND()).enqueue(new Callback<List<BaoHong>>() {
-                        @Override
-                        public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
-                            baoHongList = response.body();
-                            if (getContext() != null && baoHongList != null) {
-                                AdapterBaoLoi_QLBH adapterBaoLoi = new AdapterBaoLoi_QLBH(baoHongList);
-                                rvQLBH.setAdapter(adapterBaoLoi);
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<BaoHong>> call, Throwable t) {
-
-                        }
-                    });
-
-
+            public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
+                baoHongList = response.body();
+                if (getContext() != null && baoHongList != null) {
+                    AdapterBaoLoi_QLBH adapterBaoLoi = new AdapterBaoLoi_QLBH(baoHongList);
+                    rvQLBH.setAdapter(adapterBaoLoi);
                 }
             }
 
             @Override
-            public void onFailure(Call<NguoiDung> call, Throwable t) {
-                Toast.makeText(getContext(), "Load dữ liệu người dùng không thành công !!!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<BaoHong>> call, Throwable t) {
+
             }
         });
-
-
-
-
-
-
-
     }
 
     public void _AnhXa() {

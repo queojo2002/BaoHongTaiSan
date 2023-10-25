@@ -27,7 +27,6 @@
             android:id="@+id/recycler_tracuu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/cardview_1"
             android:background="#fff">
 
         </androidx.recyclerview.widget.RecyclerView>

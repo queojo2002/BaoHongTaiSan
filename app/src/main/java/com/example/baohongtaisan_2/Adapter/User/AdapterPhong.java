@@ -12,14 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baohongtaisan_2.Activity.User.TraCuu_BaoHongActivity;
+import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterPhong extends RecyclerView.Adapter<AdapterPhong.PhongViewHolder> {
 
-    private final List<Phong> phongList;
+    private List<Phong> phongList;
     private Context context;
 
     public AdapterPhong(List<Phong> phongList) {
@@ -61,6 +63,10 @@ public class AdapterPhong extends RecyclerView.Adapter<AdapterPhong.PhongViewHol
         return phongList.size();
     }
 
+    public void searchDataList(ArrayList<Phong> searchlist) {
+        phongList = searchlist;
+        notifyDataSetChanged();
+    }
 
     public class PhongViewHolder extends RecyclerView.ViewHolder {
         TextView TenP, TenKVP, TenLoaiPhong;

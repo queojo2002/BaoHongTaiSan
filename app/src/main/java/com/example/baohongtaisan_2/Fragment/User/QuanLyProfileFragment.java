@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class ProfileFragment extends Fragment {
+public class QuanLyProfileFragment extends Fragment {
 
     TextInputEditText txtFullname_Edit, txtTenDangNhap_Edit, txtEmail_Edit;
     private ImageView imgProfile;
@@ -27,7 +27,7 @@ public class ProfileFragment extends Fragment {
     private TextView a;
     private FirebaseUser user;
 
-    public ProfileFragment() {
+    public QuanLyProfileFragment() {
         // Required empty public constructor
     }
 
