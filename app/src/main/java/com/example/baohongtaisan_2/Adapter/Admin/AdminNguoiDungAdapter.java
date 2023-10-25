@@ -77,6 +77,10 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
             return;
         }
         holder.tennd.setText(nd.getHoVaTen());
+        holder.tendv.setText(nd.getTenDV());
+        holder.tencd.setText(nd.getTenCD());
+        holder.tenpq.setText(nd.getTenPQ());
+
         holder.editnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -336,12 +340,15 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
     }
 
     public class NguoidungViewHolder extends RecyclerView.ViewHolder {
-        private TextView tennd;
+        private TextView tennd, tendv, tencd,tenpq;
         private ImageView editnd, deletend;
 
         public NguoidungViewHolder(@NonNull View itemView) {
             super(itemView);
             tennd = itemView.findViewById(R.id.txtTenND);
+            tendv = itemView.findViewById(R.id.txtTenDV);
+            tencd = itemView.findViewById(R.id.txtTenCD);
+            tenpq = itemView.findViewById(R.id.txtTenPQ);
             editnd = itemView.findViewById(R.id.editND);
             deletend = itemView.findViewById(R.id.deleteND);
         }
