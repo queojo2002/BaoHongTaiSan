@@ -1,6 +1,8 @@
 package com.example.baohongtaisan_2.Fragment.Admin.Phong;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baohongtaisan_2.Adapter.Admin.AdminLoaiPhongAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
+import com.example.baohongtaisan_2.Interface.RCVClickItem;
+import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
@@ -43,30 +47,36 @@ public class AdminLoaiPhongFragment extends Fragment {
     private List<LoaiPhong> listLP;
     private Button btnaddLp;
 
+    private View rootView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_admin_loai_phong, container, false);
-        initializeViews(rootView);
-
-        setupRecyclerView();
-        setupSearchViewListeners();
-        setupButtonClickListeners();
+        rootView = inflater.inflate(R.layout.fragment_admin_loai_phong, container, false);
+        _AnhXa();
+        _SuKien();
 
         return rootView;
 
     }
 
-    private void initializeViews(View rootView) {
+    private void _AnhXa() {
         rcvLP = rootView.findViewById(R.id.rvLoaiphong);
 
         SVlp = rootView.findViewById(R.id.txtSearchLoaiphong);
 
         btnaddLp = rootView.findViewById(R.id.btnloaiphong_add);
 
+        LinearLayoutManager linearLayoutManagerLP = new LinearLayoutManager(requireContext());
+
+        rcvLP.setLayoutManager(linearLayoutManagerLP);
+
+        listLP = new ArrayList<>();
+
+        GetListLP();
     }
 
-    private void setupButtonClickListeners() {
+    private void _SuKien() {
 
         btnaddLp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,20 +85,6 @@ public class AdminLoaiPhongFragment extends Fragment {
             }
         });
 
-    }
-
-    private void setupRecyclerView() {
-        LinearLayoutManager linearLayoutManagerLP = new LinearLayoutManager(requireContext());
-        rcvLP.setLayoutManager(linearLayoutManagerLP);
-
-        listLP = new ArrayList<>();
-        lp_adapter = new AdminLoaiPhongAdapter(listLP);
-        rcvLP.setAdapter(lp_adapter);
-
-        GetListLP();
-    }
-
-    private void setupSearchViewListeners() {
         SVlp.clearFocus();
         SVlp.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -98,12 +94,24 @@ public class AdminLoaiPhongFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                searchLoaiPhong(s);
+                ArrayList<LoaiPhong> searchlist = new ArrayList<>();
+                for (LoaiPhong loaiPhong : listLP) {
+                    if (loaiPhong.getTenLP().toLowerCase().contains(s.toLowerCase())) {
+                        searchlist.add(loaiPhong);
+                    }
+                }
+                if (lp_adapter != null)
+                {
+                    lp_adapter.searchDataList(searchlist);
+                }
                 return false;
             }
         });
 
+
     }
+
+
 
     public void GetListLP() {
         ApiServices.apiServices.get_list_loaiphong().enqueue(new Callback<List<LoaiPhong>>() {
@@ -112,7 +120,19 @@ public class AdminLoaiPhongFragment extends Fragment {
                 listLP.clear();
                 listLP = response.body();
                 if (listLP != null && getContext() != null) {
-                    lp_adapter = new AdminLoaiPhongAdapter(listLP);
+                    lp_adapter = new AdminLoaiPhongAdapter(listLP, new RCVClickItem() {
+                        @Override
+                        public void onClickRCV(Object object, String CURD) {
+                            LoaiPhong loaiPhong = (LoaiPhong) object;
+                            if (CURD.equals("EDIT"))
+                            {
+                                Open_Dialog_Edit(loaiPhong);
+                            }else if (CURD.equals("DELETE"))
+                            {
+                                Open_Dialog_Delete(loaiPhong);
+                            }
+                        }
+                    });
                     rcvLP.setAdapter(lp_adapter);
                 }
 
@@ -125,21 +145,6 @@ public class AdminLoaiPhongFragment extends Fragment {
         });
     }
 
-    public void searchLoaiPhong(String text) {
-        ArrayList<LoaiPhong> searchlist = new ArrayList<>();
-        for (LoaiPhong loaiPhong : listLP) {
-            if (loaiPhong.getTenLP().toLowerCase().contains(text.toLowerCase())) {
-                searchlist.add(loaiPhong);
-            }
-        }
-        lp_adapter.searchDataList(searchlist);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        GetListLP();
-    }
 
     public void Open_Dialog_Add() {
         final Dialog dialog = new Dialog(getContext());
@@ -204,6 +209,104 @@ public class AdminLoaiPhongFragment extends Fragment {
 
     }
 
+    public void Open_Dialog_Edit(LoaiPhong loaiPhong) {
+        final Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_edit);
 
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        EditText txtinput = dialog.findViewById(R.id.txtInput);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
+        Button btnchinhsua = dialog.findViewById(R.id.btnEdit);
+        txtinput.setText(loaiPhong.getTenLP());
+        btnchinhsua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiServices.apiServices.edit_loaiphong(loaiPhong.getMaLP(), txtinput.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
+                        ObjectReponse objectEdit = response.body();
+                        if (objectEdit == null) return;
+                        if (objectEdit.getCode() == 1) {
+                            onResume();
+                            Toast.makeText(requireContext(), "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(requireContext(), objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
+                        Toast.makeText(requireContext(), "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void Open_Dialog_Delete(LoaiPhong lp) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Bạn có chắc chắn muốn xóa không ?");
+        builder.setMessage("Dữ liệu đã xóa không thể khôi phục ! ");
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ApiServices.apiServices.delete_loaiphong(lp.getMaLP()).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                        ObjectReponse objectadd = response.body();
+                        if (objectadd.getCode() == 1) {
+                            onResume();
+                            Toast.makeText(requireContext(), "Xóa thành công !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireContext(), objectadd.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ObjectReponse> call, Throwable t) {
+                        Toast.makeText(requireContext(), "Xóa thất bại !", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(requireContext(), "Đã hủy", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GetListLP();
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.baohongtaisan_2.Fragment.Admin.Phong;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,6 +31,7 @@ import com.example.baohongtaisan_2.Adapter.Admin.AdminPhongAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerLoaiPhong_Adapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
+import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
@@ -55,6 +58,8 @@ public class AdminDanhSachPhongFragment extends Fragment {
     private Button btnaddPhong;
     private View view;
     private int MaLP_Add = -1, MaKVP_Add = -1;
+    private int MaLP_Edit = -1, MaKVP_Edit = -1;
+
 
 
     @Override
@@ -76,8 +81,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
         rvPhong.setLayoutManager(linearLayoutManager);
 
         phongList = new ArrayList<>();
-        adminPhongAdapter = new AdminPhongAdapter(phongList);
-        rvPhong.setAdapter(adminPhongAdapter);
 
         svphong.clearFocus();
         svphong.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -94,7 +97,9 @@ public class AdminDanhSachPhongFragment extends Fragment {
                         searchlist.add(phong);
                     }
                 }
-                adminPhongAdapter.searchDataList(searchlist);
+                if (adminPhongAdapter != null) {
+                    adminPhongAdapter.searchDataList(searchlist);
+                }
                 return false;
             }
         });
@@ -118,7 +123,19 @@ public class AdminDanhSachPhongFragment extends Fragment {
                 phongList.clear();
                 phongList = response.body();
                 if (phongList != null && getContext() != null) {
-                    adminPhongAdapter = new AdminPhongAdapter(phongList);
+                    adminPhongAdapter = new AdminPhongAdapter(phongList, new RCVClickItem() {
+                        @Override
+                        public void onClickRCV(Object object, String CURD) {
+                            Phong phong = (Phong) object;
+                            if (CURD.equals("EDIT"))
+                            {
+                                Open_Dialog_Edit(phong);
+                            }else if (CURD.equals("DELETE"))
+                            {
+                                Open_Dialog_Delete(phong);
+                            }
+                        }
+                    });
                     rvPhong.setAdapter(adminPhongAdapter);
                 }
             }
@@ -131,12 +148,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        GetListPhong();
 
-    }
 
 
     public void Open_Dialog_Add() {
@@ -165,8 +177,8 @@ public class AdminDanhSachPhongFragment extends Fragment {
         Spinner spnKVP = dialog.findViewById(R.id.spnAdd_2);
         btnthem.setText("Thêm mới");
         tv.setText("Thêm mới Phòng");
-        Load_Data_LoaiPhong(spnLP);
-        Load_Data_KhuVucPhong(spnKVP);
+        Load_Data_LoaiPhong(spnLP, -1);
+        Load_Data_KhuVucPhong(spnKVP, -1);
         txtinput.setHint("Nhập tên Phòng");
 
 
@@ -235,9 +247,140 @@ public class AdminDanhSachPhongFragment extends Fragment {
 
     }
 
+    public void Open_Dialog_Edit(Phong phong) {
+        final Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_add);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        TextView tv = dialog.findViewById(R.id.tvAdd_TenChucNangEdit);
+        EditText txtinput = dialog.findViewById(R.id.txtAdd_Input);
+        Button btnhuybo = dialog.findViewById(R.id.btnAdd_HuyBo);
+        Button btnthem = dialog.findViewById(R.id.btnAdd);
+        Spinner spnLP = dialog.findViewById(R.id.spnAdd_1);
+        Spinner spnKVP = dialog.findViewById(R.id.spnAdd_2);
+        btnthem.setText("Chỉnh sửa");
+        tv.setText("Chỉnh sửa thông tin Phòng");
+        Load_Data_LoaiPhong(spnLP, phong.getMaLP());
+        Load_Data_KhuVucPhong(spnKVP, phong.getMaKVP());
+        txtinput.setText(phong.getTenP());
 
 
-    private void Load_Data_LoaiPhong(Spinner spinner) {
+
+        spnLP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayAdapter<LoaiPhong> adapter = (ArrayAdapter<LoaiPhong>) spnLP.getAdapter();
+                LoaiPhong selected = adapter.getItem(i);
+                if (selected != null) {
+                    MaLP_Edit = selected.getMaLP();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+        spnKVP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayAdapter<KhuVucPhong> adapter = (ArrayAdapter<KhuVucPhong>) spnKVP.getAdapter();
+                KhuVucPhong selected = adapter.getItem(i);
+                if (selected != null) {
+                    MaKVP_Edit = selected.getMaKVP();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+
+
+        btnthem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MaLP_Edit == -1 || MaKVP_Edit == -1) return;
+                ApiServices.apiServices.edit_phong(phong.getMaP(), txtinput.getText().toString(), MaKVP_Edit, MaLP_Edit).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
+                        ObjectReponse objectEdit = response.body();
+                        if (objectEdit == null) return;
+                        if (objectEdit.getCode() == 1) {
+                            onResume();
+                            Toast.makeText(requireContext(), "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(requireContext(), objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
+                        Toast.makeText(requireContext(), "Cập nhật thất bại !", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void Open_Dialog_Delete(Phong p) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Bạn có chắc chắn muốn xóa không ?");
+        builder.setMessage("Dữ liệu đã xóa không thể khôi phục ! ");
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ApiServices.apiServices.delete_phong(p.getMaP()).enqueue(new Callback<ObjectReponse>() {
+                    @Override
+                    public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
+                        ObjectReponse objectadd = response.body();
+                        if (objectadd.getCode() == 1) {
+                            onResume();
+                            Toast.makeText(requireContext(), "Xóa thành công !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireContext(), objectadd.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ObjectReponse> call, Throwable t) {
+                        Toast.makeText(requireContext(), "Xóa thất bại !", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(requireContext(), "Đã hủy", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+
+    private void Load_Data_LoaiPhong(Spinner spinner, int MaLP) {
         ApiServices.apiServices.get_list_loaiphong().enqueue(new Callback<List<LoaiPhong>>() {
             @Override
             public void onResponse(@NonNull Call<List<LoaiPhong>> call, @NonNull Response<List<LoaiPhong>> response) {
@@ -246,6 +389,15 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     loaiPhongList = response.body();
                     SpinnerLoaiPhong_Adapter spinnerLoaiPhongAdapter = new SpinnerLoaiPhong_Adapter(getContext(), R.layout.custom_spinner_selected, loaiPhongList);
                     spinner.setAdapter(spinnerLoaiPhongAdapter);
+                    if (MaLP != -1) {
+                        for (int i = 0; i < loaiPhongList.size(); i++) {
+                            if (loaiPhongList.get(i).getMaLP() == MaLP)
+                            {
+                                spinner.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             @Override
@@ -255,7 +407,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
         });
     }
 
-    private void Load_Data_KhuVucPhong(Spinner spinner) {
+    private void Load_Data_KhuVucPhong(Spinner spinner, int MaKVP) {
         ApiServices.apiServices.get_list_khuvucphong().enqueue(new Callback<List<KhuVucPhong>>() {
             @Override
             public void onResponse(@NonNull Call<List<KhuVucPhong>> call, @NonNull Response<List<KhuVucPhong>> response) {
@@ -264,6 +416,15 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     khuVucPhongList = response.body();
                     SpinnerKhuVucPhong_Adapter spinner_2 = new SpinnerKhuVucPhong_Adapter(getContext(), R.layout.custom_spinner_selected, khuVucPhongList);
                     spinner.setAdapter(spinner_2);
+                    if (MaKVP != -1){
+                        for (int i = 0; i < khuVucPhongList.size(); i++) {
+                            if (khuVucPhongList.get(i).getMaKVP() == MaKVP)
+                            {
+                                spinner.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             @Override
@@ -273,6 +434,12 @@ public class AdminDanhSachPhongFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        GetListPhong();
+
+    }
 
 
 }
