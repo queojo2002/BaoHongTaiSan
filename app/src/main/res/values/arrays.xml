@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tinh_trang_array">
+        <item>--Lọc theo tình trạng--</item>
+        <item>Hư hỏng nhẹ (Minor)</item>
+        <item>Hư hỏng trung bình (Moderate)</item>
+        <item>Hư hỏng nghiêm trọng (Severe)</item>
+        <item>Hư hỏng hoàn toàn (Critical)</item>
+    </string-array>
+    <string-array name="trang_thai_array">
+        <item>--Lọc theo trạng thái--</item>
+        <item>Đã gửi báo hỏng</item>
+        <item>Đã tiếp nhận báo hỏng</item>
+        <item>Đang sửa chữa</item>
+        <item>Sửa thành công</item>
+        <item>Sửa không thành công</item>
+    </string-array>
+</resources>
