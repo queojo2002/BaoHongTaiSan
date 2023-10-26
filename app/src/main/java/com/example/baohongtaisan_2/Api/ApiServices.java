@@ -149,6 +149,17 @@ public interface ApiServices {
     @GET("api/load_data_taisan.php")
     Call<List<TaiSan>> get_list_taisan();
 
+    @GET("api/add_data_taisan.php")
+    Call<ObjectReponse> add_data_taisan(@Query("TenTS") String TenTS,
+                                         @Query("MaNTS") int MaNTS,
+                                         @Query("MaLTS") int MaLTS,
+                                         @Query("GiaTri") int GiaTri,
+                                         @Query("SoLuong") int SoLuong,
+                                         @Query("HangSanXuat") String HSX,
+                                         @Query("NuocSanXuat") String NSX,
+                                         @Query("NamSanXuat") int NamSX,
+                                         @Query("GhiChu") String GhiChu);
+
 
     // end api tai san
 
@@ -204,6 +215,7 @@ public interface ApiServices {
 
     @GET("api/load_data_baoloi_byMaND.php")
     Call<List<BaoHong>> get_list_baohong_byMaND(@Query("MaND") int MaND);
+
 
 
     @GET("api/api_thongke.php")
