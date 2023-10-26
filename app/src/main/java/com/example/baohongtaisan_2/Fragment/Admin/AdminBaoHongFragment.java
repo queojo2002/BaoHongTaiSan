@@ -213,10 +213,10 @@ public class AdminBaoHongFragment extends Fragment {
         return -1;
     }
     private void filterData(int tinhTrangToSearch, int trangThaiToSearch) {
-        if (tinhTrangToSearch == 0 && trangThaiToSearch == 0) {
+        if (tinhTrangToSearch == 0 && trangThaiToSearch == 0 && baoHongList != null) {
             // Khi chọn cả "--Lọc theo tình trạng--" và "--Lọc theo trạng thái--"
             baoHongList.clear();
-            baoHongList.addAll(originalBaoHongList);
+            baoHongList = originalBaoHongList;
         } else {
             if (originalBaoHongList != null) {
                 baoHongList.clear();
