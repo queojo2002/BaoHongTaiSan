@@ -14,13 +14,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="130dp"
             android:background="#ffff">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgProfile_1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/baseline_person_24"
@@ -36,7 +36,7 @@
                 android:includeFontPadding="false"
                 android:text="Thông tin cá nhân"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_toEndOf="@id/imgProfile_1"
                 android:text="Chỉnh sửa thông tin cá nhân của bạn ở đây."
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </RelativeLayout>
 
 
@@ -71,7 +71,26 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/baseline_person_24"
                     android:drawablePadding="10dp"
-                    android:text="Đức trần văn"></com.google.android.material.textfield.TextInputEditText>
+                    android:text="Đức trần văn"
+                    android:textSize="13sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Số điện thoại">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Profile_txtSDT_Edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_local_phone_24"
+                    android:drawablePadding="10dp"
+                    android:text="0326393540"
+                    android:textSize="13sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +107,8 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/baseline_login_24"
                     android:drawablePadding="10dp"
-                    android:text="2024802010403"></com.google.android.material.textfield.TextInputEditText>
+                    android:text="2024802010403"
+                    android:textSize="13sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,16 +125,20 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/baseline_email_24"
                     android:drawablePadding="10dp"
-                    android:text="2024802010403@student.tdmu.edu.vn"></com.google.android.material.textfield.TextInputEditText>
+                    android:text="2024802010403@student.tdmu.edu.vn"
+                    android:textSize="13sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
 
             <Button
                 android:id="@+id/Profile_BtnEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chỉnh sửa thông tin cá nhân"></Button>
+                android:text="Chỉnh sửa thông tin cá nhân" />
 
 
         </LinearLayout>

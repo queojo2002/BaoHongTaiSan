@@ -54,6 +54,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
+                    System.out.println(user.getEmail()+"");
                     ApiServices.apiServices.get_nguoidung_byEmail(user.getEmail()).enqueue(new Callback<NguoiDung>() {
                         @Override
                         public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
@@ -81,7 +82,6 @@ public class SplashActivity extends AppCompatActivity {
                                 FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                                     @Override
                                     public void onComplete(@NonNull Task<String> task) {
-
                                         ApiServices.apiServices.edit_token_uid_nguoidung(nguoiDung.getMaND(), FirebaseAuth.getInstance().getCurrentUser().getUid().toString(), task.getResult().toString()).enqueue(new Callback<ObjectReponse>() {
                                             @Override
                                             public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {

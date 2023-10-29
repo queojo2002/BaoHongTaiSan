@@ -3,31 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.User.QuanLyBaoHongFragment">
 
 
-    <TextView
-        android:id="@+id/txtTVQLBH"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svQLBH_1"
         android:layout_width="match_parent"
+        android:background="@drawable/background_input"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Lịch sử báo hỏng thiết bị, tài sản của bạn"
-        android:textColor="#454444"
-        android:textSize="18sp"
-        android:textStyle="bold"></TextView>
+        android:layout_alignParentStart="true"
+        app:queryHint="Tìm kiếm lịch sử báo hỏng"
+        android:layout_margin="5dp"
+        app:iconifiedByDefault="false"/>
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/txtTVQLBH">
+        android:layout_below="@id/svQLBH_1">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQLBH"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#fff">
 
         </androidx.recyclerview.widget.RecyclerView>

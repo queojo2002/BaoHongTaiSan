@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.Admin.AdminBaoHongFragment">
+    tools:context=".Fragment.Admin.PhanBo.AdminDSTSTrongPhongFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,21 +11,23 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- SearchView -->
             <SearchView
-                android:id="@+id/txtSearchBH"
+                android:id="@+id/svTaiSan_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:queryHint="Tìm kiếm" />
+
+
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBaohong"
+            android:id="@+id/rvPBTS_TaiSan_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-</RelativeLayout>
+
+</FrameLayout>

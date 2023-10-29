@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgQLTS_2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_inventory_24">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/tvTenTS_2"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imgQLTS_2"
+                android:ems="5"
+                android:gravity="left|center"
+                android:text="Máy in Laser Trắng Đen HP 107w WiFi (4ZB78A)"
+                android:textColor="#4CAF50"
+                android:textSize="14sp"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/tvTenNTS_2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTenTS_2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:paddingBottom="2dp"
+                android:textColor="#F60404"
+                android:layout_toEndOf="@id/imgQLTS_2"
+                android:text="Bộ máy vi tính"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_TenLTS_2"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTenNTS_2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imgQLTS_2"
+                android:paddingBottom="5dp"
+                android:textColor="#120808"
+                android:text="Công cụ dụng cụ"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_SLNV"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/tvTenNTS_2"
+                android:backgroundTint="#FF0000"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:text="Số lượng hiện còn: 10000"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btnThemVaoPhong"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/tv_SLNV"
+                android:layout_toEndOf="@id/tvTenNTS_2"
+                android:backgroundTint="#349BED"
+                android:gravity="center"
+                android:text="Thêm vào Phòng"
+                android:textSize="11sp"
+                android:textStyle="italic"
+                android:textAlignment="center"
+                tools:ignore="RtlSymmetry"
+                android:layout_marginRight="5dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

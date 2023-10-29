@@ -88,8 +88,8 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
                     Open_NAV_QuanLy_Phong(1);
                 } else if (item.getItemId() == R.id.bottom_admin_qltaisan) {
                     Open_NAV_QuanLy_TaiSan(1);
-                } else if (item.getItemId() == R.id.bottom_admin_qlphanbo) {
-                    Open_NAV_PhanBo(1);
+                } else if (item.getItemId() == R.id.bottom_admin_qlbaohong) {
+                    Open_NAV_Quanly_BaoHong(1);
                 }
                 return true;
             }
@@ -108,9 +108,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
             Open_NAV_QuanLy_Phong(0);
         } else if (item.getItemId() == R.id.nav_admin_qltaisan) { // click quản lý tài sản
             Open_NAV_QuanLy_TaiSan(0);
-        } else if (item.getItemId() == R.id.nav_admin_phanbo) { // click quản lý phân bổ
-            Open_NAV_PhanBo(0);
-        }else if (item.getItemId() == R.id.nav_admin_qlbaohong) { // click quản lý báo hỏng
+        } else if (item.getItemId() == R.id.nav_admin_qlbaohong) { // click quản lý báo hỏng
             Open_NAV_Quanly_BaoHong(0);
         }else if (item.getItemId() == R.id.nav_admin_dangxuat) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -186,16 +184,13 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private void Open_NAV_PhanBo(int OptionNAV) {
-
-    }
     private void Open_NAV_Quanly_BaoHong(int OptionNAV){
         if (currentFrament_NAV != "nav_admin_qlbaohong") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminBaoHongFragment()).commit();
             getSupportActionBar().setTitle("Quản lí báo hỏng");
             currentFrament_NAV = "nav_admin_qlbaohong";
             if (OptionNAV == 0) {
-                bottomNavigationView.getMenu().findItem(R.id.bottom_admin_trangchu).setChecked(true);
+                bottomNavigationView.getMenu().findItem(R.id.bottom_admin_qlbaohong).setChecked(true);
             } else {
                 navigationView.setCheckedItem(R.id.nav_admin_qlbaohong);
             }

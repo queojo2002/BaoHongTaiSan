@@ -207,6 +207,16 @@ public interface ApiServices {
     @GET("api/load_data_phanbo_byMaP.php")
     Call<List<PhanBo>> get_list_phanbo_byMaP(@Query("MaP") int MaP);
 
+    @GET("api/add_data_phanbo.php")
+    Call<ObjectReponse> add_new_phanbo(
+            @Query("MaTS") int MaTS,
+            @Query("MaND") int MaND,
+            @Query("MaP") int MaP,
+            @Query("SoLuongCanThem") int SLCanThem,
+            @Query("GhiChuThem") String GhiChu
+
+    );
+
     @GET("api/load_data_nguoidung_byEmail.php")
     Call<NguoiDung> get_nguoidung_byEmail(@Query("Email") String Email);
 
@@ -239,6 +249,8 @@ public interface ApiServices {
     Call<ObjectReponse> edit_data_nguoidung(
             @Query("MaND") int MaND,
             @Query("HoVaTen") String HoVaTen,
+            @Query("SoDienThoai") String SDT,
+            @Query("MatKhau") String MatKhau,
             @Query("MaDV") int MaDV,
             @Query("MaCD") int MaCD,
             @Query("MaPQ") int MaPQ);
@@ -254,7 +266,15 @@ public interface ApiServices {
             @Query("UID") String UID,
             @Query("TOKEN") String TOKEN);
 
-
+    @GET("api/add_data_nguoidung_2.php")
+    Call<ObjectReponse> add_new_nguoidung(
+            @Query("HoVaTen") String HoVaTen,
+            @Query("SoDienThoai") String SDT,
+            @Query("Email") String Email,
+            @Query("MatKhau") String MatKhau,
+            @Query("MaPQ") int MaPQ,
+            @Query("MaDV") int MaDV,
+            @Query("MaCD") int MaCD);
 
     // End api người dùng
 

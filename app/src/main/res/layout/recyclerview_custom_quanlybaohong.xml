@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:stretchColumns="*">
@@ -26,10 +27,11 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="left|center"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/logo_tdmu_2">
+                android:src="@drawable/logo_tdmu_2"
+                tools:ignore="RtlHardcoded">
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -38,8 +40,8 @@
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imgQLBH"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="10-18-2023 12:31:32"
                 android:textSize="11sp"
@@ -53,21 +55,21 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@id/imgQLBH"
+                android:layout_toEndOf="@id/imgQLBH"
                 android:gravity="center"
                 android:text="Toshiba Inverter 1 HP RAS-H10C4KCVG-V"
                 android:textColor="#000000"
                 android:textSize="12sp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtQLBG_TenTS"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@id/imgQLBH"
+                android:layout_toEndOf="@id/imgQLBH"
                 android:orientation="vertical">
 
                 <TableRow
@@ -77,10 +79,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="left|center"
                         android:text="Tên phòng: "
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/txtQLBG_TenP"
@@ -91,7 +94,8 @@
                         android:gravity="top|left|center"
                         android:text="Phòng C2-P2-E3-123"
                         android:textColor="#CB00ED"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                 </TableRow>
 
@@ -103,10 +107,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="left|center"
                         android:text="Trạng thái: "
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/txtQLBG_TrangThai"
@@ -117,7 +122,8 @@
                         android:gravity="top|left|center"
                         android:text="Đã gửi báo hỏng"
                         android:textColor="#266E29"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                 </TableRow>
 
@@ -129,10 +135,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="left|center"
                         android:text="Tình trạng: "
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/txtQLBG_TinhTrang"
@@ -143,7 +150,8 @@
                         android:gravity="top|left|center"
                         android:text="Hư hỏng trung bình (Moderate)"
                         android:textColor="#F64E4E"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                 </TableRow>
 
@@ -154,10 +162,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="left|center"
                         android:text="Mô tả hư hỏng: "
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        tools:ignore="RtlHardcoded" />
 
                     <TextView
                         android:id="@+id/txtQLBG_MoTa"

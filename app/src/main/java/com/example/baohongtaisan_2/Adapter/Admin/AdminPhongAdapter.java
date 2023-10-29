@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baohongtaisan_2.Activity.Admin.AdminPhanBoTaiSanActivity;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerLoaiPhong_Adapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
@@ -50,6 +51,7 @@ public class AdminPhongAdapter extends RecyclerView.Adapter<AdminPhongAdapter.Ad
 
     private List<Phong> phongList;
     private RCVClickItem rcvClickItem;
+    private Context context;
 
     public AdminPhongAdapter(List<Phong> phongList, RCVClickItem rcvClickItem) {
         this.phongList = phongList;
@@ -61,6 +63,7 @@ public class AdminPhongAdapter extends RecyclerView.Adapter<AdminPhongAdapter.Ad
     @Override
     public AdminPhongAdapter.AdminPhongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_phong_admin, parent, false);
+        context = parent.getContext();
         return new AdminPhongAdapter.AdminPhongViewHolder(view);
     }
 
@@ -83,6 +86,16 @@ public class AdminPhongAdapter extends RecyclerView.Adapter<AdminPhongAdapter.Ad
             @Override
             public void onClick(View view) {
                 rcvClickItem.onClickRCV(p, "DELETE");
+            }
+        });
+
+        holder.phanboTaiSan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AdminPhanBoTaiSanActivity.class);
+                intent.putExtra("MaP", p.getMaP());
+                intent.putExtra("TenP", p.getTenP());
+                context.startActivity(intent);
             }
         });
 
@@ -117,7 +130,7 @@ public class AdminPhongAdapter extends RecyclerView.Adapter<AdminPhongAdapter.Ad
 
     public class AdminPhongViewHolder extends RecyclerView.ViewHolder {
         private TextView tenphong, kvp, lp;
-        private ImageView editphong, deletephong;
+        private ImageView editphong, deletephong, phanboTaiSan;
 
         public AdminPhongViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -126,6 +139,7 @@ public class AdminPhongAdapter extends RecyclerView.Adapter<AdminPhongAdapter.Ad
             lp = itemView.findViewById(R.id.txtLP);
             editphong = itemView.findViewById(R.id.editPhong);
             deletephong = itemView.findViewById(R.id.deletePhong);
+            phanboTaiSan = itemView.findViewById(R.id.phanboTaiSan);
         }
     }
 

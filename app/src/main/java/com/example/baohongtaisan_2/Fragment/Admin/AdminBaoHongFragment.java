@@ -1,7 +1,10 @@
 package com.example.baohongtaisan_2.Fragment.Admin;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +29,9 @@ import android.widget.Toast;
 import com.example.baohongtaisan_2.Adapter.Admin.AdminBaoHongAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.CustomSpinnerAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
+import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.BaoHong;
+import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
@@ -41,17 +49,18 @@ public class AdminBaoHongFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private AdminBaoHongAdapter adminBaoHongAdapter;
     private List<BaoHong> baoHongList;
-    private List<BaoHong> originalBaoHongList;
     private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_admin_bao_hong, container, false);
         _AnhXa();
-        GetListBaoHong();
+        _SuKien();
+
         return view;
     }
+
+
 
 
     public void _AnhXa() {
@@ -62,51 +71,14 @@ public class AdminBaoHongFragment extends Fragment {
         rvBH.setLayoutManager(linearLayoutManager);
 
         baoHongList = new ArrayList<>();
-        adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList);
-        rvBH.setAdapter(adminBaoHongAdapter);
 
-        Spinner spinner1 = view.findViewById(R.id.spntinhtrang);
-        ArrayAdapter<CharSequence> adapter1 = new CustomSpinnerAdapter(getContext(), android.R.layout.simple_spinner_item, android.R.id.text1, Arrays.asList(getResources().getStringArray(R.array.tinh_trang_array)), 10);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter1);
+        GetListBaoHong();
 
-        Spinner spinner2 = view.findViewById(R.id.spntrangthai);
-        ArrayAdapter<CharSequence> adapter2 = new CustomSpinnerAdapter(getContext(), android.R.layout.simple_spinner_item, android.R.id.text1, Arrays.asList(getResources().getStringArray(R.array.trang_thai_array)), 10);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedTinhTrang = spinner1.getSelectedItem().toString();
-                int tinhTrangToSearch = getTinhTrangValue(selectedTinhTrang);
-                String selectedTrangThai = spinner2.getSelectedItem().toString();
-                int trangThaiToSearch = getTrangThaiValue(selectedTrangThai);
-                ((TextView) parentView.getChildAt(0)).setTextSize(10);
-                filterData(tinhTrangToSearch, trangThaiToSearch);
-            }
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
 
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedTinhTrang = spinner1.getSelectedItem().toString();
-                int tinhTrangToSearch = getTinhTrangValue(selectedTinhTrang);
-                String selectedTrangThai = spinner2.getSelectedItem().toString();
-                int trangThaiToSearch = getTrangThaiValue(selectedTrangThai);
-                ((TextView) parentView.getChildAt(0)).setTextSize(10);
-
-                filterData(tinhTrangToSearch, trangThaiToSearch);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
+    private void _SuKien() {
 
         svBH.clearFocus();
         svBH.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -119,50 +91,43 @@ public class AdminBaoHongFragment extends Fragment {
             public boolean onQueryTextChange(String s) {
                 ArrayList<BaoHong> searchlist = new ArrayList<>();
                 for (BaoHong baoHong : baoHongList) {
-                    if (baoHongMatchesSearch(baoHong, s)) {
+                    if (baoHong.getTenP().toLowerCase().contains(s.toLowerCase())) {
                         searchlist.add(baoHong);
                     }
                 }
-                adminBaoHongAdapter.searchDataList(searchlist);
-                return false;
-            }
-
-            private boolean baoHongMatchesSearch(BaoHong baoHong, String query) {
-                // Thay đổi logic tìm kiếm.
-                String queryLower = query.toLowerCase();
-                String tenP = baoHong.getTenP().toLowerCase();
-                String tenTS = baoHong.getTenTS().toLowerCase();
-                String ngay = baoHong.getNgayCapNhat().toLowerCase();
-
-                // Sử dụng nhiều thuộc tính cho tìm kiếm phù hợp.
-                if (tenP.contains(queryLower) || tenTS.contains(queryLower) || ngay.contains(queryLower)) {
-                    return true;
+                if (adminBaoHongAdapter != null) {
+                    adminBaoHongAdapter.searchDataList(searchlist);
                 }
                 return false;
             }
         });
 
-    }
 
+    }
 
 
     public void GetListBaoHong() {
         ApiServices.apiServices.get_list_baohong().enqueue(new Callback<List<BaoHong>>() {
             @Override
             public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    originalBaoHongList = response.body();
-                    baoHongList.clear();
-                    baoHongList.addAll(originalBaoHongList);
-                    if (baoHongList != null && getContext() != null) {
-                        adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList);
+                baoHongList.clear();
+                baoHongList = response.body();
+                if (response.isSuccessful() && response.body() != null && baoHongList != null && getContext() != null) {
+                        adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList, new RCVClickItem() {
+                            @Override
+                            public void onClickRCV(Object object, String CURD) {
+                                BaoHong baoHong = (BaoHong) object;
+                                if (CURD.equals("CHITIET"))
+                                {
+                                    Open_Dialog_ChiTiet(baoHong);
+                                }
+                            }
+                        });
                         rvBH.setAdapter(adminBaoHongAdapter);
-                    }
                 } else {
                     Toast.makeText(getContext(), "Có lỗi xảy ra...", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<BaoHong>> call, Throwable t) {
                 Toast.makeText(getContext(), "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
@@ -171,63 +136,73 @@ public class AdminBaoHongFragment extends Fragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
+    public void Open_Dialog_ChiTiet(BaoHong baoHong) {
+        final Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_chitiet_baohong);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        TextView tents = dialog.findViewById(R.id.tvTenTS);
+        TextView tenphong = dialog.findViewById(R.id.tvTenphong);
+        TextView tinhtrang = dialog.findViewById(R.id.tvTinhtrang);
+        TextView ngaycapnhat = dialog.findViewById(R.id.tvNgaycapnhat);
+        TextView hoten = dialog.findViewById(R.id.tvHoten);
+        TextView email = dialog.findViewById(R.id.tvEmail);
+
+        tents.setText(baoHong.getTenTS());
+        tenphong.setText(baoHong.getTenP());
+        int tt = baoHong.getTinhTrang();
+        if (tt == 1) {
+            tinhtrang.setText("Hư hỏng nhẹ (Minor)");
+        } else if (tt == 2) {
+            tinhtrang.setText("Hư hỏng trung bình (Moderate)");
+        } else if (tt == 3) {
+            tinhtrang.setText("Hư hỏng nghiêm trọng (Severe)");
+        } else if (tt == 4) {
+            tinhtrang.setText("Hư hỏng hoàn toàn (Critical)");
+        }
+        ngaycapnhat.setText(baoHong.getNgayCapNhat());
+
+        hoten.setText(baoHong.getHoVaTen());
+        email.setText(baoHong.getEmail());
+
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+
+
     @Override
     public void onResume() {
         super.onResume();
         GetListBaoHong();
 
     }
-    public interface ItemClickListener {
-        void onClick(View view, int position,boolean isLongClick);
-    }
-    private int getTinhTrangValue(String tinhTrang) {
-        if (tinhTrang.equals("Hư hỏng nhẹ (Minor)")) {
-            return 1;
-        } else if (tinhTrang.equals("Hư hỏng trung bình (Moderate)")) {
-            return 2;
-        } else if (tinhTrang.equals("Hư hỏng nghiêm trọng (Severe)")) {
-            return 3;
-        } else if (tinhTrang.equals("Hư hỏng hoàn toàn (Critical)")) {
-            return 4;
-        } else if (tinhTrang.equals("--Lọc theo tình trạng--")) {
-            return 0;
-        }
-        return -1;
-    }
 
 
-    private int getTrangThaiValue(String tinhTrang) {
-        if (tinhTrang.equals("Đã gửi báo hỏng")) {
-            return 1;
-        } else if (tinhTrang.equals("Đã tiếp nhận báo hỏng")) {
-            return 2;
-        } else if (tinhTrang.equals("Đang sửa chữa")) {
-            return 3;
-        } else if (tinhTrang.equals("Sửa thành công")) {
-            return 4;
-        } else if (tinhTrang.equals("Sửa không thành công")) {
-            return 5;
-        } else if (tinhTrang.equals("--Lọc theo trạng thái--")) {
-            return 0;
-        }
-        return -1;
-    }
-    private void filterData(int tinhTrangToSearch, int trangThaiToSearch) {
-        if (tinhTrangToSearch == 0 && trangThaiToSearch == 0 && baoHongList != null) {
-            // Khi chọn cả "--Lọc theo tình trạng--" và "--Lọc theo trạng thái--"
-            baoHongList.clear();
-            baoHongList = originalBaoHongList;
-        } else {
-            if (originalBaoHongList != null) {
-                baoHongList.clear();
-                for (BaoHong baoHong : originalBaoHongList) {
-                    if ((tinhTrangToSearch == 0 || baoHong.getTinhTrang() == tinhTrangToSearch) &&
-                            (trangThaiToSearch == 0 || baoHong.getTrangThai() == trangThaiToSearch)) {
-                        baoHongList.add(baoHong);
-                    }
-                }
-            }
-        }
-        adminBaoHongAdapter.notifyDataSetChanged();
-    }
+
+
 }

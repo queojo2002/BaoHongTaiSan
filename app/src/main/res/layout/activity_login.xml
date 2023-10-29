@@ -15,10 +15,58 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/logo_tdmu_1" />
 
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawableStart="@drawable/baseline_email_24"
+        android:drawablePadding="5dp"
+        android:padding="15dp"
+        android:layout_below="@id/imageView2"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="80dp"
+        android:textSize="13sp"
+        android:background="@drawable/background_input"
+        android:text="nguoidung1@gmail.com"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:drawableLeft="@drawable/baseline_password_24"
+        android:drawableStart="@drawable/baseline_password_24"
+        android:drawablePadding="5dp"
+        android:padding="15dp"
+        android:layout_below="@id/txtUsername"
+        android:layout_centerInParent="true"
+        android:textSize="13sp"
+        android:password="true"
+        android:background="@drawable/background_input"
+        android:text="nguoidung1101"
+        android:layout_marginBottom="10dp"/>
+
     <Button
+        android:layout_below="@id/txtPassword"
+        android:id="@+id/btnLoginUP"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rs_button_home_1"
+        android:paddingStart="50dp"
+        android:paddingEnd="70dp"
+        android:drawableLeft="@drawable/baseline_login_24"
+        android:text="Đăng nhập"
+        android:textColor="#000000"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:layout_below="@id/btnLoginUP"
         android:id="@+id/btnLogin"
         android:layout_width="250dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:layout_centerInParent="true"
         android:background="@drawable/rs_button_home_1"
         android:drawableLeft="@drawable/rs_button_home_2"

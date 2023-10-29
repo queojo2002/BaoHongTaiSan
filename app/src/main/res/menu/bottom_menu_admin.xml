@@ -22,9 +22,9 @@
         android:title="Tài sản" />
 
     <item
-        android:id="@+id/bottom_admin_qlphanbo"
-        android:icon="@drawable/baseline_inventory_24"
-        android:title="Phân bổ" />
+        android:id="@+id/bottom_admin_qlbaohong"
+        android:icon="@drawable/baseline_construction_24"
+        android:title="QLBH" />
 
 
 </menu>

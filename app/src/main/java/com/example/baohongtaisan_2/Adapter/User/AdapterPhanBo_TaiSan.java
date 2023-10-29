@@ -33,7 +33,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
     @NonNull
     @Override
     public PhanBoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_tracuu_cuscom, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_tracuu_custom, parent, false);
         context = parent.getContext();
         return new PhanBoViewHolder(view);
     }

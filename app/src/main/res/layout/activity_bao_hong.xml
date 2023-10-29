@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="20dp"
     tools:context=".Activity.User.BaoHongActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,17 +22,22 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgBaoHong"
         android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_height="100dp"
         android:layout_below="@id/toolbar"
         android:layout_centerInParent="true"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/logo_tdmu_2"></de.hdodenhof.circleimageview.CircleImageView>
+        android:src="@drawable/logo_tdmu_2" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/imgBaoHong">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgBaoHong"
-        android:layout_marginRight="3dp"
+        android:layout_marginEnd="3dp"
         android:stretchColumns="*">
 
         <TableRow
@@ -42,10 +48,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="left|center"
                 android:text="Tên tài sản"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
 
             <EditText
                 android:id="@+id/txt_TenTS_BH"
@@ -55,7 +62,8 @@
                 android:ems="10"
                 android:gravity="left"
                 android:text="Máy in Laser Trắng Đen HP 107w WiFi (4ZB78A)"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
         </TableRow>
 
         <TableRow
@@ -65,10 +73,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="left|center"
                 android:text="Chọn trạng thái"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -111,10 +120,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="left|center"
                 android:text="Mô tả hư hỏng"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
 
             <EditText
                 android:id="@+id/txtMoTaHuHong_BH"
@@ -137,7 +147,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="left|center"
                 android:text="Hình ảnh mô tả"
                 android:textSize="16sp" />
@@ -162,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_span="2"
                 android:backgroundTint="#2FAE35"
-                android:text="Gửi báo hỏng"></Button>
+                android:text="Gửi báo hỏng" />
         </TableRow>
 
 
@@ -175,11 +185,11 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_span="2"></ProgressBar>
+                android:layout_span="2" />
         </TableRow>
 
 
-    </TableLayout>
-
+     </TableLayout>
+    </ScrollView>
 
 </RelativeLayout>

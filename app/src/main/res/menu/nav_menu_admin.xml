@@ -22,10 +22,6 @@
             android:icon="@drawable/baseline_devices_other_24"
             android:title="Quản lí tài sản" />
 
-        <item
-            android:id="@+id/nav_admin_phanbo"
-            android:icon="@drawable/baseline_inventory_24"
-            android:title="Phân bổ tài sản" />
 
         <item
             android:id="@+id/nav_admin_qlbaohong"

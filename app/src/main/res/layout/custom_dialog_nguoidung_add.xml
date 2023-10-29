@@ -16,22 +16,58 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="Thêm mới thông tin"
-        android:textSize="16dp" />
+        android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/txtAdd_Input"
+        android:id="@+id/txtHoVaTen_Add"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/tvAdd_TenChucNangEdit"
         android:padding="12dp"
         android:textSize="14sp"
         android:background="@drawable/background_input"
-        android:hint="Nhập tên người dùng mới"
+        android:hint="Nhập họ và tên người dùng"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/txtSDT_Add"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/txtHoVaTen_Add"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:inputType="number"
+        android:background="@drawable/background_input"
+        android:hint="Nhập số điện thoại"
+        android:layout_marginBottom="10dp"/>
+
+
+    <EditText
+        android:id="@+id/txtEmail_Add"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/txtSDT_Add"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:background="@drawable/background_input"
+        android:hint="Nhập email đăng nhập"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/txtMatKhau_Add"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/txtEmail_Add"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:background="@drawable/background_input"
+        android:hint="Nhập mật khẩu đăng nhập"
         android:layout_marginBottom="2dp"/>
+
 
     <Spinner
         android:id="@+id/spnAdd_1"
-        android:layout_below="@id/txtAdd_Input"
+        android:layout_below="@id/txtMatKhau_Add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

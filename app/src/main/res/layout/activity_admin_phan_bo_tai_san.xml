@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Admin.AdminPhanBoTaiSanActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/lavender"
+        android:elevation="4dp"
+        android:gravity="center_horizontal"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Phân bổ: Phòng E3-302" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_below="@id/toolbar"
+        android:contentDescription="Todo"
+        android:id="@+id/tablayout_pbts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabBackground="@drawable/background_tab"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#2196F3"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#2196F3"
+        app:tabTextColor="@color/black" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:contentDescription="Todo"
+        android:id="@+id/viewpager_pbts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tablayout_pbts" />
+
+
+</RelativeLayout>

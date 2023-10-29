@@ -38,6 +38,11 @@ import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +65,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
     private Button btnaddNd;
     private View rootView;
     private int MaDV = -1, MaCD = -1, MaPQ = -1;
+    private int MaDV_ADD = -1, MaCD_ADD = -1, MaPQ_ADD = -1;
 
 
     @Override
@@ -122,13 +128,13 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         btnaddNd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(getContext(), AddNguoidungActivity.class);
-                startActivity(intent);*/
+                Open_Dialog_Add();
             }
         });
 
 
     }
+
 
 
 
@@ -161,10 +167,9 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         });
     }
 
-
     @SuppressLint("SetTextI18n")
     public void Open_Dialog_Edit(NguoiDung nd) {
-        final Dialog dialog = new Dialog(requireContext());
+        Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_nguoidung_add);
 
@@ -182,7 +187,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         dialog.setCancelable(true);
 
         TextView tv = dialog.findViewById(R.id.tvAdd_TenChucNangEdit);
-        EditText txtinput = dialog.findViewById(R.id.txtAdd_Input);
+        EditText txtinput = dialog.findViewById(R.id.txtHoVaTen_Add);
+        EditText txtSDT = dialog.findViewById(R.id.txtSDT_Add);
+        EditText txtEmail = dialog.findViewById(R.id.txtEmail_Add);
+        EditText txtMatKhau = dialog.findViewById(R.id.txtMatKhau_Add);
         Button btnhuybo = dialog.findViewById(R.id.btnAdd_HuyBo);
         Button btnthem = dialog.findViewById(R.id.btnAdd);
 
@@ -197,8 +205,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         Load_Data_ChucDanh(spnCD, nd.getMaCD());
         Load_Data_PhanQuyen(spnPQ, nd.getMaPQ());
         txtinput.setText(nd.getHoVaTen());
-
-
+        txtSDT.setText(nd.getSoDienThoai().toString());
+        txtEmail.setText(nd.getEmail());
+        txtEmail.setEnabled(false);
+        txtMatKhau.setText(nd.getMatKhau());
 
         spnDV.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -243,13 +253,16 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MaCD == -1 || MaDV == -1 || MaPQ == -1 || TextUtils.isEmpty(txtinput.getText().toString()))
+                if (MaCD == -1 ||
+                        MaDV == -1 ||
+                        MaPQ == -1 ||
+                        TextUtils.isEmpty(txtinput.getText().toString()) ||
+                        TextUtils.isEmpty(txtSDT.getText().toString()) ||
+                        TextUtils.isEmpty(txtMatKhau.getText().toString()))
                 {
                     Toast.makeText(requireContext(), "Dữ liệu sửa người dùng của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
-                }else
-                {
-
-                    ApiServices.apiServices.edit_data_nguoidung(nd.getMaND(), txtinput.getText().toString(), MaDV, MaCD, MaPQ).enqueue(new Callback<ObjectReponse>() {
+                }else {
+                    ApiServices.apiServices.edit_data_nguoidung(nd.getMaND(), txtinput.getText().toString(), txtSDT.getText().toString(), txtMatKhau.getText().toString() ,MaDV, MaCD, MaPQ).enqueue(new Callback<ObjectReponse>() {
                         @Override
                         public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                             ObjectReponse objectEdit = response.body();
@@ -284,6 +297,136 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private void Open_Dialog_Add() {
+        Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_nguoidung_add);
+
+        Window window = dialog.getWindow();
+        if (window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtt = window.getAttributes();
+        windowAtt.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtt);
+        dialog.setCancelable(true);
+
+        TextView tv = dialog.findViewById(R.id.tvAdd_TenChucNangEdit);
+        EditText txtHoVaTen = dialog.findViewById(R.id.txtHoVaTen_Add);
+        EditText txtSDT = dialog.findViewById(R.id.txtSDT_Add);
+        EditText txtEmail = dialog.findViewById(R.id.txtEmail_Add);
+        EditText txtMatKhau = dialog.findViewById(R.id.txtMatKhau_Add);
+        Button btnhuybo = dialog.findViewById(R.id.btnAdd_HuyBo);
+        Button btnthem = dialog.findViewById(R.id.btnAdd);
+
+        Spinner spnDV = dialog.findViewById(R.id.spnAdd_1);
+        Spinner spnCD = dialog.findViewById(R.id.spnAdd_2);
+        Spinner spnPQ = dialog.findViewById(R.id.spnAdd_3);
+
+        btnthem.setText("Thêm mới");
+        tv.setText("Thêm mới thông tin người dùng");
+
+        Load_Data_DonVi(spnDV, -1);
+        Load_Data_ChucDanh(spnCD, -1);
+        Load_Data_PhanQuyen(spnPQ, -1);
+
+
+
+        spnDV.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayAdapter<DonVi> adapter = (ArrayAdapter<DonVi>) spnDV.getAdapter();
+                DonVi selected = adapter.getItem(i);
+                if (selected != null) {
+                    MaDV_ADD = selected.getMaDV();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        spnCD.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayAdapter<ChucDanh> adapter = (ArrayAdapter<ChucDanh>) spnCD.getAdapter();
+                ChucDanh selected = adapter.getItem(i);
+                if (selected != null) {
+                    MaCD_ADD = selected.getMaCD();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        spnPQ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ArrayAdapter<PhanQuyen> adapter = (ArrayAdapter<PhanQuyen>) spnPQ.getAdapter();
+                PhanQuyen selected = adapter.getItem(i);
+                if (selected != null) {
+                    MaPQ_ADD = selected.getMaPQ();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+
+        btnthem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MaCD_ADD == -1 ||
+                    MaDV_ADD == -1 ||
+                    MaPQ_ADD == -1 ||
+                    TextUtils.isEmpty(txtHoVaTen.getText().toString()) ||
+                    TextUtils.isEmpty(txtSDT.getText().toString()) ||
+                    TextUtils.isEmpty(txtEmail.getText().toString()) ||
+                    TextUtils.isEmpty(txtMatKhau.getText().toString())) {
+                    Toast.makeText(requireContext(), "Dữ liệu thêm mới người dùng của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
+                }else {
+                    ApiServices.apiServices.add_new_nguoidung(txtHoVaTen.getText().toString(),
+                            txtSDT.getText().toString(),
+                            txtEmail.getText().toString(),
+                            txtMatKhau.getText().toString(), MaPQ_ADD, MaDV_ADD, MaCD_ADD).enqueue(new Callback<ObjectReponse>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
+                            ObjectReponse objectEdit = response.body();
+                            if (objectEdit == null) return;
+                            if (objectEdit.getCode() == 1) {
+                                onResume();
+                                Toast.makeText(requireContext(), "Thêm mới người dùng thành công", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(requireContext(), objectEdit.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<ObjectReponse> call, @NonNull Throwable t) {
+                            Toast.makeText(requireContext(), "Có lỗi khi cập nhật người dùng!!!!!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+
+        btnhuybo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+
 
     private void Load_Data_DonVi(Spinner spinner, int MaDV) {
         ApiServices.apiServices.get_list_donvi().enqueue(new Callback<List<DonVi>>() {
@@ -294,13 +437,16 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     donViList = response.body();
                     SpinnerDonViAdapter spinnerDonViAdapter = new SpinnerDonViAdapter(requireContext(), R.layout.custom_spinner_selected, donViList);
                     spinner.setAdapter(spinnerDonViAdapter);
-                    for (int i = 0; i < donViList.size(); i++) {
-                        if (donViList.get(i).getMaDV() == MaDV)
-                        {
-                            spinner.setSelection(i);
-                            break;
+                    if (MaDV != -1) {
+                        for (int i = 0; i < donViList.size(); i++) {
+                            if (donViList.get(i).getMaDV() == MaDV)
+                            {
+                                spinner.setSelection(i);
+                                break;
+                            }
                         }
                     }
+
                 }
             }
 
@@ -320,14 +466,15 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     chucDanhList = response.body();
                     SpinnerChucDanhAdapter spinnerChucDanhAdapter = new SpinnerChucDanhAdapter(requireContext(), R.layout.custom_spinner_selected, chucDanhList);
                     spinner.setAdapter(spinnerChucDanhAdapter);
-                    for (int i = 0; i < chucDanhList.size(); i++) {
-                        if (chucDanhList.get(i).getMaCD() == MaCD)
-                        {
-                            spinner.setSelection(i);
-                            break;
+                    if (MaCD != -1) {
+                        for (int i = 0; i < chucDanhList.size(); i++) {
+                            if (chucDanhList.get(i).getMaCD() == MaCD)
+                            {
+                                spinner.setSelection(i);
+                                break;
+                            }
                         }
                     }
-
                 }
             }
             @Override
@@ -346,11 +493,13 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     phanQuyenList = response.body();
                     SpinnerPhanQuyenAdapter spinnerPhanQuyenAdapter = new SpinnerPhanQuyenAdapter(requireContext(), R.layout.custom_spinner_selected, phanQuyenList);
                     spinner.setAdapter(spinnerPhanQuyenAdapter);
-                    for (int i = 0; i < phanQuyenList.size(); i++) {
-                        if (phanQuyenList.get(i).getMaPQ() == MaPQ)
-                        {
-                            spinner.setSelection(i);
-                            break;
+                    if (MaPQ != -1){
+                        for (int i = 0; i < phanQuyenList.size(); i++) {
+                            if (phanQuyenList.get(i).getMaPQ() == MaPQ)
+                            {
+                                spinner.setSelection(i);
+                                break;
+                            }
                         }
                     }
                 }
