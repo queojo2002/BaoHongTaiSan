@@ -83,8 +83,7 @@ public class AdminQLDonViFragment extends Fragment {
                         searchlist.add(donVi);
                     }
                 }
-                if (adminDonVi_adapter != null)
-                {
+                if (adminDonVi_adapter != null) {
                     adminDonVi_adapter.searchDataList(searchlist);
                 }
 
@@ -111,11 +110,9 @@ public class AdminQLDonViFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CRUD) {
                             DonVi dv = (DonVi) object;
-                            if (CRUD.equals("EDIT"))
-                            {
+                            if (CRUD.equals("EDIT")) {
                                 Open_Dialog_Edit(dv);
-                            }else if (CRUD.equals("DELETE"))
-                            {
+                            } else if (CRUD.equals("DELETE")) {
                                 Open_Dialog_Delete(dv);
                             }
                         }
@@ -123,6 +120,7 @@ public class AdminQLDonViFragment extends Fragment {
                     rcvDV.setAdapter(adminDonVi_adapter);
                 }
             }
+
             @Override
             public void onFailure(Call<List<DonVi>> call, Throwable t) {
                 Toast.makeText(getContext(), "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
@@ -136,8 +134,7 @@ public class AdminQLDonViFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -150,7 +147,7 @@ public class AdminQLDonViFragment extends Fragment {
 
         TextView tv = dialog.findViewById(R.id.tvTenChucNangEdit);
         EditText txtinput = dialog.findViewById(R.id.txtInput);
-        Button btnhuybo =dialog.findViewById(R.id.btnHuyBo);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
         Button btnthemmoi = dialog.findViewById(R.id.btnEdit);
 
         tv.setText("Thêm mới đơn vị");
@@ -199,8 +196,7 @@ public class AdminQLDonViFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -293,7 +289,6 @@ public class AdminQLDonViFragment extends Fragment {
         super.onResume();
         GetListDonVi();
     }
-
 
 
 }

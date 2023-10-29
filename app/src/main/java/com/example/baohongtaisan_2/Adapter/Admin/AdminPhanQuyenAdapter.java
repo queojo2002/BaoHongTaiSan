@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
 
@@ -19,10 +20,12 @@ import java.util.List;
 public class AdminPhanQuyenAdapter extends RecyclerView.Adapter<AdminPhanQuyenAdapter.PhanquyenViewHolder> {
 
     private List<PhanQuyen> listPhanquyen;
-    private Context context;
+    private RCVClickItem rcvClickItem;
 
-    public AdminPhanQuyenAdapter(List<PhanQuyen> listPhanquyen) {
+
+    public AdminPhanQuyenAdapter(List<PhanQuyen> listPhanquyen, RCVClickItem rcvClickItem) {
         this.listPhanquyen = listPhanquyen;
+        this.rcvClickItem = rcvClickItem;
     }
 
     @NonNull
@@ -38,43 +41,20 @@ public class AdminPhanQuyenAdapter extends RecyclerView.Adapter<AdminPhanQuyenAd
         if (pq == null) {
             return;
         }
-        holder.mapq.setText(pq.getMaPQ());
+        holder.mapq.setText(pq.getMaPQ()+"");
         holder.tenpq.setText(pq.getTenPQ());
-        /*holder.editpq.setOnClickListener(new View.OnClickListener() {
+        holder.editpq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-
-                Intent intent = new Intent(context, EditPhanquyenActivity.class);
-                Bundle bdPhanquyen = new Bundle();
-                bdPhanquyen.putString("mapq", pq.getMaPQ());
-                bdPhanquyen.putString("tenpq", pq.getTenPQ());
-                bdPhanquyen.putString("motapq", pq.getMoTaPQ());
-                intent.putExtra("dataphanquyen", bdPhanquyen);
-                context.startActivity(intent);
+                rcvClickItem.onClickRCV(pq, "EDIT");
             }
         });
         holder.deletepq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(holder.tenpq.getContext());
-                builder.setTitle("Bạn có chắc chắn muốn xóa không ?");
-                builder.setMessage("Dữ liệu đã xóa không thể khôi phục ! ");
-                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        *//*Xử lý*//*
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(holder.tenpq.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.show();
+                rcvClickItem.onClickRCV(pq, "DELETE");
             }
-        });*/
+        });
     }
 
     @Override
@@ -95,8 +75,10 @@ public class AdminPhanQuyenAdapter extends RecyclerView.Adapter<AdminPhanQuyenAd
     }
 
     public class PhanquyenViewHolder extends RecyclerView.ViewHolder {
-        private TextView mapq, tenpq;
-        private ImageView editpq, deletepq;
+        private TextView mapq;
+        private TextView tenpq;
+        private ImageView editpq;
+        private ImageView deletepq;
 
         public PhanquyenViewHolder(@NonNull View itemView) {
             super(itemView);

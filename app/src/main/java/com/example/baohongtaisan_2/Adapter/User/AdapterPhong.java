@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baohongtaisan_2.Activity.User.TraCuu_BaoHongActivity;
-import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 

@@ -2,7 +2,7 @@ package com.example.baohongtaisan_2.Model;
 
 public class BaoHong {
     private int MaBL, MaPB, MaND, TrangThai, TinhTrang;
-    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token , HoVaTen, Email;
+    private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token, HoVaTen, Email;
 
 
     // TrangThai: 1 - Da Gui

@@ -1,15 +1,10 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
+
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,7 +35,7 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
 
     private List<BaoHong> baoHongList;
     private Context context;
-    private RCVClickItem rcvClickItem;
+    private final RCVClickItem rcvClickItem;
 
     public AdminBaoHongAdapter(List<BaoHong> baoHongList, RCVClickItem rcvClickItem) {
         this.baoHongList = baoHongList;
@@ -117,7 +112,7 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
         holder.rlBaoHongAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rcvClickItem.onClickRCV(baoHong,"CHITIET");
+                rcvClickItem.onClickRCV(baoHong, "CHITIET");
             }
         });
     }
@@ -143,20 +138,19 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
 
 
     public void Set_TrangThai(BaoHong baoHong, int TrangThai) {
-        ApiServices.apiServices.edit_data_trangthai_baoloi_byMaBL(baoHong.getMaBL(),TrangThai).enqueue(new Callback<ObjectReponse>() {
+        ApiServices.apiServices.edit_data_trangthai_baoloi_byMaBL(baoHong.getMaBL(), TrangThai).enqueue(new Callback<ObjectReponse>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                 ObjectReponse objectReponse = response.body();
                 if (objectReponse == null) return;
-                if(objectReponse.getCode() == 1){
+                if (objectReponse.getCode() == 1) {
                     baoHong.setTrangThai(TrangThai);
                     sendNotiToUser(baoHong.getMaND(), baoHong.getTenTS(), baoHong.getTenP(), TrangThai, baoHong.getTinhTrang(), baoHong.getMota(), baoHong.getToken());
                     Toast.makeText(context, "Cập nhật thành công !", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
-                }
-                else {
-                    Toast.makeText(context, objectReponse.getMessage() , Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, objectReponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -166,9 +160,6 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
             }
         });
     }
-
-
-
 
 
     private void sendNotiToUser(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa, String Token) {
@@ -189,10 +180,17 @@ public class AdminBaoHongAdapter extends RecyclerView.Adapter<AdminBaoHongAdapte
 
 
     public static class AdminBaoHongViewHolder extends RecyclerView.ViewHolder {
-        private CircleImageView imgQLBH_BaoHong;
-        private TextView txtQLBH_TenTS, txtQLBH_TenP, txtQLBH_Time, txtQLBH_TrangThai, txtQLBH_TinhTrang;
-        private Button btnTT2, btnTT3, btnTT4, btnTT5;
-        private RelativeLayout rlBaoHongAdmin;
+        private final CircleImageView imgQLBH_BaoHong;
+        private final TextView txtQLBH_TenTS;
+        private final TextView txtQLBH_TenP;
+        private final TextView txtQLBH_Time;
+        private final TextView txtQLBH_TrangThai;
+        private final TextView txtQLBH_TinhTrang;
+        private final Button btnTT2;
+        private final Button btnTT3;
+        private final Button btnTT4;
+        private final Button btnTT5;
+        private final RelativeLayout rlBaoHongAdmin;
 
         public AdminBaoHongViewHolder(@NonNull View itemView) {
             super(itemView);

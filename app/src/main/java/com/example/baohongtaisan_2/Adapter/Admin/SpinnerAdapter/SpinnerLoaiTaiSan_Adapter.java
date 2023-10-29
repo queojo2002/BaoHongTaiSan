@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.baohongtaisan_2.Model.LoaiTaiSan;
-import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.R;
 
 import java.util.List;

@@ -4,12 +4,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +16,16 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.baohongtaisan_2.Adapter.Admin.AdminPBTSTaiSanAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
-import com.example.baohongtaisan_2.Model.PhanBo;
-import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.Model.TaiSan;
 import com.example.baohongtaisan_2.R;
 
@@ -41,8 +38,8 @@ import retrofit2.Response;
 
 public class AdminPBTSFragment extends Fragment {
 
-    private int MaP;
-    private String TenP;
+    private final int MaP;
+    private final String TenP;
     private View view;
     private RecyclerView rv;
     private SearchView sv;
@@ -111,8 +108,7 @@ public class AdminPBTSFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             TaiSan taiSan = (TaiSan) object;
-                            if (CURD.equals("ADD"))
-                            {
+                            if (CURD.equals("ADD")) {
                                 Open_Dialog_Them(taiSan);
                             }
                         }
@@ -121,6 +117,7 @@ public class AdminPBTSFragment extends Fragment {
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<TaiSan>> call, Throwable t) {
                 Toast.makeText(getContext(), "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
@@ -134,8 +131,7 @@ public class AdminPBTSFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_add_phanbo);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);

@@ -110,7 +110,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
             Open_NAV_QuanLy_TaiSan(0);
         } else if (item.getItemId() == R.id.nav_admin_qlbaohong) { // click quản lý báo hỏng
             Open_NAV_Quanly_BaoHong(0);
-        }else if (item.getItemId() == R.id.nav_admin_dangxuat) {
+        } else if (item.getItemId() == R.id.nav_admin_dangxuat) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -184,7 +184,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private void Open_NAV_Quanly_BaoHong(int OptionNAV){
+    private void Open_NAV_Quanly_BaoHong(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_qlbaohong") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminBaoHongFragment()).commit();
             getSupportActionBar().setTitle("Quản lí báo hỏng");

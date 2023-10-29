@@ -38,15 +38,9 @@ import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,8 +111,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                         searchlist.add(nguoiDung);
                     }
                 }
-                if (adminNguoiDung_adapter != null)
-                {
+                if (adminNguoiDung_adapter != null) {
                     adminNguoiDung_adapter.searchDataList(searchlist);
                 }
                 return false;
@@ -136,8 +129,6 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
     }
 
 
-
-
     public void GetListNguoiDung() {
         ApiServices.apiServices.get_list_nguoidung().enqueue(new Callback<List<NguoiDung>>() {
             @Override
@@ -149,8 +140,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             NguoiDung nguoiDung = (NguoiDung) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(nguoiDung);
                             }
                         }
@@ -174,8 +164,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_nguoidung_add);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -205,7 +194,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         Load_Data_ChucDanh(spnCD, nd.getMaCD());
         Load_Data_PhanQuyen(spnPQ, nd.getMaPQ());
         txtinput.setText(nd.getHoVaTen());
-        txtSDT.setText(nd.getSoDienThoai().toString());
+        txtSDT.setText(nd.getSoDienThoai());
         txtEmail.setText(nd.getEmail());
         txtEmail.setEnabled(false);
         txtMatKhau.setText(nd.getMatKhau());
@@ -219,8 +208,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaDV = selected.getMaDV();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
         spnCD.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -232,8 +223,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaCD = selected.getMaCD();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
         spnPQ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -245,8 +238,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaPQ = selected.getMaPQ();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
 
@@ -258,11 +253,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                         MaPQ == -1 ||
                         TextUtils.isEmpty(txtinput.getText().toString()) ||
                         TextUtils.isEmpty(txtSDT.getText().toString()) ||
-                        TextUtils.isEmpty(txtMatKhau.getText().toString()))
-                {
+                        TextUtils.isEmpty(txtMatKhau.getText().toString())) {
                     Toast.makeText(requireContext(), "Dữ liệu sửa người dùng của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
-                }else {
-                    ApiServices.apiServices.edit_data_nguoidung(nd.getMaND(), txtinput.getText().toString(), txtSDT.getText().toString(), txtMatKhau.getText().toString() ,MaDV, MaCD, MaPQ).enqueue(new Callback<ObjectReponse>() {
+                } else {
+                    ApiServices.apiServices.edit_data_nguoidung(nd.getMaND(), txtinput.getText().toString(), txtSDT.getText().toString(), txtMatKhau.getText().toString(), MaDV, MaCD, MaPQ).enqueue(new Callback<ObjectReponse>() {
                         @Override
                         public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                             ObjectReponse objectEdit = response.body();
@@ -304,8 +298,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_nguoidung_add);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -336,7 +329,6 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         Load_Data_PhanQuyen(spnPQ, -1);
 
 
-
         spnDV.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -346,8 +338,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaDV_ADD = selected.getMaDV();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
         spnCD.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -359,8 +353,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaCD_ADD = selected.getMaCD();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
         spnPQ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -372,8 +368,10 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     MaPQ_ADD = selected.getMaPQ();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
 
@@ -381,14 +379,14 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (MaCD_ADD == -1 ||
-                    MaDV_ADD == -1 ||
-                    MaPQ_ADD == -1 ||
-                    TextUtils.isEmpty(txtHoVaTen.getText().toString()) ||
-                    TextUtils.isEmpty(txtSDT.getText().toString()) ||
-                    TextUtils.isEmpty(txtEmail.getText().toString()) ||
-                    TextUtils.isEmpty(txtMatKhau.getText().toString())) {
+                        MaDV_ADD == -1 ||
+                        MaPQ_ADD == -1 ||
+                        TextUtils.isEmpty(txtHoVaTen.getText().toString()) ||
+                        TextUtils.isEmpty(txtSDT.getText().toString()) ||
+                        TextUtils.isEmpty(txtEmail.getText().toString()) ||
+                        TextUtils.isEmpty(txtMatKhau.getText().toString())) {
                     Toast.makeText(requireContext(), "Dữ liệu thêm mới người dùng của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     ApiServices.apiServices.add_new_nguoidung(txtHoVaTen.getText().toString(),
                             txtSDT.getText().toString(),
                             txtEmail.getText().toString(),
@@ -427,20 +425,17 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
     }
 
 
-
     private void Load_Data_DonVi(Spinner spinner, int MaDV) {
         ApiServices.apiServices.get_list_donvi().enqueue(new Callback<List<DonVi>>() {
             @Override
             public void onResponse(@NonNull Call<List<DonVi>> call, @NonNull Response<List<DonVi>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     donViList = response.body();
                     SpinnerDonViAdapter spinnerDonViAdapter = new SpinnerDonViAdapter(requireContext(), R.layout.custom_spinner_selected, donViList);
                     spinner.setAdapter(spinnerDonViAdapter);
                     if (MaDV != -1) {
                         for (int i = 0; i < donViList.size(); i++) {
-                            if (donViList.get(i).getMaDV() == MaDV)
-                            {
+                            if (donViList.get(i).getMaDV() == MaDV) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -461,15 +456,13 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         ApiServices.apiServices.get_list_chucdanh().enqueue(new Callback<List<ChucDanh>>() {
             @Override
             public void onResponse(@NonNull Call<List<ChucDanh>> call, @NonNull Response<List<ChucDanh>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     chucDanhList = response.body();
                     SpinnerChucDanhAdapter spinnerChucDanhAdapter = new SpinnerChucDanhAdapter(requireContext(), R.layout.custom_spinner_selected, chucDanhList);
                     spinner.setAdapter(spinnerChucDanhAdapter);
                     if (MaCD != -1) {
                         for (int i = 0; i < chucDanhList.size(); i++) {
-                            if (chucDanhList.get(i).getMaCD() == MaCD)
-                            {
+                            if (chucDanhList.get(i).getMaCD() == MaCD) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -477,6 +470,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<ChucDanh>> call, @NonNull Throwable t) {
 
@@ -488,15 +482,13 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
         ApiServices.apiServices.get_list_phanquyen().enqueue(new Callback<List<PhanQuyen>>() {
             @Override
             public void onResponse(@NonNull Call<List<PhanQuyen>> call, @NonNull Response<List<PhanQuyen>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     phanQuyenList = response.body();
                     SpinnerPhanQuyenAdapter spinnerPhanQuyenAdapter = new SpinnerPhanQuyenAdapter(requireContext(), R.layout.custom_spinner_selected, phanQuyenList);
                     spinner.setAdapter(spinnerPhanQuyenAdapter);
-                    if (MaPQ != -1){
+                    if (MaPQ != -1) {
                         for (int i = 0; i < phanQuyenList.size(); i++) {
-                            if (phanQuyenList.get(i).getMaPQ() == MaPQ)
-                            {
+                            if (phanQuyenList.get(i).getMaPQ() == MaPQ) {
                                 spinner.setSelection(i);
                                 break;
                             }

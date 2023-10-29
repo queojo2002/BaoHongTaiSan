@@ -1,6 +1,5 @@
 package com.example.baohongtaisan_2.Activity;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,14 +28,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.appcheck.FirebaseAppCheck;
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
@@ -84,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(txtUser.getText().toString()) || TextUtils.isEmpty(txtPass.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Dữ liệu đăng nhập của bạn không đúng !!!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     System.out.println(txtUser.getText().toString().trim() + " - " + txtPass.getText().toString().trim());
                     Add_User_In_Firebase(txtUser.getText().toString().trim(), txtPass.getText().toString().trim());
                 }
@@ -93,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     @Override
@@ -115,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                                     @Override
                                     public void onComplete(@NonNull Task<String> task) {
-                                        _Them_NguoiDung(account.getDisplayName(), account.getEmail(), 2, 5, 7, FirebaseAuth.getInstance().getCurrentUser().getUid().toString(), task.getResult().toString());
+                                        _Them_NguoiDung(account.getDisplayName(), account.getEmail(), 2, 5, 7, FirebaseAuth.getInstance().getCurrentUser().getUid(), task.getResult());
                                     }
                                 });
 
@@ -186,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                     FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
                         public void onComplete(@NonNull Task<String> task) {
-                            ApiServices.apiServices.edit_token_uid_nguoidung(nguoiDung.getMaND(), FirebaseAuth.getInstance().getCurrentUser().getUid().toString(), task.getResult().toString()).enqueue(new Callback<ObjectReponse>() {
+                            ApiServices.apiServices.edit_token_uid_nguoidung(nguoiDung.getMaND(), FirebaseAuth.getInstance().getCurrentUser().getUid(), task.getResult()).enqueue(new Callback<ObjectReponse>() {
                                 @Override
                                 public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                                     if (nguoiDung.getTenPQ().equals("Admin")) {
@@ -231,10 +224,8 @@ public class LoginActivity extends AppCompatActivity {
                 NguoiDung nguoiDung = response.body();
                 progressDialog.dismiss();
                 if (response.isSuccessful() && nguoiDung != null) {
-                    if (nguoiDung.getUid() == null || nguoiDung.getUid().isEmpty())
-                    {
-                        if (Pass.equals(nguoiDung.getMatKhau().toString()))
-                        {
+                    if (nguoiDung.getUid() == null || nguoiDung.getUid().isEmpty()) {
+                        if (Pass.equals(nguoiDung.getMatKhau())) {
                             auth.createUserWithEmailAndPassword(nguoiDung.getEmail().trim(), Pass).addOnCompleteListener(createTask -> {
                                 if (createTask.isSuccessful()) {
                                     // Người dùng mới đã được thêm thành công
@@ -242,17 +233,18 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     // Thêm người dùng mới không thành công
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại !!!!!!", Toast.LENGTH_SHORT).show();
-                                }});
-                        }else {
+                                }
+                            });
+                        } else {
                             Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu không chính xác!!!", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         auth.signInWithEmailAndPassword(Email, Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     _UpdateNguoiDung(Email);
-                                }else {
+                                } else {
                                     Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu không chính xác!!!", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -260,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     }
-                }else {
+                } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại !!!", Toast.LENGTH_SHORT).show();
                 }
             }

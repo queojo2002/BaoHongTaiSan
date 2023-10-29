@@ -1,43 +1,26 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.NhomTaiSan;
-import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class AdminNhomTaiSanAdapter extends RecyclerView.Adapter<AdminNhomTaiSanAdapter.NhomtaisanViewHolder> {
 
     private List<NhomTaiSan> listnhomts;
-    private RCVClickItem rcvClickItem;
+    private final RCVClickItem rcvClickItem;
+
     public AdminNhomTaiSanAdapter(List<NhomTaiSan> listnhomts, RCVClickItem rcvClickItem) {
         this.listnhomts = listnhomts;
         this.rcvClickItem = rcvClickItem;
@@ -56,7 +39,7 @@ public class AdminNhomTaiSanAdapter extends RecyclerView.Adapter<AdminNhomTaiSan
         if (nhomTaiSan == null) {
             return;
         }
-        holder.manhomts.setText(nhomTaiSan.getMaNTS()+"");
+        holder.manhomts.setText(nhomTaiSan.getMaNTS() + "");
         holder.tennhomts.setText(nhomTaiSan.getTenNTS());
 
         holder.editnhomts.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +66,6 @@ public class AdminNhomTaiSanAdapter extends RecyclerView.Adapter<AdminNhomTaiSan
     }
 
 
-
     public void searchDataList(ArrayList<NhomTaiSan> searchlist) {
         listnhomts = searchlist;
         notifyDataSetChanged();
@@ -94,8 +76,10 @@ public class AdminNhomTaiSanAdapter extends RecyclerView.Adapter<AdminNhomTaiSan
     }
 
     public class NhomtaisanViewHolder extends RecyclerView.ViewHolder {
-        private TextView manhomts, tennhomts;
-        private ImageView editnhomts, deletenhomts;
+        private final TextView manhomts;
+        private final TextView tennhomts;
+        private final ImageView editnhomts;
+        private final ImageView deletenhomts;
 
         public NhomtaisanViewHolder(@NonNull View itemView) {
             super(itemView);

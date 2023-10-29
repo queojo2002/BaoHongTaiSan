@@ -16,7 +16,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminDSPBTSAdapter extends RecyclerView.Adapter<AdminDSPBTSAdapter.AdminTaiSanViewHolder>{
+public class AdminDSPBTSAdapter extends RecyclerView.Adapter<AdminDSPBTSAdapter.AdminTaiSanViewHolder> {
 
     private List<PhanBo> phanBoList;
     private View view;
@@ -61,8 +61,13 @@ public class AdminDSPBTSAdapter extends RecyclerView.Adapter<AdminDSPBTSAdapter.
     }
 
     public class AdminTaiSanViewHolder extends RecyclerView.ViewHolder {
-        private CircleImageView imgQLTS;
-        private TextView txtTenTS, txtTenLTS, txtTenNTS, SLNV, SLHC;
+        private final CircleImageView imgQLTS;
+        private final TextView txtTenTS;
+        private final TextView txtTenLTS;
+        private final TextView txtTenNTS;
+        private final TextView SLNV;
+        private final TextView SLHC;
+
         public AdminTaiSanViewHolder(@NonNull View itemView) {
             super(itemView);
             imgQLTS = itemView.findViewById(R.id.imgQLTS);

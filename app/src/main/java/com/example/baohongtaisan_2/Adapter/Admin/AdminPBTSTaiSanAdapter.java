@@ -1,7 +1,6 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminPBTSTaiSanAdapter extends RecyclerView.Adapter<AdminPBTSTaiSanAdapter.AdminTaiSanViewHolder>{
+public class AdminPBTSTaiSanAdapter extends RecyclerView.Adapter<AdminPBTSTaiSanAdapter.AdminTaiSanViewHolder> {
     private List<TaiSan> taiSanList;
     private View view;
-    private RCVClickItem rcvClickItem;
+    private final RCVClickItem rcvClickItem;
 
 
     public AdminPBTSTaiSanAdapter(List<TaiSan> taiSanList, RCVClickItem rcvClickItem) {
@@ -78,7 +77,8 @@ public class AdminPBTSTaiSanAdapter extends RecyclerView.Adapter<AdminPBTSTaiSan
         private final TextView txtTenLTS;
         private final TextView txtTenNTS;
         private final TextView SLNV;
-        private Button btnThemVaoPhong;
+        private final Button btnThemVaoPhong;
+
         public AdminTaiSanViewHolder(@NonNull View itemView) {
             super(itemView);
             CircleImageView imgQLTS = itemView.findViewById(R.id.imgQLTS_2);

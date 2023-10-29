@@ -1,5 +1,9 @@
 package com.example.baohongtaisan_2.Activity.Admin;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,12 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.baohongtaisan_2.Adapter.Admin.TabLayoutAdapter.TabLayoutPBTSAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.TabLayoutAdapter.TabLayoutPhongAdapter;
 import com.example.baohongtaisan_2.Fragment.Admin.PhanBo.AdminDSTSTrongPhongFragment;
 import com.example.baohongtaisan_2.R;
 import com.google.android.material.tabs.TabLayout;
@@ -49,16 +48,15 @@ public class AdminPhanBoTaiSanActivity extends AppCompatActivity {
     }
 
 
-    public void _SuKien(){
+    public void _SuKien() {
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 1)
-                {
-                    String tag = "android:switcher:" + viewPager.getId() + ":" +  tab.getPosition();
+                if (tab.getPosition() == 1) {
+                    String tag = "android:switcher:" + viewPager.getId() + ":" + tab.getPosition();
                     Fragment f = getSupportFragmentManager().findFragmentByTag(tag);
-                    if(f instanceof AdminDSTSTrongPhongFragment) {
+                    if (f instanceof AdminDSTSTrongPhongFragment) {
                         ((AdminDSTSTrongPhongFragment) f).onResume();
                     }
                 }

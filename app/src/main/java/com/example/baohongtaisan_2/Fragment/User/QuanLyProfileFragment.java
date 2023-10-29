@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class QuanLyProfileFragment extends Fragment {
 
-    TextInputEditText txtFullname_Edit, txtTenDangNhap_Edit, txtEmail_Edit;
+    TextInputEditText txtFullname_Edit, txtSDT_Edit, txtTenDangNhap_Edit, txtEmail_Edit;
     private ImageView imgProfile;
     private View view;
     private int KhoiTao = 0;
@@ -44,13 +44,15 @@ public class QuanLyProfileFragment extends Fragment {
         txtFullname_Edit = view.findViewById(R.id.Profile_txtFullname_Edit);
         txtTenDangNhap_Edit = view.findViewById(R.id.Profile_txtTenDangNhap_Edit);
         txtEmail_Edit = view.findViewById(R.id.Profile_txtEmail_Edit);
+        txtSDT_Edit = view.findViewById(R.id.Profile_txtSDT_Edit);
         imgProfile = view.findViewById(R.id.imgProfile_1);
 
         if (KhoiTao == 0) {
             KhoiTao = 1;
             txtFullname_Edit.setText(IsLogin.getInstance().getHoVaTen());
             txtEmail_Edit.setText(IsLogin.getInstance().getEmail());
-            txtTenDangNhap_Edit.setText(IsLogin.getInstance().getEmail().substring(0, IsLogin.getInstance().getEmail().indexOf("@")));
+            txtTenDangNhap_Edit.setText(IsLogin.getInstance().getTenDangNhap());
+            txtSDT_Edit.setText(IsLogin.getInstance().getSoDienThoai());
             Glide.with(this).load(user.getPhotoUrl()).error(R.drawable.logo_tdmu_2).into(imgProfile);
         }
         return view;

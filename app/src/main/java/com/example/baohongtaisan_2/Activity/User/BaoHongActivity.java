@@ -22,14 +22,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.baohongtaisan_2.Adapter.Admin.AdminNguoiDungAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
 import com.example.baohongtaisan_2.Model.NotificationReponse;
 import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
-import com.example.baohongtaisan_2.Model.Object_Add;
 import com.example.baohongtaisan_2.Model.UploadIMG;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -283,20 +281,17 @@ public class BaoHongActivity extends AppCompatActivity {
     }
 
 
-    private void sendNotiToAdmin(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa)
-    {
+    private void sendNotiToAdmin(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa) {
         ApiServices.apiServices.get_list_nguoidung().enqueue(new Callback<List<NguoiDung>>() {
             @Override
             public void onResponse(Call<List<NguoiDung>> call, Response<List<NguoiDung>> response) {
                 nguoiDungList.clear();
                 nguoiDungList = response.body();
                 if (nguoiDungList != null) {
-                    for (int i = 0 ; i < nguoiDungList.size(); i++)
-                    {
+                    for (int i = 0; i < nguoiDungList.size(); i++) {
                         NguoiDung nguoiDung = nguoiDungList.get(i);
-                        if (nguoiDung.getTenPQ().equals("Admin") && nguoiDung.getToken() != null)
-                        {
-                            System.out.println(nguoiDung.getHoVaTen()+"");
+                        if (nguoiDung.getTenPQ().equals("Admin") && nguoiDung.getToken() != null) {
+                            System.out.println(nguoiDung.getHoVaTen() + "");
                             sendNoti(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa, nguoiDung.getToken());
                         }
                     }
@@ -311,8 +306,7 @@ public class BaoHongActivity extends AppCompatActivity {
         });
     }
 
-    private void sendNoti(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa, String Token)
-    {
+    private void sendNoti(int MaND, String TenTS, String TenP, int TrangThai, int TinhTrang, String MoTa, String Token) {
         NotificationDataBaoHong notificationDataBaoHong = new NotificationDataBaoHong(MaND, TenTS, TenP, TrangThai, TinhTrang, MoTa, "UserToAdmin");
         NotificationSendData notificationSendData = new NotificationSendData(notificationDataBaoHong, Token);
         ApiServices.apiServices_Noti.sendNoti(notificationSendData).enqueue(new Callback<NotificationReponse>() {

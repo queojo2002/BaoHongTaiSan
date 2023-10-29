@@ -10,11 +10,11 @@ import android.widget.TextView;
 import java.util.List;
 
 public class CustomSpinnerAdapter extends ArrayAdapter<CharSequence> {
-    private Context context;
-    private int resource;
-    private int textViewResourceId;
-    private List<CharSequence> items;
-    private int textSize;
+    private final Context context;
+    private final int resource;
+    private final int textViewResourceId;
+    private final List<CharSequence> items;
+    private final int textSize;
 
     public CustomSpinnerAdapter(Context context, int resource, int textViewResourceId, List<CharSequence> items, int textSize) {
         super(context, resource, textViewResourceId, items);

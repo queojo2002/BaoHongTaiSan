@@ -4,16 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.baohongtaisan_2.Adapter.User.AdapterPhong;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class TraCuuFragment extends Fragment {
     private AdapterPhong adapterPhong;
     private List<Phong> phongList;
     private androidx.appcompat.widget.SearchView sv;
+
     public TraCuuFragment() {
     }
 
@@ -53,8 +55,7 @@ public class TraCuuFragment extends Fragment {
     }
 
 
-    public void _AnhXa()
-    {
+    public void _AnhXa() {
         recyclerView = view.findViewById(R.id.recycler_1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -62,8 +63,7 @@ public class TraCuuFragment extends Fragment {
         sv = view.findViewById(R.id.svPhong_1);
     }
 
-    public void _SuKien()
-    {
+    public void _SuKien() {
         sv.clearFocus();
         sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -104,7 +104,6 @@ public class TraCuuFragment extends Fragment {
 
             }
         });
-
 
 
     }

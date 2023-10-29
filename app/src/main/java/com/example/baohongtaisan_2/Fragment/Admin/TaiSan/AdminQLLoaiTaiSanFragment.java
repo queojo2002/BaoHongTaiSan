@@ -26,9 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baohongtaisan_2.Adapter.Admin.AdminLoaiTaiSanAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
-import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.LoaiTaiSan;
-import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
 
@@ -56,7 +54,6 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
         _SuKien();
         return rootView;
     }
-
 
 
     private void _AnhXa() {
@@ -101,8 +98,7 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
                         searchlist.add(loaiTaiSan);
                     }
                 }
-                if (lts_adapter != null)
-                {
+                if (lts_adapter != null) {
                     lts_adapter.searchDataList(searchlist);
                 }
                 return false;
@@ -110,7 +106,6 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
         });
 
     }
-
 
 
     public void GetListLTS() {
@@ -124,11 +119,9 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             LoaiTaiSan loaiTaiSan = (LoaiTaiSan) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(loaiTaiSan);
-                            }else if (CURD.equals("DELETE"))
-                            {
+                            } else if (CURD.equals("DELETE")) {
                                 Open_Dialog_Delete(loaiTaiSan);
                             }
                         }
@@ -145,15 +138,13 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
     }
 
 
-
     public void Open_Dialog_Add() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -166,7 +157,7 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
 
         TextView tv = dialog.findViewById(R.id.tvTenChucNangEdit);
         EditText txtinput = dialog.findViewById(R.id.txtInput);
-        Button btnhuybo =dialog.findViewById(R.id.btnHuyBo);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
         Button btnthemmoi = dialog.findViewById(R.id.btnEdit);
 
         tv.setText("Thêm mới loại tài sản");
@@ -217,8 +208,7 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -273,7 +263,7 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
     }
 
 
-    public void Open_Dialog_Delete(LoaiTaiSan loaiTaiSan){
+    public void Open_Dialog_Delete(LoaiTaiSan loaiTaiSan) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Bạn có chắc chắn muốn xóa không ?");
         builder.setMessage("Dữ liệu đã xóa không thể khôi phục ! ");
@@ -284,10 +274,10 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
                     @Override
                     public void onResponse(Call<ObjectReponse> call, Response<ObjectReponse> response) {
                         ObjectReponse objectadd = response.body();
-                        if (objectadd.getCode() == 1){
+                        if (objectadd.getCode() == 1) {
                             onResume();
                             Toast.makeText(requireContext(), "Xóa thành công !", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(requireContext(), objectadd.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

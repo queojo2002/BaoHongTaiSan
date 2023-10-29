@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baohongtaisan_2.Adapter.Admin.AdminLoaiPhongAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
-import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
@@ -100,8 +99,7 @@ public class AdminLoaiPhongFragment extends Fragment {
                         searchlist.add(loaiPhong);
                     }
                 }
-                if (lp_adapter != null)
-                {
+                if (lp_adapter != null) {
                     lp_adapter.searchDataList(searchlist);
                 }
                 return false;
@@ -110,7 +108,6 @@ public class AdminLoaiPhongFragment extends Fragment {
 
 
     }
-
 
 
     public void GetListLP() {
@@ -124,11 +121,9 @@ public class AdminLoaiPhongFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             LoaiPhong loaiPhong = (LoaiPhong) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(loaiPhong);
-                            }else if (CURD.equals("DELETE"))
-                            {
+                            } else if (CURD.equals("DELETE")) {
                                 Open_Dialog_Delete(loaiPhong);
                             }
                         }
@@ -152,8 +147,7 @@ public class AdminLoaiPhongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -166,7 +160,7 @@ public class AdminLoaiPhongFragment extends Fragment {
 
         TextView tv = dialog.findViewById(R.id.tvTenChucNangEdit);
         EditText txtinput = dialog.findViewById(R.id.txtInput);
-        Button btnhuybo =dialog.findViewById(R.id.btnHuyBo);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
         Button btnthemmoi = dialog.findViewById(R.id.btnEdit);
 
         tv.setText("Thêm mới loại phòng");
@@ -215,8 +209,7 @@ public class AdminLoaiPhongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);

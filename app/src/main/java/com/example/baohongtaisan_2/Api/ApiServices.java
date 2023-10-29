@@ -1,7 +1,5 @@
 package com.example.baohongtaisan_2.Api;
 
-import android.database.Observable;
-
 import com.example.baohongtaisan_2.Model.BaoHong;
 import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.DonVi;
@@ -144,21 +142,20 @@ public interface ApiServices {
     // End api khu vực phòng
 
 
-
     //tai san
     @GET("api/load_data_taisan.php")
     Call<List<TaiSan>> get_list_taisan();
 
     @GET("api/add_data_taisan.php")
     Call<ObjectReponse> add_data_taisan(@Query("TenTS") String TenTS,
-                                         @Query("MaNTS") int MaNTS,
-                                         @Query("MaLTS") int MaLTS,
-                                         @Query("GiaTri") int GiaTri,
-                                         @Query("SoLuong") int SoLuong,
-                                         @Query("HangSanXuat") String HSX,
-                                         @Query("NuocSanXuat") String NSX,
-                                         @Query("NamSanXuat") int NamSX,
-                                         @Query("GhiChu") String GhiChu);
+                                        @Query("MaNTS") int MaNTS,
+                                        @Query("MaLTS") int MaLTS,
+                                        @Query("GiaTri") int GiaTri,
+                                        @Query("SoLuong") int SoLuong,
+                                        @Query("HangSanXuat") String HSX,
+                                        @Query("NuocSanXuat") String NSX,
+                                        @Query("NamSanXuat") int NamSX,
+                                        @Query("GhiChu") String GhiChu);
 
 
     // end api tai san
@@ -184,8 +181,6 @@ public interface ApiServices {
     // End api nhóm tài sản
 
 
-
-
     //Loại tài sản
 
     @GET("api/load_data_loaitaisan.php")
@@ -193,7 +188,7 @@ public interface ApiServices {
 
     @GET("api/edit_data_loaitaisan.php")
     Call<ObjectReponse> edit_data_loaitaisan_byMaLTS(@Query("MaLTS") int MaLTS,
-                                                        @Query("TenLTS") String TenLTS);
+                                                     @Query("TenLTS") String TenLTS);
 
     @GET("api/add_data_loaitaisan.php")
     Call<ObjectReponse> add_data_loaitaisan(@Query("TenLTS") String TenLTS);
@@ -227,10 +222,8 @@ public interface ApiServices {
     Call<List<BaoHong>> get_list_baohong_byMaND(@Query("MaND") int MaND);
 
 
-
     @GET("api/api_thongke.php")
     Call<ThongKe> get_thongke();
-
 
 
     // Người dùng
@@ -278,16 +271,20 @@ public interface ApiServices {
 
     // End api người dùng
 
-    @GET("api/load_data_phanquyen.php")
-    Call<List<PhanQuyen>> get_list_phanquyen();
+
 
     // phân quyền
 
+    @GET("api/load_data_phanquyen.php")
+    Call<List<PhanQuyen>> get_list_phanquyen();
 
+
+    @GET("api/add_data_phanquyen.php")
+    Call<ObjectReponse> add_data_phanquyen(@Query("TenPQ") String Ten,
+                                  @Query("MoTaPQ") String MoTa);
 
 
     // end api phân quyền
-
 
 
     // báo lỗi
@@ -305,12 +302,7 @@ public interface ApiServices {
             @Query("TrangThai") int TrangThai);
 
 
-
     // end api báo lỗi
-
-
-
-
 
 
     @POST("fcm/send")

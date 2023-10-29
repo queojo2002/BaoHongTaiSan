@@ -1,14 +1,18 @@
 package com.example.baohongtaisan_2.Adapter.Admin;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +20,7 @@ import java.util.List;
 public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.DonviViewHolder> {
 
     private List<DonVi> listDonvi;
-    private RCVClickItem rcvClickItem;
+    private final RCVClickItem rcvClickItem;
 
     public AdminDonViAdapter(List<DonVi> listDonvi, RCVClickItem rcvClickItem) {
         this.listDonvi = listDonvi;
@@ -73,10 +77,11 @@ public class AdminDonViAdapter extends RecyclerView.Adapter<AdminDonViAdapter.Do
     }
 
 
-
     public class DonviViewHolder extends RecyclerView.ViewHolder {
-        private TextView madv, tendv;
-        private ImageView editdv, deletedv;
+        private final TextView madv;
+        private final TextView tendv;
+        private final ImageView editdv;
+        private final ImageView deletedv;
 
         public DonviViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -17,14 +17,14 @@
             android:layout_height="wrap_content">
 
             <SearchView
-                android:id="@+id/txtSearchPQ"
+                android:id="@+id/svPQ"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:queryHint="Tìm kiếm" />
 
             <Button
-                android:id="@+id/btnpq_add"
+                android:id="@+id/btnaddPQ"
                 android:layout_width="140dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"

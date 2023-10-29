@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
 
@@ -44,7 +43,6 @@ public class SpinnerPhanQuyenAdapter extends ArrayAdapter<PhanQuyen> {
         }
         return convertView;
     }
-
 
 
 }

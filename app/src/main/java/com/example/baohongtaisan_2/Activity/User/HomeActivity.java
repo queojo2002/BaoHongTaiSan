@@ -17,10 +17,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.example.baohongtaisan_2.Activity.LoginActivity;
 import com.example.baohongtaisan_2.Fragment.User.NhanTinFragment;
-import com.example.baohongtaisan_2.Fragment.User.QuanLyProfileFragment;
 import com.example.baohongtaisan_2.Fragment.User.QuanLyBaoHongFragment;
+import com.example.baohongtaisan_2.Fragment.User.QuanLyProfileFragment;
 import com.example.baohongtaisan_2.Fragment.User.TraCuuFragment;
 import com.example.baohongtaisan_2.Fragment.User.TrangChuFragment;
+import com.example.baohongtaisan_2.Model.IsLogin;
 import com.example.baohongtaisan_2.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -217,8 +218,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) finishAffinity();
-        txt_FullName.setText(user.getDisplayName());
-        txt_Email.setText(user.getEmail());
+        txt_FullName.setText(IsLogin.getInstance().getHoVaTen());
+        txt_Email.setText(IsLogin.getInstance().getEmail());
         Glide.with(this).load(user.getPhotoUrl()).error(R.drawable.logo_tdmu_2).into(imgProfile);
     }
 

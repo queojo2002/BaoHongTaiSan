@@ -2,40 +2,31 @@ package com.example.baohongtaisan_2.Fragment.Admin;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.baohongtaisan_2.Adapter.Admin.AdminBaoHongAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.CustomSpinnerAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.BaoHong;
-import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -59,8 +50,6 @@ public class AdminBaoHongFragment extends Fragment {
 
         return view;
     }
-
-
 
 
     public void _AnhXa() {
@@ -113,21 +102,21 @@ public class AdminBaoHongFragment extends Fragment {
                 baoHongList.clear();
                 baoHongList = response.body();
                 if (response.isSuccessful() && response.body() != null && baoHongList != null && getContext() != null) {
-                        adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList, new RCVClickItem() {
-                            @Override
-                            public void onClickRCV(Object object, String CURD) {
-                                BaoHong baoHong = (BaoHong) object;
-                                if (CURD.equals("CHITIET"))
-                                {
-                                    Open_Dialog_ChiTiet(baoHong);
-                                }
+                    adminBaoHongAdapter = new AdminBaoHongAdapter(baoHongList, new RCVClickItem() {
+                        @Override
+                        public void onClickRCV(Object object, String CURD) {
+                            BaoHong baoHong = (BaoHong) object;
+                            if (CURD.equals("CHITIET")) {
+                                Open_Dialog_ChiTiet(baoHong);
                             }
-                        });
-                        rvBH.setAdapter(adminBaoHongAdapter);
+                        }
+                    });
+                    rvBH.setAdapter(adminBaoHongAdapter);
                 } else {
                     Toast.makeText(getContext(), "Có lỗi xảy ra...", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<List<BaoHong>> call, Throwable t) {
                 Toast.makeText(getContext(), "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
@@ -143,8 +132,7 @@ public class AdminBaoHongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_chitiet_baohong);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -193,16 +181,12 @@ public class AdminBaoHongFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onResume() {
         super.onResume();
         GetListBaoHong();
 
     }
-
-
 
 
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,12 +13,7 @@ import com.example.baohongtaisan_2.Adapter.User.AdapterBaoLoi_QLBH;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.BaoHong;
 import com.example.baohongtaisan_2.Model.IsLogin;
-import com.example.baohongtaisan_2.Model.NguoiDung;
-import com.example.baohongtaisan_2.Model.NotificationDataBaoHong;
-import com.example.baohongtaisan_2.Model.NotificationReponse;
-import com.example.baohongtaisan_2.Model.NotificationSendData;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;

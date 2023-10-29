@@ -1,25 +1,19 @@
 package com.example.baohongtaisan_2.Fragment.Admin.PhanBo;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.baohongtaisan_2.Activity.User.TraCuu_BaoHongActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.baohongtaisan_2.Adapter.Admin.AdminDSPBTSAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.AdminPBTSTaiSanAdapter;
-import com.example.baohongtaisan_2.Adapter.User.AdapterPhanBo_TaiSan;
 import com.example.baohongtaisan_2.Api.ApiServices;
-import com.example.baohongtaisan_2.Model.BaoHong;
 import com.example.baohongtaisan_2.Model.PhanBo;
-import com.example.baohongtaisan_2.Model.TaiSan;
 import com.example.baohongtaisan_2.R;
 
 import java.util.ArrayList;
@@ -33,13 +27,14 @@ import retrofit2.Response;
 public class AdminDSTSTrongPhongFragment extends Fragment {
 
 
-    private int MaP;
-    private String TenP;
+    private final int MaP;
+    private final String TenP;
     private View view;
     private RecyclerView rv;
     private SearchView sv;
     private List<PhanBo> phanBoList;
     private AdminDSPBTSAdapter dspbtsAdapter;
+
     public AdminDSTSTrongPhongFragment(int MaP, String TenP) {
         this.MaP = MaP;
         this.TenP = TenP;
@@ -65,7 +60,6 @@ public class AdminDSTSTrongPhongFragment extends Fragment {
 
         GetListPhanBoTrongPhong();
     }
-
 
 
     public void _SuKien() {

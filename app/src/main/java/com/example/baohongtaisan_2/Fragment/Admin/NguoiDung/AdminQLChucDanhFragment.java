@@ -27,7 +27,6 @@ import com.example.baohongtaisan_2.Adapter.Admin.AdminChucDanhAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.ChucDanh;
-import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
 
@@ -90,8 +89,7 @@ public class AdminQLChucDanhFragment extends Fragment {
                         searchlist.add(chucDanh);
                     }
                 }
-                if (adminChucDanh_adapter != null)
-                {
+                if (adminChucDanh_adapter != null) {
                     adminChucDanh_adapter.searchDataList(searchlist);
                 }
                 return false;
@@ -118,11 +116,9 @@ public class AdminQLChucDanhFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             ChucDanh cd = (ChucDanh) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(cd);
-                            }else if (CURD.equals("DELETE"))
-                            {
+                            } else if (CURD.equals("DELETE")) {
                                 Open_Dialog_Delete(cd);
                             }
                         }
@@ -146,8 +142,7 @@ public class AdminQLChucDanhFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -160,7 +155,7 @@ public class AdminQLChucDanhFragment extends Fragment {
 
         TextView tv = dialog.findViewById(R.id.tvTenChucNangEdit);
         EditText txtinput = dialog.findViewById(R.id.txtInput);
-        Button btnhuybo =dialog.findViewById(R.id.btnHuyBo);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
         Button btnthemmoi = dialog.findViewById(R.id.btnEdit);
 
         tv.setText("Thêm mới chức danh");
@@ -210,8 +205,7 @@ public class AdminQLChucDanhFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -267,7 +261,7 @@ public class AdminQLChucDanhFragment extends Fragment {
     }
 
 
-    public void Open_Dialog_Delete(ChucDanh cd){
+    public void Open_Dialog_Delete(ChucDanh cd) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Bạn có chắc chắn muốn xóa không ?");
         builder.setMessage("Dữ liệu đã xóa không thể khôi phục ! ");

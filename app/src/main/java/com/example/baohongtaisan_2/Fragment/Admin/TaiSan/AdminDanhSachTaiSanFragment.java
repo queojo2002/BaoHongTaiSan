@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,18 +23,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Adapter.Admin.AdminLoaiTaiSanAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.AdminNguoiDungAdapter;
 import com.example.baohongtaisan_2.Adapter.Admin.AdminTaiSanAdapter;
-import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerKhuVucPhong_Adapter;
-import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerLoaiPhong_Adapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerLoaiTaiSan_Adapter;
 import com.example.baohongtaisan_2.Adapter.Admin.SpinnerAdapter.SpinnerNhomTaiSan_Adapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
-import com.example.baohongtaisan_2.Model.KhuVucPhong;
-import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.LoaiTaiSan;
-import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.TaiSan;
@@ -62,6 +54,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
     private Button btnAddTaiSan;
     private View view;
     private int MaNTS_Add = -1, MaLTS_Add = -1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_admin_danh_sach_tai_san, container, false);
@@ -71,8 +64,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
 
     }
 
-    public void _AnhXa()
-    {
+    public void _AnhXa() {
         taiSanList = new ArrayList<>();
         rcv = view.findViewById(R.id.rvTaiSan);
         sv = view.findViewById(R.id.txtSearchTS);
@@ -85,8 +77,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
 
     }
 
-    public void _SuKien()
-    {
+    public void _SuKien() {
         sv.clearFocus();
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -114,6 +105,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
             }
         });
     }
+
     public void GetListTaiSan() {
         ApiServices.apiServices.get_list_taisan().enqueue(new Callback<List<TaiSan>>() {
             @Override
@@ -126,20 +118,21 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<TaiSan>> call, Throwable t) {
                 Toast.makeText(getContext(), "Lấy dữ liệu thất bại...", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     public void Open_Dialog_Add() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_taisan_add);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -177,8 +170,10 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
                     MaNTS_Add = selected.getMaNTS();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
         spnLTS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -189,8 +184,10 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
                     MaLTS_Add = selected.getMaLTS();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
 
@@ -198,8 +195,8 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (MaNTS_Add == -1 || MaLTS_Add == -1) return;
-                ApiServices.apiServices.add_data_taisan(txtinput.getText().toString(), MaNTS_Add, MaLTS_Add,Integer.parseInt(txtgiatri.getText().toString()),
-                        Integer.parseInt(txtsoluong.getText().toString()),txthangsx.getText().toString(),txtnuocsx.getText().toString(),
+                ApiServices.apiServices.add_data_taisan(txtinput.getText().toString(), MaNTS_Add, MaLTS_Add, Integer.parseInt(txtgiatri.getText().toString()),
+                        Integer.parseInt(txtsoluong.getText().toString()), txthangsx.getText().toString(), txtnuocsx.getText().toString(),
                         Integer.parseInt(txtnamsx.getText().toString()), txtghichu.getText().toString()).enqueue(new Callback<ObjectReponse>() {
                     @Override
                     public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
@@ -239,15 +236,13 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
         ApiServices.apiServices.get_list_nhomtaisan().enqueue(new Callback<List<NhomTaiSan>>() {
             @Override
             public void onResponse(@NonNull Call<List<NhomTaiSan>> call, @NonNull Response<List<NhomTaiSan>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     nhomTaiSanList = response.body();
                     SpinnerNhomTaiSan_Adapter spinnerNhomTaiSanAdapter = new SpinnerNhomTaiSan_Adapter(getContext(), R.layout.custom_spinner_selected, nhomTaiSanList);
                     spinner.setAdapter(spinnerNhomTaiSanAdapter);
                     if (MaNTS != -1) {
                         for (int i = 0; i < nhomTaiSanList.size(); i++) {
-                            if (nhomTaiSanList.get(i).getMaNTS() == MaNTS)
-                            {
+                            if (nhomTaiSanList.get(i).getMaNTS() == MaNTS) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -255,6 +250,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<NhomTaiSan>> call, @NonNull Throwable t) {
 
@@ -266,15 +262,13 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
         ApiServices.apiServices.get_list_loaitaisan().enqueue(new Callback<List<LoaiTaiSan>>() {
             @Override
             public void onResponse(@NonNull Call<List<LoaiTaiSan>> call, @NonNull Response<List<LoaiTaiSan>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     loaiTaiSanList = response.body();
                     SpinnerLoaiTaiSan_Adapter spinner_2 = new SpinnerLoaiTaiSan_Adapter(getContext(), R.layout.custom_spinner_selected, loaiTaiSanList);
                     spinner.setAdapter(spinner_2);
-                    if (MaLTS != -1){
+                    if (MaLTS != -1) {
                         for (int i = 0; i < loaiTaiSanList.size(); i++) {
-                            if (loaiTaiSanList.get(i).getMaLTS() == MaLTS)
-                            {
+                            if (loaiTaiSanList.get(i).getMaLTS() == MaLTS) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -282,6 +276,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<LoaiTaiSan>> call, @NonNull Throwable t) {
 

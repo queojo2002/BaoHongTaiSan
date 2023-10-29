@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.baohongtaisan_2.Fragment.Admin.PhanBo.AdminPBTSFragment;
 import com.example.baohongtaisan_2.Fragment.Admin.PhanBo.AdminDSTSTrongPhongFragment;
+import com.example.baohongtaisan_2.Fragment.Admin.PhanBo.AdminPBTSFragment;
 
 public class TabLayoutPBTSAdapter extends FragmentStatePagerAdapter {
 
-    private int MaP;
-    private String TenP;
+    private final int MaP;
+    private final String TenP;
+
     public TabLayoutPBTSAdapter(@NonNull FragmentManager fm, int behavior, int MaP, String TenP) {
         super(fm, behavior);
         this.MaP = MaP;
@@ -22,12 +23,10 @@ public class TabLayoutPBTSAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 1:
-                return new AdminDSTSTrongPhongFragment(MaP, TenP);
-            default:
-                return new AdminPBTSFragment(MaP, TenP);
+        if (position == 1) {
+            return new AdminDSTSTrongPhongFragment(MaP, TenP);
         }
+        return new AdminPBTSFragment(MaP, TenP);
     }
 
     @Override

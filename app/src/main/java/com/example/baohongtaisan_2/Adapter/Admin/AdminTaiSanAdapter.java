@@ -4,25 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baohongtaisan_2.Model.NguoiDung;
-import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.Model.TaiSan;
 import com.example.baohongtaisan_2.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminTaiSanAdapter extends RecyclerView.Adapter<AdminTaiSanAdapter.AdminTaiSanViewHolder>{
+public class AdminTaiSanAdapter extends RecyclerView.Adapter<AdminTaiSanAdapter.AdminTaiSanViewHolder> {
 
     private List<TaiSan> taiSanList;
     private View view;
@@ -70,8 +65,13 @@ public class AdminTaiSanAdapter extends RecyclerView.Adapter<AdminTaiSanAdapter.
     }
 
     public class AdminTaiSanViewHolder extends RecyclerView.ViewHolder {
-        private CircleImageView imgQLTS;
-        private TextView txtTenTS, txtTenLTS, txtTenNTS, SLNV, SLHC;
+        private final CircleImageView imgQLTS;
+        private final TextView txtTenTS;
+        private final TextView txtTenLTS;
+        private final TextView txtTenNTS;
+        private final TextView SLNV;
+        private final TextView SLHC;
+
         public AdminTaiSanViewHolder(@NonNull View itemView) {
             super(itemView);
             imgQLTS = itemView.findViewById(R.id.imgQLTS);

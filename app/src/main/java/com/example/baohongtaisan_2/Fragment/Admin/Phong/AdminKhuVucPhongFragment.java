@@ -26,11 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baohongtaisan_2.Adapter.Admin.AdminKhuVucPhongAdapter;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
-import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,8 +99,7 @@ public class AdminKhuVucPhongFragment extends Fragment {
                         searchlist.add(khuVucPhong);
                     }
                 }
-                if (kvp_adapter != null)
-                {
+                if (kvp_adapter != null) {
                     kvp_adapter.searchDataList(searchlist);
                 }
                 return false;
@@ -123,11 +120,9 @@ public class AdminKhuVucPhongFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             KhuVucPhong khuVucPhong = (KhuVucPhong) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(khuVucPhong);
-                            }else if (CURD.equals("DELETE"))
-                            {
+                            } else if (CURD.equals("DELETE")) {
                                 Open_Dialog_Delete(khuVucPhong);
                             }
                         }
@@ -151,8 +146,7 @@ public class AdminKhuVucPhongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -165,7 +159,7 @@ public class AdminKhuVucPhongFragment extends Fragment {
 
         TextView tv = dialog.findViewById(R.id.tvTenChucNangEdit);
         EditText txtinput = dialog.findViewById(R.id.txtInput);
-        Button btnhuybo =dialog.findViewById(R.id.btnHuyBo);
+        Button btnhuybo = dialog.findViewById(R.id.btnHuyBo);
         Button btnthemmoi = dialog.findViewById(R.id.btnEdit);
 
         tv.setText("Thêm mới khu vực phòng");
@@ -214,8 +208,7 @@ public class AdminKhuVucPhongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_edit);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);

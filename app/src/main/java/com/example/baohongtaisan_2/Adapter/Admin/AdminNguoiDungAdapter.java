@@ -21,7 +21,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
 
     private List<NguoiDung> listNguoidung;
 
-    private RCVClickItem rcvClickItem;
+    private final RCVClickItem rcvClickItem;
 
     public AdminNguoiDungAdapter(List<NguoiDung> listNguoidung, RCVClickItem rcvClickItem) {
         this.listNguoidung = listNguoidung;
@@ -80,10 +80,13 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
     }
 
 
-
     public class NguoidungViewHolder extends RecyclerView.ViewHolder {
-        private TextView tennd, tendv, tencd,tenpq;
-        private ImageView editnd, deletend;
+        private final TextView tennd;
+        private final TextView tendv;
+        private final TextView tencd;
+        private final TextView tenpq;
+        private final ImageView editnd;
+        private final ImageView deletend;
 
         public NguoidungViewHolder(@NonNull View itemView) {
             super(itemView);

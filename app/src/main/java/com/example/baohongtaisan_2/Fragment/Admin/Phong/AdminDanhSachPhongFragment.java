@@ -3,7 +3,6 @@ package com.example.baohongtaisan_2.Fragment.Admin.Phong;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -59,7 +58,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
     private View view;
     private int MaLP_Add = -1, MaKVP_Add = -1;
     private int MaLP_Edit = -1, MaKVP_Edit = -1;
-
 
 
     @Override
@@ -127,11 +125,9 @@ public class AdminDanhSachPhongFragment extends Fragment {
                         @Override
                         public void onClickRCV(Object object, String CURD) {
                             Phong phong = (Phong) object;
-                            if (CURD.equals("EDIT"))
-                            {
+                            if (CURD.equals("EDIT")) {
                                 Open_Dialog_Edit(phong);
-                            }else if (CURD.equals("DELETE"))
-                            {
+                            } else if (CURD.equals("DELETE")) {
                                 Open_Dialog_Delete(phong);
                             }
                         }
@@ -148,17 +144,13 @@ public class AdminDanhSachPhongFragment extends Fragment {
     }
 
 
-
-
-
     public void Open_Dialog_Add() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_add);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -191,8 +183,10 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     MaLP_Add = selected.getMaLP();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
         spnKVP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -203,8 +197,10 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     MaKVP_Add = selected.getMaKVP();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
 
@@ -253,8 +249,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
         dialog.setContentView(R.layout.custom_dialog_add);
 
         Window window = dialog.getWindow();
-        if (window == null)
-        {
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -278,7 +273,6 @@ public class AdminDanhSachPhongFragment extends Fragment {
         txtinput.setText(phong.getTenP());
 
 
-
         spnLP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -288,8 +282,10 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     MaLP_Edit = selected.getMaLP();
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
         spnKVP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -300,10 +296,11 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     MaKVP_Edit = selected.getMaKVP();
                 }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
 
         btnthem.setOnClickListener(new View.OnClickListener() {
@@ -384,15 +381,13 @@ public class AdminDanhSachPhongFragment extends Fragment {
         ApiServices.apiServices.get_list_loaiphong().enqueue(new Callback<List<LoaiPhong>>() {
             @Override
             public void onResponse(@NonNull Call<List<LoaiPhong>> call, @NonNull Response<List<LoaiPhong>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     loaiPhongList = response.body();
                     SpinnerLoaiPhong_Adapter spinnerLoaiPhongAdapter = new SpinnerLoaiPhong_Adapter(getContext(), R.layout.custom_spinner_selected, loaiPhongList);
                     spinner.setAdapter(spinnerLoaiPhongAdapter);
                     if (MaLP != -1) {
                         for (int i = 0; i < loaiPhongList.size(); i++) {
-                            if (loaiPhongList.get(i).getMaLP() == MaLP)
-                            {
+                            if (loaiPhongList.get(i).getMaLP() == MaLP) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -400,6 +395,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<LoaiPhong>> call, @NonNull Throwable t) {
 
@@ -411,15 +407,13 @@ public class AdminDanhSachPhongFragment extends Fragment {
         ApiServices.apiServices.get_list_khuvucphong().enqueue(new Callback<List<KhuVucPhong>>() {
             @Override
             public void onResponse(@NonNull Call<List<KhuVucPhong>> call, @NonNull Response<List<KhuVucPhong>> response) {
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     khuVucPhongList = response.body();
                     SpinnerKhuVucPhong_Adapter spinner_2 = new SpinnerKhuVucPhong_Adapter(getContext(), R.layout.custom_spinner_selected, khuVucPhongList);
                     spinner.setAdapter(spinner_2);
-                    if (MaKVP != -1){
+                    if (MaKVP != -1) {
                         for (int i = 0; i < khuVucPhongList.size(); i++) {
-                            if (khuVucPhongList.get(i).getMaKVP() == MaKVP)
-                            {
+                            if (khuVucPhongList.get(i).getMaKVP() == MaKVP) {
                                 spinner.setSelection(i);
                                 break;
                             }
@@ -427,6 +421,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<KhuVucPhong>> call, @NonNull Throwable t) {
 
