@@ -20,11 +20,33 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageview"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/baseline_home_work_24" />
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:src="@color/purple_500"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"/>
+
+
+            <TextView
+                android:id="@+id/tvKiTuPhong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imageview"
+                android:layout_alignLeft="@id/imageview"
+                android:layout_alignRight="@id/imageview"
+                android:layout_alignTop="@id/imageview"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="Dãy C2" />
+
 
             <TextView
                 android:id="@+id/txtTenPhong"
@@ -34,8 +56,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/imageview"
                 android:text="Phòng E3-302"
-                android:textColor="#000000"
-                android:textSize="12sp">
+                android:textColor="#3F51B5"
+                android:textSize="13sp">
 
             </TextView>
 

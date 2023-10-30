@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.R;
@@ -16,12 +17,15 @@ import com.example.baohongtaisan_2.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAdapter.NguoidungViewHolder> {
 
     private List<NguoiDung> listNguoidung;
 
     private final RCVClickItem rcvClickItem;
+    private View view;
 
     public AdminNguoiDungAdapter(List<NguoiDung> listNguoidung, RCVClickItem rcvClickItem) {
         this.listNguoidung = listNguoidung;
@@ -31,7 +35,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
     @NonNull
     @Override
     public NguoidungViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_nguoidung_admin, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_nguoidung_admin, parent, false);
         return new NguoidungViewHolder(view);
     }
 
@@ -45,6 +49,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
         holder.tendv.setText(nd.getTenDV());
         holder.tencd.setText(nd.getTenCD());
         holder.tenpq.setText(nd.getTenPQ());
+        Glide.with(view).load("https://ui-avatars.com/api/?name="+nd.getHoVaTen()+"&background=0D8ABC&bold=true&font-size=0.30").error(R.drawable.baseline_account_circle_24).into(holder.imgAccount);
 
         holder.editnd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +92,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
         private final TextView tenpq;
         private final ImageView editnd;
         private final ImageView deletend;
+        private CircleImageView imgAccount;
 
         public NguoidungViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +102,7 @@ public class AdminNguoiDungAdapter extends RecyclerView.Adapter<AdminNguoiDungAd
             tenpq = itemView.findViewById(R.id.txtTenPQ);
             editnd = itemView.findViewById(R.id.editND);
             deletend = itemView.findViewById(R.id.deleteND);
+            imgAccount = itemView.findViewById(R.id.imgaccount);
         }
     }
 }
