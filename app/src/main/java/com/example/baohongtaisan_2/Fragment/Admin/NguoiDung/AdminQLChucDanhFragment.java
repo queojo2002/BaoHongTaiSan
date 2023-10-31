@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.ChucDanh;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,11 @@ import retrofit2.Response;
 
 public class AdminQLChucDanhFragment extends Fragment {
 
-    private SearchView SVcd;
+    private androidx.appcompat.widget.SearchView SVcd;
     private RecyclerView rcvCD;
     private AdminChucDanhAdapter adminChucDanh_adapter;
     private List<ChucDanh> listCD;
-    private Button btnaddCd;
+    private FloatingActionButton btnaddCd;
     private View rootView;
 
     @Override
@@ -75,7 +76,7 @@ public class AdminQLChucDanhFragment extends Fragment {
 
     private void _SuKien() {
         SVcd.clearFocus();
-        SVcd.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVcd.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -102,6 +103,16 @@ public class AdminQLChucDanhFragment extends Fragment {
                 Open_Dialog_Add();
             }
         });
+
+        rcvCD.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) btnaddCd.hide();
+                else btnaddCd.show();
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
 
     }
 

@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,11 @@ import retrofit2.Response;
 
 public class AdminQLDonViFragment extends Fragment {
 
-    private SearchView SVdv;
+    private androidx.appcompat.widget.SearchView SVdv;
     private RecyclerView rcvDV;
     private AdminDonViAdapter adminDonVi_adapter;
     private List<DonVi> listDV;
-    private Button btnaddDv;
+    private FloatingActionButton btnaddDv;
     private View rootView;
 
     @Override
@@ -68,7 +69,7 @@ public class AdminQLDonViFragment extends Fragment {
 
     public void _SuKien() {
         SVdv.clearFocus();
-        SVdv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVdv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -97,6 +98,17 @@ public class AdminQLDonViFragment extends Fragment {
                 Open_Dialog_Add();
             }
         });
+
+        rcvDV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) btnaddDv.hide();
+                else btnaddDv.show();
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
+
     }
 
     public void GetListDonVi() {

@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Model.DonVi;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,11 @@ import retrofit2.Response;
 
 public class AdminQLPhanQuyenFragment extends Fragment {
 
-    private SearchView sv;
+    private androidx.appcompat.widget.SearchView sv;
     private RecyclerView rcv;
     private AdminPhanQuyenAdapter adminPhanQuyenAdapter;
     private List<PhanQuyen> phanQuyenLists;
-    private Button btnADD;
+    private FloatingActionButton btnADD;
     private View rootView;
 
     @Override
@@ -68,7 +69,7 @@ public class AdminQLPhanQuyenFragment extends Fragment {
 
     private void _SuKien() {
         sv.clearFocus();
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -97,6 +98,16 @@ public class AdminQLPhanQuyenFragment extends Fragment {
                 Open_Dialog_Add();
             }
         });
+
+        rcv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) btnADD.hide();
+                else btnADD.show();
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
     }
 
 
