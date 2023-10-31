@@ -216,7 +216,7 @@ public interface ApiServices {
     Call<NguoiDung> get_nguoidung_byEmail(@Query("Email") String Email);
 
     @GET("api/load_data_baoloi.php")
-    Call<List<BaoHong>> get_list_baohong();
+    Call<List<BaoHong>> get_list_baohong(@Query("cmd") String Loai);
 
     @GET("api/load_data_baoloi_byMaND.php")
     Call<List<BaoHong>> get_list_baohong_byMaND(@Query("MaND") int MaND);

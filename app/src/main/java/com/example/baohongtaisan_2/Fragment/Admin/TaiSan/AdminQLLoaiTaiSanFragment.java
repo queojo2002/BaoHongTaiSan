@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.LoaiTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +40,11 @@ import retrofit2.Response;
 
 public class AdminQLLoaiTaiSanFragment extends Fragment {
 
-    private SearchView SVlts;
+    private androidx.appcompat.widget.SearchView SVlts;
     private RecyclerView rcvLTS;
     private AdminLoaiTaiSanAdapter lts_adapter;
     private List<LoaiTaiSan> listLTS;
-    private Button btnaddlts;
+    private FloatingActionButton btnaddlts;
     private View rootView;
 
 
@@ -84,7 +85,7 @@ public class AdminQLLoaiTaiSanFragment extends Fragment {
         });
 
         SVlts.clearFocus();
-        SVlts.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVlts.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;

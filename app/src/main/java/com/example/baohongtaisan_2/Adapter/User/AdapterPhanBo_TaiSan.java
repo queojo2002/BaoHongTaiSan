@@ -53,16 +53,19 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
         for (int i = 0; i < baoHongList.size(); i++) {
             BaoHong baoHong = baoHongList.get(i);
             if (baoHong.getMaPB() == phanBo.getMaPB()) {
-                Flag_Check_TT = 1;
+
                 if (baoHong.getTrangThai() == 1) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#5792B9"));
                     holder.TrangThai.setText("Đã gửi báo hỏng tài sản");
+                    Flag_Check_TT = 1;
                 } else if (baoHong.getTrangThai() == 2) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#A4D83B"));
                     holder.TrangThai.setText("Đã tiếp nhận báo hỏng");
+                    Flag_Check_TT = 1;
                 } else if (baoHong.getTrangThai() == 3) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#FC4A32"));
                     holder.TrangThai.setText("Đang sữa chữa");
+                    Flag_Check_TT = 1;
                 } else if (baoHong.getTrangThai() == 4) {
                     holder.TrangThai.setText("Hoạt động tốt");
                 } else if (baoHong.getTrangThai() == 5) {
@@ -71,6 +74,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
                 } else {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#AF6DCA"));
                     holder.TrangThai.setText("Trạng thái không thể xác định");
+                    Flag_Check_TT = 1;
                 }
             }
         }
@@ -98,6 +102,8 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
                 intent.putExtra("MaPB", phanBo.getMaPB());
                 intent.putExtra("TenTS", phanBo.getTenTS());
                 intent.putExtra("TenP", phanBo.getTenP());
+                intent.putExtra("TenNTS", phanBo.getTenNTS());
+                intent.putExtra("TenLTS", phanBo.getTenLTS());
                 context.startActivity(intent);
             }
         });

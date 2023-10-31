@@ -96,7 +96,7 @@ public class AdminBaoHongFragment extends Fragment {
 
 
     public void GetListBaoHong() {
-        ApiServices.apiServices.get_list_baohong().enqueue(new Callback<List<BaoHong>>() {
+        ApiServices.apiServices.get_list_baohong("Admin").enqueue(new Callback<List<BaoHong>>() {
             @Override
             public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
                 baoHongList.clear();

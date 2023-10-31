@@ -36,6 +36,7 @@ import com.example.baohongtaisan_2.Model.LoaiPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.Phong;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +48,14 @@ import retrofit2.Response;
 
 public class AdminDanhSachPhongFragment extends Fragment {
 
-    private SearchView svphong;
+    private androidx.appcompat.widget.SearchView svphong;
     private RecyclerView rvPhong;
     private LinearLayoutManager linearLayoutManager;
     private AdminPhongAdapter adminPhongAdapter;
     private List<KhuVucPhong> khuVucPhongList;
     private List<LoaiPhong> loaiPhongList;
     private List<Phong> phongList;
-    private Button btnaddPhong;
+    private FloatingActionButton btnaddPhong;
     private View view;
     private int MaLP_Add = -1, MaKVP_Add = -1;
     private int MaLP_Edit = -1, MaKVP_Edit = -1;
@@ -81,7 +82,7 @@ public class AdminDanhSachPhongFragment extends Fragment {
         phongList = new ArrayList<>();
 
         svphong.clearFocus();
-        svphong.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        svphong.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -99,6 +100,18 @@ public class AdminDanhSachPhongFragment extends Fragment {
                     adminPhongAdapter.searchDataList(searchlist);
                 }
                 return false;
+            }
+        });
+
+        rvPhong.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    btnaddPhong.hide();
+                }else {
+                    btnaddPhong.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
 

@@ -3,6 +3,7 @@ package com.example.baohongtaisan_2.Activity.Admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class AdminPhanBoTaiSanActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Toolbar toolbar;
+    private TextView Title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class AdminPhanBoTaiSanActivity extends AppCompatActivity {
     private void _AnhXa() {
         intent = getIntent();
         toolbar = findViewById(R.id.toolbar);
+        Title = findViewById(R.id.Title);
         viewPager = findViewById(R.id.viewpager_pbts);
         tabLayout = findViewById(R.id.tablayout_pbts);
         TabLayoutPBTSAdapter tabLayoutPBTSAdapter = new TabLayoutPBTSAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, intent.getIntExtra("MaP", -1), intent.getStringExtra("TenP"));
@@ -44,7 +47,7 @@ public class AdminPhanBoTaiSanActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
-        getSupportActionBar().setTitle("Phân bổ: " + intent.getStringExtra("TenP") + "");
+        Title.setText("Phân bổ: " + intent.getStringExtra("TenP") + "");
     }
 
 

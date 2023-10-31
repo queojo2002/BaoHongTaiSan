@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.KhuVucPhong;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,11 @@ import retrofit2.Response;
 
 public class AdminKhuVucPhongFragment extends Fragment {
 
-    private SearchView SVkvp;
+    private androidx.appcompat.widget.SearchView SVkvp;
     private RecyclerView rcvKVP;
     private AdminKhuVucPhongAdapter kvp_adapter;
     private List<KhuVucPhong> listKVP;
-    private Button btnaddKvp;
+    private FloatingActionButton btnaddKvp;
 
     private View rootView;
 
@@ -85,7 +86,7 @@ public class AdminKhuVucPhongFragment extends Fragment {
         });
 
         SVkvp.clearFocus();
-        SVkvp.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVkvp.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -106,6 +107,17 @@ public class AdminKhuVucPhongFragment extends Fragment {
             }
         });
 
+        rcvKVP.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    btnaddKvp.hide();
+                }else {
+                    btnaddKvp.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
 

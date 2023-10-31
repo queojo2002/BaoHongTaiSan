@@ -32,6 +32,7 @@ import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.TaiSan;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +45,14 @@ import retrofit2.Response;
 public class AdminDanhSachTaiSanFragment extends Fragment {
 
 
-    private SearchView sv;
+    private androidx.appcompat.widget.SearchView sv;
     private RecyclerView rcv;
     private AdminTaiSanAdapter taiSanAdapter;
     private List<TaiSan> taiSanList;
     private List<NhomTaiSan> nhomTaiSanList;
     private List<LoaiTaiSan> loaiTaiSanList;
 
-    private Button btnAddTaiSan;
+    private FloatingActionButton btnAddTaiSan;
     private View view;
     private int MaNTS_Add = -1, MaLTS_Add = -1;
 
@@ -79,7 +80,7 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
 
     public void _SuKien() {
         sv.clearFocus();
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -102,6 +103,18 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Open_Dialog_Add();
+            }
+        });
+
+        rcv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    btnAddTaiSan.hide();
+                }else {
+                    btnAddTaiSan.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
     }

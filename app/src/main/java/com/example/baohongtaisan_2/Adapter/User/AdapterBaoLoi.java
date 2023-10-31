@@ -39,7 +39,6 @@ public class AdapterBaoLoi extends RecyclerView.Adapter<AdapterBaoLoi.BaoHongVie
         if (baoHongList == null) {
             return;
         }
-        BaoHongViewHolder holder_1 = holder;
         BaoHong baoHong = baoHongList.get(position);
         Glide.with(context).load(baoHong.getHinhAnh()).error(R.drawable.baseline_inventory_24).into(holder.imgHome_BaoHong);
         holder.txtHome_TenTS.setText(baoHong.getTenTS());

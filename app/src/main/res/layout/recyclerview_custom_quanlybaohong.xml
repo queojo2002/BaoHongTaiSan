@@ -7,10 +7,7 @@
     android:layout_height="wrap_content"
     android:stretchColumns="*"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp">
+    android:clipToPadding="false">
 
 
 
@@ -23,11 +20,9 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="16dp">
+                android:layout_height="230dp"
+                app:cardCornerRadius="16dp"
+                android:layout_margin="8dp">
 
                 <RelativeLayout
                     android:id="@+id/rlQLBH"
@@ -213,13 +208,12 @@
             android:id="@+id/cell_title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/img"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="8dp"
                 app:cardCornerRadius="16dp">
 
                 <RelativeLayout
@@ -228,11 +222,10 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/QLBH_imgView"
-                        android:layout_width="48dp"
+                        android:layout_width="60dp"
                         android:layout_height="55dp"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/baseline_account_circle_24" />
@@ -243,9 +236,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="false"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@+id/QLBH_imgView"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_toEndOf="@+id/QLBH_imgView"
                         android:text="Mã báo lỗi: 1"
                         android:textColor="#9A0523"
                         android:textSize="14sp" />
@@ -259,7 +252,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_toEndOf="@+id/QLBH_imgView"
-                        android:text="Phòng cơ sở vật chấtPhòng cơ sở vật chất"
+                        android:text="Phòng cơ sở vật chấtPhòng cơ sở vật chấtsdsadsad"
                         android:textColor="#3C3C3C"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />

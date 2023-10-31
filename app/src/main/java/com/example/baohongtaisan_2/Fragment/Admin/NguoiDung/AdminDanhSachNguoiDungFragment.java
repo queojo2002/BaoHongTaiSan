@@ -38,6 +38,7 @@ import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.Model.PhanQuyen;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,14 +50,14 @@ import retrofit2.Response;
 
 public class AdminDanhSachNguoiDungFragment extends Fragment {
 
-    private SearchView SVnd;
+    private androidx.appcompat.widget.SearchView SVnd;
     private RecyclerView rcvND;
     private AdminNguoiDungAdapter adminNguoiDung_adapter;
     private List<NguoiDung> listND;
     private List<DonVi> donViList;
     private List<ChucDanh> chucDanhList;
     private List<PhanQuyen> phanQuyenList;
-    private Button btnaddNd;
+    private FloatingActionButton btnaddNd;
     private View rootView;
     private int MaDV = -1, MaCD = -1, MaPQ = -1;
     private int MaDV_ADD = -1, MaCD_ADD = -1, MaPQ_ADD = -1;
@@ -97,7 +98,7 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
 
     private void _SuKien() {
         SVnd.clearFocus();
-        SVnd.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVnd.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -122,6 +123,15 @@ public class AdminDanhSachNguoiDungFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Open_Dialog_Add();
+            }
+        });
+
+        rcvND.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) btnaddNd.hide();
+                else btnaddNd.show();
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
 

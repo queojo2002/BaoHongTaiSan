@@ -79,7 +79,7 @@ public class TraCuuFragment extends Fragment {
                         searchlist.add(phong);
                     }
                 }
-                adapterPhong.searchDataList(searchlist);
+                if (adapterPhong != null) adapterPhong.searchDataList(searchlist);
                 return false;
             }
         });

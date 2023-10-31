@@ -82,6 +82,8 @@
         app:backgroundTint="@null"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        app:fabCustomSize="45dp"
+        android:contentDescription="no"/>
 
 </RelativeLayout>

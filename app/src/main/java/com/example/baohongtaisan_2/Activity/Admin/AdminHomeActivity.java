@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView txt_Email, txt_FullName;
+    private TextView txt_Email, txt_FullName, Title;
     private ImageView imgProfile;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -58,6 +58,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
 
     private void _AnhXa() {
         toolbar = findViewById(R.id.toolbar);
+        Title = findViewById(R.id.Title);
         bottomNavigationView = findViewById(R.id.bottom_admin_view);
         drawerLayout = findViewById(R.id.drawer_layout_admin);
         navigationView = findViewById(R.id.nav_admin_view);
@@ -68,7 +69,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
         imgProfile = headerView.findViewById(R.id.imgProfile);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Tổng quan");
+        Title.setText("Tổng quan");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -134,7 +135,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private void Open_NAV_TrangChu(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_trangchu") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new TrangChuFragment()).commit();
-            getSupportActionBar().setTitle("Trang chủ");
+            Title.setText("Trang chủ");
             currentFrament_NAV = "nav_admin_trangchu";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_admin_trangchu).setChecked(true); // set menu bottom
@@ -147,7 +148,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private void Open_NAV_QuanLy_NguoiDung(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_qlnguoidung") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminNguoiDungFragment()).commit();
-            getSupportActionBar().setTitle("Quản lí người dùng");
+            Title.setText("Quản lí người dùng");
             currentFrament_NAV = "nav_admin_qlnguoidung";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_admin_qlnguoidung).setChecked(true); // set menu bottom
@@ -160,7 +161,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private void Open_NAV_QuanLy_Phong(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_qlphong") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminPhongFragment()).commit();
-            getSupportActionBar().setTitle("Quản lí phòng");
+            Title.setText("Quản lí phòng");
             currentFrament_NAV = "nav_admin_qlphong";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_admin_qlphong).setChecked(true); // set menu bottom
@@ -173,7 +174,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private void Open_NAV_QuanLy_TaiSan(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_qltaisan") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminTaiSanFragment()).commit();
-            getSupportActionBar().setTitle("Quản lí tài sản");
+            Title.setText("Quản lí tài sản");
             currentFrament_NAV = "nav_admin_qltaisan";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_admin_qltaisan).setChecked(true); // set menu bottom
@@ -187,7 +188,7 @@ public class AdminHomeActivity extends AppCompatActivity implements NavigationVi
     private void Open_NAV_Quanly_BaoHong(int OptionNAV) {
         if (currentFrament_NAV != "nav_admin_qlbaohong") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_admin, new AdminBaoHongFragment()).commit();
-            getSupportActionBar().setTitle("Quản lí báo hỏng");
+            Title.setText("Quản lí báo hỏng");
             currentFrament_NAV = "nav_admin_qlbaohong";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_admin_qlbaohong).setChecked(true);

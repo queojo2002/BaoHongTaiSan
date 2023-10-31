@@ -75,7 +75,6 @@ public class TraCuu_BaoHongActivity extends AppCompatActivity {
     }
 
     private void Data_Show_ListTaiSan_InPhong() {
-
         ApiServices.apiServices.get_list_phanbo_byMaP(MaP).enqueue(new Callback<List<PhanBo>>() {
             @Override
             public void onResponse(Call<List<PhanBo>> call, Response<List<PhanBo>> response) {
@@ -86,7 +85,7 @@ public class TraCuu_BaoHongActivity extends AppCompatActivity {
                     finish();
                 } else {
 
-                    ApiServices.apiServices.get_list_baohong().enqueue(new Callback<List<BaoHong>>() {
+                    ApiServices.apiServices.get_list_baohong("Admin").enqueue(new Callback<List<BaoHong>>() {
                         @Override
                         public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
                             baoHongList.clear();
@@ -116,36 +115,8 @@ public class TraCuu_BaoHongActivity extends AppCompatActivity {
             }
         });
 
-        /*DatabaseReference phongRef = db.getReference("PhanBo");
-        phongRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int Flag = 0;
-                for (DataSnapshot pbSnapshot : dataSnapshot.getChildren()) {
-                    PhanBo phanBo = pbSnapshot.getValue(PhanBo.class);
-                    if (phanBo.getPhong().getMaP().equals(MaP)) {
-                        Flag = 1;
-                        phanBoList.add(phanBo);
-                    }
-                }
-                if (Flag == 1) {
-                    adapterPhanBo_taiSan = new AdapterPhanBo_TaiSan(phanBoList);
-                    recycler.setAdapter(adapterPhanBo_taiSan);
-                    adapterPhanBo_taiSan.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(TraCuu_BaoHongActivity.this, "Phòng này hiện chưa có tài sản!!!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Xử lý lỗi nếu có
-            }
-        });*/
-
     }
+
 
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.baohongtaisan_2.Fragment.User;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class TrangChuFragment extends Fragment {
 
     public void _Get_ThongKe() {
         ApiServices.apiServices.get_thongke().enqueue(new Callback<ThongKe>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<ThongKe> call, Response<ThongKe> response) {
                 ThongKe thongKe = response.body();
@@ -84,12 +86,11 @@ public class TrangChuFragment extends Fragment {
     }
 
     public void _Show_BaoHong() {
-        ApiServices.apiServices.get_list_baohong().enqueue(new Callback<List<BaoHong>>() {
+        ApiServices.apiServices.get_list_baohong("Home").enqueue(new Callback<List<BaoHong>>() {
             @Override
             public void onResponse(Call<List<BaoHong>> call, Response<List<BaoHong>> response) {
                 baoHongList = response.body();
                 if (getContext() != null && baoHongList != null) {
-                    System.out.println(baoHongList.size() + "");
                     AdapterBaoLoi adapterBaoLoi = new AdapterBaoLoi(baoHongList);
                     rvHome.setAdapter(adapterBaoLoi);
                 }

@@ -15,8 +15,20 @@
         android:elevation="4dp"
         android:gravity="center_horizontal"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Tra cứu &amp; Báo hỏng" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Danh sách tài sản có trong phòng"
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"

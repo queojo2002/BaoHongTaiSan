@@ -60,7 +60,7 @@ public class AdapterBaoLoi_QLBH extends RecyclerView.Adapter<AdapterBaoLoi_QLBH.
         holder.tvMaBH.setText("Mã báo lỗi: " + baoHong.getMaBL());
         holder.tvTenTS.setText(baoHong.getTenTS());
         holder.tvTime.setText(baoHong.getNgayTao());
-        Glide.with(context).load("https://ui-avatars.com/api/?name="+baoHong.getMaBL()+"&background=EB0895&bold=true&font-size=0.25").error(R.drawable.baseline_account_circle_24).into(holder.QLBH_imgView);
+        Glide.with(context).load(baoHong.getHinhAnh()).error(R.drawable.baseline_account_circle_24).into(holder.QLBH_imgView);
 
 
         if (baoHong.getTinhTrang() == 1) {

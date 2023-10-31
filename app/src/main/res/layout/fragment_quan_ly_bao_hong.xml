@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         app:queryHint="Tìm kiếm lịch sử báo hỏng"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         app:iconifiedByDefault="false"/>
 
 

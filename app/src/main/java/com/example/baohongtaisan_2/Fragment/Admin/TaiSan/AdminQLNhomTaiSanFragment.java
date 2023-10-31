@@ -29,6 +29,7 @@ import com.example.baohongtaisan_2.Interface.RCVClickItem;
 import com.example.baohongtaisan_2.Model.NhomTaiSan;
 import com.example.baohongtaisan_2.Model.ObjectReponse;
 import com.example.baohongtaisan_2.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +40,11 @@ import retrofit2.Response;
 
 public class AdminQLNhomTaiSanFragment extends Fragment {
 
-    private SearchView SVnts;
+    private androidx.appcompat.widget.SearchView SVnts;
     private RecyclerView rcvNTS;
     private AdminNhomTaiSanAdapter nts_adapter;
     private List<NhomTaiSan> listNTS;
-    private Button btnaddnts;
+    private FloatingActionButton btnaddnts;
     private View rootView;
 
 
@@ -85,7 +86,7 @@ public class AdminQLNhomTaiSanFragment extends Fragment {
         });
 
         SVnts.clearFocus();
-        SVnts.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        SVnts.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -105,6 +106,18 @@ public class AdminQLNhomTaiSanFragment extends Fragment {
                 return false;
             }
         });
+
+    rcvNTS.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            if (dy>0){
+                btnaddnts.hide();
+            }else {
+                btnaddnts.show();
+            }
+            super.onScrolled(recyclerView, dx, dy);
+        }
+    });
 
 
     }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rdBaoHong"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rdSTT1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hư hỏng nhẹ (Minor)" />
+
+        <RadioButton
+            android:id="@+id/rdSTT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:text="Hư hỏng trung bình (Moderate)" />
+
+        <RadioButton
+            android:id="@+id/rdSTT3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:text="Hư hỏng nghiêm trọng (Severe)" />
+
+        <RadioButton
+            android:id="@+id/rdSTT4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:text="Hư hỏng hoàn toàn (Critical)" />
+    </RadioGroup>
+</RelativeLayout>

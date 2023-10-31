@@ -32,7 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private TextView txt_Email, txt_FullName;
+    private TextView txt_Email, txt_FullName, Title;
     private ImageView imgProfile;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public void _AnhXa() {
         toolbar = findViewById(R.id.toolbar);
+        Title = findViewById(R.id.Title);
         bottomNavigationView = findViewById(R.id.bottom_nav);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -70,7 +71,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         txt_Email = headerView.findViewById(R.id.txtEmail);
         imgProfile = headerView.findViewById(R.id.imgProfile);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Trang chủ");
+        Title.setText("Trang chủ");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -149,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Open_NAV_TrangChu(int OptionNAV) {
         if (currentFrament_NAV != "nav_trangchu") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new TrangChuFragment()).commit();
-            getSupportActionBar().setTitle("Trang chủ");
+            Title.setText("Trang chủ");
             currentFrament_NAV = "nav_trangchu";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_trangchu).setChecked(true); // set menu bottom
@@ -162,7 +163,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Open_NAV_QuanLy_ThongTinCaNhan(int OptionNAV) {
         if (currentFrament_NAV != "nav_manager_info") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new QuanLyProfileFragment()).commit();
-            getSupportActionBar().setTitle("Quản lý thông tin cá nhân");
+            Title.setText("Quản lý thông tin cá nhân");
             currentFrament_NAV = "nav_manager_info";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_manager_info).setChecked(true); // set menu bottom
@@ -175,7 +176,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Open_NAV_QuanLy_ThongBaoThietBi(int OptionNAV) {
         if (currentFrament_NAV != "nav_manager_thietbi") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new QuanLyBaoHongFragment()).commit();
-            getSupportActionBar().setTitle("Quản lý thông báo thiết bị");
+            Title.setText("Quản lý thông báo thiết bị");
             currentFrament_NAV = "nav_manager_thietbi";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_manager_baohong).setChecked(true); // set menu bottom
@@ -189,7 +190,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Open_NAV_TraCuu(int OptionNAV) {
         if (currentFrament_NAV != "nav_tracuu") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new TraCuuFragment()).commit();
-            getSupportActionBar().setTitle("Tra cứu & Báo hỏng");
+            Title.setText("Tra cứu & Báo hỏng");
             currentFrament_NAV = "nav_tracuu";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_baohong_tracuu).setChecked(true); // set menu bottom
@@ -202,7 +203,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Open_NAV_NhanTin(int OptionNAV) {
         if (currentFrament_NAV != "nav_nhantin") {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new NhanTinFragment()).commit();
-            getSupportActionBar().setTitle("Nhắn tin trực tuyến");
+            Title.setText("Nhắn tin trực tuyến");
             currentFrament_NAV = "nav_nhantin";
             if (OptionNAV == 0) {
                 bottomNavigationView.getMenu().findItem(R.id.bottom_nhantin).setChecked(true); // set menu bottom
