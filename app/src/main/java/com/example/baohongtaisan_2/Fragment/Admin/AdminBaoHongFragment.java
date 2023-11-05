@@ -35,12 +35,13 @@ import retrofit2.Response;
 
 public class AdminBaoHongFragment extends Fragment {
 
-    private SearchView svBH;
+    private androidx.appcompat.widget.SearchView svBH;
     private RecyclerView rvBH;
     private LinearLayoutManager linearLayoutManager;
     private AdminBaoHongAdapter adminBaoHongAdapter;
     private List<BaoHong> baoHongList;
     private View view;
+    private Button btnTatCa, btnDaTiepNhan, btnDangSuaChua, btnSuaThanhCong, btnSuaKhongThanhCong;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +56,11 @@ public class AdminBaoHongFragment extends Fragment {
     public void _AnhXa() {
         rvBH = view.findViewById(R.id.rvBaohong);
         svBH = view.findViewById(R.id.txtSearchBH);
-
+        btnTatCa = view.findViewById(R.id.btnTatCa);
+        btnDaTiepNhan = view.findViewById(R.id.btnDaTiepNhan);
+        btnDangSuaChua = view.findViewById(R.id.btnDangSuaChua);
+        btnSuaThanhCong = view.findViewById(R.id.btnSuaThanhCong);
+        btnSuaKhongThanhCong = view.findViewById(R.id.btnSuaKhongThanhCong);
         linearLayoutManager = new LinearLayoutManager(requireContext());
         rvBH.setLayoutManager(linearLayoutManager);
 
@@ -70,7 +75,7 @@ public class AdminBaoHongFragment extends Fragment {
     private void _SuKien() {
 
         svBH.clearFocus();
-        svBH.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        svBH.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
@@ -92,6 +97,47 @@ public class AdminBaoHongFragment extends Fragment {
         });
 
 
+        btnTatCa.setOnClickListener(view -> {
+            _SetColor_BtnSearch(-1);
+            _TimKiem_BaoHong(-1);
+        });
+
+        btnDaTiepNhan.setOnClickListener(view -> {
+            _SetColor_BtnSearch(2);
+            _TimKiem_BaoHong(2);
+        });
+
+        btnDangSuaChua.setOnClickListener(view -> {
+            _SetColor_BtnSearch(3);
+            _TimKiem_BaoHong(3);
+        });
+
+        btnSuaThanhCong.setOnClickListener(view -> {
+            _SetColor_BtnSearch(4);
+            _TimKiem_BaoHong(4);
+        });
+
+        btnSuaKhongThanhCong.setOnClickListener(view -> {
+            _SetColor_BtnSearch(5);
+            _TimKiem_BaoHong(5);
+        });
+
+    }
+
+    private void _TimKiem_BaoHong(int i) {
+        ArrayList<BaoHong> searchlist = new ArrayList<>();
+        if (i == -1) {
+            for (BaoHong baoHong : baoHongList) {searchlist.add(baoHong);}
+        }else {
+            for (BaoHong baoHong : baoHongList) {
+                if (baoHong.getTrangThai() == i){
+                    searchlist.add(baoHong);
+                }
+            }
+        }
+        if (adminBaoHongAdapter != null) {
+            adminBaoHongAdapter.searchDataList(searchlist);
+        }
     }
 
 
@@ -181,6 +227,41 @@ public class AdminBaoHongFragment extends Fragment {
     }
 
 
+
+    public void _SetColor_BtnSearch(int i) {
+        if (i == -1){
+            btnTatCa.setBackgroundColor(Color.parseColor("#F72C00"));
+            btnDaTiepNhan.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDangSuaChua.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaKhongThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+        }else if (i == 2){
+            btnTatCa.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDaTiepNhan.setBackgroundColor(Color.parseColor("#F72C00"));
+            btnDangSuaChua.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaKhongThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+        }else if (i == 3){
+            btnTatCa.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDaTiepNhan.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDangSuaChua.setBackgroundColor(Color.parseColor("#F72C00"));
+            btnSuaThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaKhongThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+        }else if (i == 4){
+            btnTatCa.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDaTiepNhan.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDangSuaChua.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaThanhCong.setBackgroundColor(Color.parseColor("#F72C00"));
+            btnSuaKhongThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+        }else if (i == 5){
+            btnTatCa.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDaTiepNhan.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnDangSuaChua.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaThanhCong.setBackgroundColor(Color.parseColor("#E4E4E4"));
+            btnSuaKhongThanhCong.setBackgroundColor(Color.parseColor("#F72C00"));
+        }
+
+    }
     @Override
     public void onResume() {
         super.onResume();

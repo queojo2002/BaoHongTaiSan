@@ -16,12 +16,96 @@
             android:layout_height="wrap_content">
 
             <!-- SearchView -->
-            <SearchView
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/txtSearchBH"
                 android:layout_width="match_parent"
+                android:background="@drawable/background_input"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:queryHint="Tìm kiếm" />
+                app:queryHint="Tìm kiếm"
+                android:layout_margin="10dp"
+                app:iconifiedByDefault="false"/>
+
+            <TextView
+                android:id="@+id/BaoHong_tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSearchBH"
+                android:text="Trạng thái"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="#EC0202"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:flexWrap="wrap"
+                app:alignItems="stretch"
+                app:alignContent="stretch"
+                android:layout_below="@id/BaoHong_tv_1">
+
+                <Button
+                    android:id="@+id/btnTatCa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Tất cả"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#E4E4E4"
+                    android:layout_marginRight="5dp"/>
+
+                <Button
+                    android:id="@+id/btnDaTiepNhan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_below="@id/BaoHong_tv_1"
+                    android:text="Đã tiếp nhận báo hỏng"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#E4E4E4"
+                    android:layout_marginRight="5dp"/>
+
+                <Button
+                    android:id="@+id/btnDangSuaChua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_below="@id/BaoHong_tv_1"
+                    android:text="Đang sửa chữa"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#E4E4E4"
+                    android:layout_marginRight="5dp"/>
+
+                <Button
+                    android:id="@+id/btnSuaThanhCong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_below="@id/BaoHong_tv_1"
+                    android:text="Sửa thành công"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#E4E4E4"
+                    android:layout_marginRight="5dp"/>
+
+                <Button
+                    android:id="@+id/btnSuaKhongThanhCong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_below="@id/BaoHong_tv_1"
+                    android:text="Sửa không thành công"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="#E4E4E4"
+                    android:layout_marginRight="5dp"/>
+            </com.google.android.flexbox.FlexboxLayout>
+
+
+
+
+
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
