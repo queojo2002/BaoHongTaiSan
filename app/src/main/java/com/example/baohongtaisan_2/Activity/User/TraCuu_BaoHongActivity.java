@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baohongtaisan_2.Adapter.User.AdapterPhanBo_TaiSan;
 import com.example.baohongtaisan_2.Api.ApiServices;
 import com.example.baohongtaisan_2.Model.BaoHong;
+import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.PhanBo;
 import com.example.baohongtaisan_2.R;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,51 +31,76 @@ import retrofit2.Response;
 
 public class TraCuu_BaoHongActivity extends AppCompatActivity {
 
-    private Intent intent;
-    private Toolbar toolbar;
+
+    private SearchView sv;
     private int MaP = -1;
     private List<PhanBo> phanBoList;
     private List<BaoHong> baoHongList;
 
     private RecyclerView recycler;
-    private LinearLayoutManager linearLayoutManager;
 
     private AdapterPhanBo_TaiSan adapterPhanBo_taiSan;
 
-    private FirebaseDatabase db;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tra_cuu);
 
-        toolbar = findViewById(R.id.toolbar);
+        sv = findViewById(R.id.svTaiSan);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         recycler = findViewById(R.id.recycler_tracuu);
         phanBoList = new ArrayList<>();
         baoHongList = new ArrayList<>();
-        linearLayoutManager = new LinearLayoutManager(TraCuu_BaoHongActivity.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(TraCuu_BaoHongActivity.this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recycler.setLayoutManager(linearLayoutManager);
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recycler.addItemDecoration(itemDecoration);
 
-        intent = getIntent();
-        db = FirebaseDatabase.getInstance();
+        Intent intent = getIntent();
         MaP = intent.getIntExtra("MaP", -1);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
         Data_Show_ListTaiSan_InPhong();
 
+        _SuKien();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Data_Show_ListTaiSan_InPhong();
+
+
+
+    public void _SuKien(){
+        sv.clearFocus();
+        sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<PhanBo> searchlist = new ArrayList<>();
+                for (PhanBo phanBo : phanBoList) {
+                    if (phanBo.getTenTS().toLowerCase().contains(s.toLowerCase()) ||
+                            phanBo.getTenNTS().toLowerCase().contains(s.toLowerCase()) ||
+                            phanBo.getTenLTS().toLowerCase().contains(s.toLowerCase())) {
+                        searchlist.add(phanBo);
+                    }
+                }
+                if (adapterPhanBo_taiSan != null) {
+                    adapterPhanBo_taiSan.searchDataList(searchlist);
+                }
+                return false;
+            }
+        });
     }
+
 
     private void Data_Show_ListTaiSan_InPhong() {
         ApiServices.apiServices.get_list_phanbo_byMaP(MaP).enqueue(new Callback<List<PhanBo>>() {
@@ -119,11 +147,18 @@ public class TraCuu_BaoHongActivity extends AppCompatActivity {
 
 
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Data_Show_ListTaiSan_InPhong();
     }
 }

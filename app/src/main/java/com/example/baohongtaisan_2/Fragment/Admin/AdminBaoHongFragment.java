@@ -85,7 +85,8 @@ public class AdminBaoHongFragment extends Fragment {
             public boolean onQueryTextChange(String s) {
                 ArrayList<BaoHong> searchlist = new ArrayList<>();
                 for (BaoHong baoHong : baoHongList) {
-                    if (baoHong.getTenP().toLowerCase().contains(s.toLowerCase())) {
+                    if (baoHong.getTenP().toLowerCase().contains(s.toLowerCase()) ||
+                            baoHong.getTenTS().toLowerCase().contains(s.toLowerCase())) {
                         searchlist.add(baoHong);
                     }
                 }

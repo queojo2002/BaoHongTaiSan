@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baohongtaisan_2.Activity.User.BaoHongActivity;
 import com.example.baohongtaisan_2.Model.BaoHong;
+import com.example.baohongtaisan_2.Model.NguoiDung;
 import com.example.baohongtaisan_2.Model.PhanBo;
 import com.example.baohongtaisan_2.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_TaiSan.PhanBoViewHolder> {
-    private final List<PhanBo> phanBoList;
+    private List<PhanBo> phanBoList;
     private final List<BaoHong> baoHongList;
     private Context context;
 
@@ -67,6 +69,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
                     holder.TrangThai.setText("Đang sữa chữa");
                     Flag_Check_TT = 1;
                 } else if (baoHong.getTrangThai() == 4) {
+                    holder.TrangThai.setBackgroundColor(Color.parseColor("#00FF0A"));
                     holder.TrangThai.setText("Hoạt động tốt");
                 } else if (baoHong.getTrangThai() == 5) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#FF1E00"));
@@ -80,6 +83,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
         }
 
         if (Flag_Check_TT == 0) {
+            holder.TrangThai.setBackgroundColor(Color.parseColor("#00FF0A"));
             holder.TrangThai.setText("Hoạt động tốt");
         } else {
             holder.btnBaoHong.setBackgroundColor(Color.parseColor("#AAB7B8"));
@@ -111,6 +115,10 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
 
     }
 
+    public void searchDataList(ArrayList<PhanBo> searchlist) {
+        phanBoList = searchlist;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         if (phanBoList == null) {

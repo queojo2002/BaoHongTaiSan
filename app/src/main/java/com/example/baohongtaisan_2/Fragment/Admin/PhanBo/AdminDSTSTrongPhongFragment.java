@@ -31,7 +31,7 @@ public class AdminDSTSTrongPhongFragment extends Fragment {
     private final String TenP;
     private View view;
     private RecyclerView rv;
-    private SearchView sv;
+    private androidx.appcompat.widget.SearchView sv;
     private List<PhanBo> phanBoList;
     private AdminDSPBTSAdapter dspbtsAdapter;
 
@@ -64,7 +64,7 @@ public class AdminDSTSTrongPhongFragment extends Fragment {
 
     public void _SuKien() {
         sv.clearFocus();
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 return false;
