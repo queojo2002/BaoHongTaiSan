@@ -207,10 +207,20 @@ public class AdminDanhSachTaiSanFragment extends Fragment {
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MaNTS_Add == -1 || MaLTS_Add == -1) return;
-                ApiServices.apiServices.add_data_taisan(txtinput.getText().toString(), MaNTS_Add, MaLTS_Add, Integer.parseInt(txtgiatri.getText().toString()),
-                        Integer.parseInt(txtsoluong.getText().toString()), txthangsx.getText().toString(), txtnuocsx.getText().toString(),
-                        Integer.parseInt(txtnamsx.getText().toString()), txtghichu.getText().toString()).enqueue(new Callback<ObjectReponse>() {
+                if (MaNTS_Add == -1 || MaLTS_Add == -1 ) return;
+                int giatriValue, soluongValue, namsxValue;
+
+                try {
+                    giatriValue = Integer.parseInt(txtgiatri.getText().toString());
+                    soluongValue = Integer.parseInt(txtsoluong.getText().toString());
+                    namsxValue = Integer.parseInt(txtnamsx.getText().toString());
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Chưa nhập đủ thông tin cần thiết.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ApiServices.apiServices.add_data_taisan(txtinput.getText().toString(), MaNTS_Add, MaLTS_Add, giatriValue,
+                        soluongValue, txthangsx.getText().toString(), txtnuocsx.getText().toString(),
+                        namsxValue, txtghichu.getText().toString()).enqueue(new Callback<ObjectReponse>() {
                     @Override
                     public void onResponse(@NonNull Call<ObjectReponse> call, @NonNull Response<ObjectReponse> response) {
                         ObjectReponse objectEdit = response.body();

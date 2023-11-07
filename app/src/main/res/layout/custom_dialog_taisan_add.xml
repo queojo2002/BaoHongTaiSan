@@ -29,7 +29,7 @@
             android:padding="12dp"
             android:textSize="14sp"
             android:background="@drawable/background_input"
-            android:hint="Nhập tên tài sản mới"
+            android:hint="* Nhập tên tài sản mới"
             android:layout_marginBottom="2dp"/>
 
         <Spinner
@@ -58,7 +58,7 @@
             android:padding="12dp"
             android:textSize="14sp"
             android:background="@drawable/background_input"
-            android:hint="$ Giá trị "
+            android:hint="* Giá trị "
             android:inputType="numberSigned"
             android:layout_marginBottom="2dp"/>
 
@@ -70,7 +70,7 @@
             android:padding="12dp"
             android:textSize="14sp"
             android:background="@drawable/background_input"
-            android:hint="Số lượng "
+            android:hint="* Số lượng "
             android:inputType="numberSigned"
             android:layout_marginBottom="2dp"/>
 
@@ -104,7 +104,7 @@
             android:padding="12dp"
             android:textSize="14sp"
             android:background="@drawable/background_input"
-            android:hint="Năm sản xuất "
+            android:hint="* Năm sản xuất "
             android:inputType="numberSigned"
             android:layout_marginBottom="2dp"/>
 
