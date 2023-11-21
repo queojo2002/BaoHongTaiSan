@@ -2,7 +2,8 @@
 # [Android-Java] Ứng dụng báo hỏng tài sản
 - [Link source code]()
 - [Link PowerPoint trình bày]()
-- Video demo: [![Watch the video](https://img.youtube.com/vi/QhBqCxbd7o0/hqdefault.jpg)](https://www.youtube.com/embed/QhBqCxbd7o0)
+- Video demo:
+- [![Watch the video](https://img.youtube.com/vi/QhBqCxbd7o0/hqdefault.jpg)](https://www.youtube.com/embed/QhBqCxbd7o0)
 
 ## Authors
 
