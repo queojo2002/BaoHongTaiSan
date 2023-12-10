@@ -71,6 +71,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
                 } else if (baoHong.getTrangThai() == 4) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#00FF0A"));
                     holder.TrangThai.setText("Hoạt động tốt");
+                    Flag_Check_TT = 0;
                 } else if (baoHong.getTrangThai() == 5) {
                     holder.TrangThai.setBackgroundColor(Color.parseColor("#FF1E00"));
                     holder.TrangThai.setText("Đang bị hư hỏng");
@@ -85,6 +86,7 @@ public class AdapterPhanBo_TaiSan extends RecyclerView.Adapter<AdapterPhanBo_Tai
         if (Flag_Check_TT == 0) {
             holder.TrangThai.setBackgroundColor(Color.parseColor("#00FF0A"));
             holder.TrangThai.setText("Hoạt động tốt");
+            holder.btnBaoHong.setEnabled(true);
         } else {
             holder.btnBaoHong.setBackgroundColor(Color.parseColor("#AAB7B8"));
             holder.btnBaoHong.setEnabled(false);

@@ -48,26 +48,26 @@
         android:layout_marginBottom="10dp"/>
 
     <Button
-        android:layout_below="@id/txtPassword"
         android:id="@+id/btnLoginUP"
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:layout_below="@id/txtPassword"
         android:layout_centerInParent="true"
         android:background="@drawable/rs_button_home_1"
+        android:drawableLeft="@drawable/baseline_login_24"
         android:paddingStart="50dp"
         android:paddingEnd="70dp"
-        android:drawableLeft="@drawable/baseline_login_24"
         android:text="Đăng nhập"
         android:textColor="#000000"
         app:backgroundTint="@null" />
 
     <Button
-        android:layout_below="@id/btnLoginUP"
         android:id="@+id/btnLogin"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/btnLoginUP"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rs_button_home_1"
         android:drawableLeft="@drawable/rs_button_home_2"
         android:text="Đăng nhập bằng email"

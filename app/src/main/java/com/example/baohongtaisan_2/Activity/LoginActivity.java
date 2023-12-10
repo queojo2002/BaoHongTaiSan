@@ -125,8 +125,14 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
+
+
         }
     }
+
+
+
+
 
 
     public void _Them_NguoiDung(String HoVaTen, String Email, int MaPQ, int MaDV, int MaCD, String UID, String Token) {

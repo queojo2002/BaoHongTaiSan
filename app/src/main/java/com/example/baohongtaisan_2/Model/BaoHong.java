@@ -4,13 +4,14 @@ public class BaoHong {
     private int MaBL, MaPB, MaND, TrangThai, TinhTrang;
     private String Mota, HinhAnh, NgayCapNhat, NgayTao, TenP, TenTS, token, HoVaTen, Email;
 
-
+    // TrangThai: 0 - Chua bao hong lan nao
     // TrangThai: 1 - Da Gui
     // TrangThai: 2 - Da Tiep Nhan
     // TrangThai: 3 - Dang Sua Chua
     // TrangThai: 4 - Sua Thanh Cong
     //TrangThai: 5 - Sua khong thanh cong
 
+    // TinhTrang: 0 - chua bao hong
     // TinhTrang: 1 -
     // TinhTrang: 2 -
     // TinhTrang: 3 -
